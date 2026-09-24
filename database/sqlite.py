@@ -15,15 +15,26 @@ connection = sqlite3.connect("movie_booking.db")
 #print("created  succesfully")
 
 #cursor = connection.cursor()
-#cursor.execute("""create TABLE theater_user(theater_user_id INTEGER PRIMARY KEY,theater_id INTEGER,username TEXT UNIQUE,password_hash TEXT,require_password_reset BOOLEAN,FOREIGN KEY (theater_id) REFERENCES theater(theater_id))""")
+#cursor.execute("""CREATE TABLE theater (
+    #theater_id INTEGER PRIMARY KEY,
+    #theater_name TEXT UNIQUE
+#);""")
 #connection.commit()
 
 #print("created  succesfully")
 
 #cursor = connection.cursor()
-#cursor.execute("""create TABLE theater(theater_id INTEGER PRIMARY KEY,theater_user_id INTEGER,theater_name TEXT UNIQUE,FOREIGN KEY (theater_user_id) REFERENCES theater_user(theater_user_id))""")
+#cursor.execute("""CREATE TABLE theater_user (
+    #theater_user_id INTEGER PRIMARY KEY,
+    #theater_id INTEGER,
+    #username TEXT UNIQUE,
+    #password_hash TEXT,
+    #require_password_reset BOOLEAN,
+    #FOREIGN KEY (theater_id)
+        #REFERENCES theater(theater_id)
+#);""")
 #connection.commit()
-#connection.close()
+#onnection.close()
 #print("created  succesfully")
 
 #cursor = connection.cursor()
@@ -82,11 +93,11 @@ connection = sqlite3.connect("movie_booking.db")
 #connection.close()
 #print("created  succesfully")
 
-cursor = connection.cursor()
+#cursor = connection.cursor()
 
-cursor.execute("SELECT movie_id FROM movie")
-print(cursor.fetchall())
+#cursor.execute("SELECT movie_id FROM movie")
+#print(cursor.fetchall())
 
-connection.close()
+#connection.close()
 
 
