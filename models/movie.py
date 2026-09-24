@@ -22,7 +22,8 @@ movie1=movie(2,"sun","comedy","malay","230 min",date(2026,9,4),date(2026,10,4))
 movie_dao=MovieDao()
 #movie_dao.add_movie(movie1)
 #print(movie_dao.get_movie(1))
-movie_dao.update_movie(movie1)
+#movie_dao.update_movie(movie1)
+movie_dao.delete_movie(2)
 
 
 

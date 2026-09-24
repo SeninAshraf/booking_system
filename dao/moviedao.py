@@ -21,5 +21,11 @@ class MovieDao:
         cursor.execute("""SELECT * FROM movie where movie_id=?""",(movie_id,))
         result= cursor.fetchone()
         return result
-        
+
+    def delete_movie(self,movie_id):
+            connection = get_connection()
+            cursor=connection.cursor()
+            cursor.execute("""DELETE from movie where movie_id=?""",(movie_id,))
+            connection.commit()
+            connection.close()
 
