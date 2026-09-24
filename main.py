@@ -17,4 +17,7 @@ booking1.display()
 seat1=seat(1,1,"A10",SeatCategory.ECONOMY,SeatStatus.available,250,"A")
 seat1.display()
 
+import os
+
+print("Database path:", os.path.abspath("movie_booking.db"))
 

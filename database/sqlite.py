@@ -82,4 +82,11 @@ connection = sqlite3.connect("movie_booking.db")
 #connection.close()
 #print("created  succesfully")
 
+cursor = connection.cursor()
+
+cursor.execute("SELECT movie_id FROM movie")
+print(cursor.fetchall())
+
+connection.close()
+
 
