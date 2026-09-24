@@ -1,4 +1,5 @@
 from models.seat_status import SeatStatus
+from models.seat_category import SeatCategory
 class seat:
     def __init__(self,seat_id,show_id,seat_no,category,seat_status,seat_price,seat_row):
         self.seat_id=seat_id
@@ -16,3 +17,6 @@ class seat:
         print("seat status:",self.seat_status)
         print("seat price:",self.seat_price)
         print("seat row:",self.seat_row)
+
+seat1=seat(1,1,"A10",SeatCategory.ECONOMY,SeatStatus.available,250,"A")
+seat1.display()

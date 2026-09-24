@@ -12,7 +12,14 @@ class booking:
             print("status:",self.status)
             print("ticket Quantity:",self.ticketQuantity)
 
+booking1 = booking(
+    1,
+    230,
+    BookingStatus.CONFIRMED,
+    2
+)
 
+booking1.display()
 
     
     
