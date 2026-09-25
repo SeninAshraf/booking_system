@@ -100,4 +100,10 @@ connection = sqlite3.connect("movie_booking.db")
 
 #connection.close()
 
+cursor = connection.cursor()
+cursor.execute("""INSERT INTO admin(admin_username,password_hash) VALUES ("senin","123")""")
+connection.commit()
+connection.close()
+print("created  succesfully")
+
 

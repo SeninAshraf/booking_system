@@ -11,9 +11,9 @@ class TheaterOfficial:
         print("Theater Username:",self.theaterUserName)
         print("Password:",self.passwordHash)
         print("Is first login:",self.firstLogin)
-TheaterOfficial1=TheaterOfficial("1","senin","****","yes")
+#TheaterOfficial1=TheaterOfficial("1","senin","****","yes")
 #TheaterOfficial1.display()
 
-theater_dao=TheaterOfficialDao()
-theater_dao.add_theateruser(TheaterOfficial1)
+#theater_dao=TheaterOfficialDao()
+#theater_dao.add_theateruser(TheaterOfficial1)
 
