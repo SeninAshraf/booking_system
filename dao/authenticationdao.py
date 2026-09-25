@@ -9,4 +9,7 @@ class AuthDao:
         cursor.execute("""SELECT * FROM admin WHERE admin_username = ?""", (username,))
         result = cursor.fetchone()
         connection.close()
-        return Admin(result[0], result[1])
+        if result is None:
+            return None
+        else:
+            return Admin(result[0], result[1])
