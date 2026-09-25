@@ -29,6 +29,6 @@ booking1 = booking(
 booking_dao = BookingDAO()
 #booking_dao.save(booking1)
 
-print(booking_dao.find_all())
+#print(booking_dao.find_all())
     
     
