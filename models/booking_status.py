@@ -1,4 +1,4 @@
 from enum import Enum
 
 class BookingStatus(Enum):
-    CONFIRMED = 1
+    CONFIRMED = "Confirmed"

@@ -50,7 +50,7 @@ connection = sqlite3.connect("movie_booking.db")
 #print("created  succesfully")
 
 #cursor = connection.cursor()
-#cursor.execute("""CREATE TABLE booking (booking_id INTEGER PRIMARY KEY,customer_id INTEGER,show_id INTEGER,total_amount INTEGER,ticket_quantity INTEGER,FOREIGN KEY (customer_id) REFERENCES customer(customer_id),FOREIGN KEY (show_id) REFERENCES show(show_id))""")
+#cursor.execute("""CREATE TABLE booking (booking_id INTEGER PRIMARY KEY,customer_id INTEGER,show_id INTEGER,total_amount INTEGER,ticket_quantity INTEGER,booking_status TEXT CHECK (booking_status IN ('Confirmed')),FOREIGN KEY (customer_id) REFERENCES customer(customer_id),FOREIGN KEY (show_id) REFERENCES show(show_id));""")
 #connection.commit()
 #connection.close()
 #print("created  succesfully")
