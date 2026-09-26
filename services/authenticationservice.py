@@ -16,4 +16,3 @@ class AuthenticationService:
             password.encode("utf-8"),
             admin.passwordHash.encode("utf-8")
         )
-    

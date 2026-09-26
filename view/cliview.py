@@ -1,17 +1,13 @@
-from dao.authenticationdao import AuthDao
-from services.authenticationservice import AuthenticationService
+class Viewer:
 
-auth_dao = AuthDao()
-auth_service = AuthenticationService(auth_dao)
+    def login(self, controllers):
 
-while True:
+        username = input("Enter Username: ")
+        password = input("Enter password: ")
 
-    username = input("Enter Username: ")
+        result = controllers.login(username, password)
 
-    password = input("Enter password: ")
-
-    if auth_service.login_admin(username, password):
-        print("Login successful")
-        break
-
-    print("Invalid username or password. Please try again.")
+        if result:
+            print("Login successful")
+        else:
+            print("Invalid username or password")
