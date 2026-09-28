@@ -19,6 +19,8 @@ class Viewer:
             self.login(controller)
         elif choice == "2":
             self.theater_login(controller)
+        elif choice == "3":
+            self.customer_login(controller)
         elif choice == "4":
             self.exit()
         else:
@@ -47,6 +49,10 @@ class Viewer:
             print("Login succesfull")
         else:
             print("Invalid username or theatername or password")
+
+    def customer_login(self,controller):
+        print("========== CUSTOMER ==========")
+        customer_mobile_num = input("Enter mobile number:")
 
     def exit(self):
         print("Thank you for using Movie Ticket Booking System.")

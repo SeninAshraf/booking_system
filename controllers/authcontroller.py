@@ -17,3 +17,5 @@ class AuthenticationController:
                     theater_username,
                     theater_password
                 )
+    def customer_login(self,customer_mobile_num):
+          pass
