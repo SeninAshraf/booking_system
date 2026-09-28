@@ -3,13 +3,20 @@ from controllers.authcontroller import AuthenticationController
 from services.authenticationservice import AuthenticationService
 from dao.authenticationdao import AuthDao
 
+from dao.theaterofficialdao import TheaterOfficialDao
+from services.theaterofficialservice import TheaterService
+from controllers.theaterofficialcontroller import TheaterController
 
+#authetication admin
 auth_dao = AuthDao()
-
 auth_service = AuthenticationService(auth_dao)
-
 auth_controller = AuthenticationController(auth_service)
+
+#auth theater official
+theater_dao = TheaterOfficialDao()
+theater_service = TheaterService(theater_dao)
+theater_controller = TheaterController(theater_service)
 
 viewer = Viewer()
 #for displaying cli view common
-viewer.starting_view(auth_controller)
+viewer.starting_view(auth_controller,theater_controller)

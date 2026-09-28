@@ -1,6 +1,6 @@
 class Viewer:
 
-    def starting_view(self, controller):
+    def starting_view(self, controller,theater_controller):
 
         print("""
 ================= MOVIE TICKET BOOKING SYSTEM =================
