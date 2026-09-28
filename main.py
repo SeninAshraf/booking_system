@@ -11,5 +11,5 @@ auth_service = AuthenticationService(auth_dao)
 auth_controller = AuthenticationController(auth_service)
 
 viewer = Viewer()
-
+#for displaying cli view common
 viewer.starting_view(auth_controller)

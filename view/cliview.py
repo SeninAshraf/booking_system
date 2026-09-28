@@ -17,7 +17,8 @@ class Viewer:
 
         if choice == "1":
             self.login(controller)
-
+        elif choice == "4":
+            self.exit()
         else:
             print("coming soon")
 
@@ -32,3 +33,7 @@ class Viewer:
             print("Login successful")
         else:
             print("Invalid username or password")
+
+    def exit(self):
+        print("Thank you for using Movie Ticket Booking System.")
+        return
