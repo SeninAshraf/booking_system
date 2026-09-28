@@ -1,5 +1,4 @@
 import bcrypt
-
 class AuthenticationService:
 
     def __init__(self, auth_dao):
@@ -31,5 +30,22 @@ class AuthenticationService:
                 return False
             if theater_user.firstLogin:
                 print("Password reset is required.")
+
+                self.update_password(
+                theater_name,
+                theater_username
+                )
+
+                return True
     
+    def update_password(self, theater_name, theater_username):
+            new_password = input("Enter new password: ")
+
+            new_password_hash = bcrypt.hashpw(
+                    new_password.encode("utf-8"),
+                    bcrypt.gensalt()
+                ).decode("utf-8")
+
+            self.auth_dao.changing_password(theater_name,theater_username,new_password_hash)
+                            
             return True
