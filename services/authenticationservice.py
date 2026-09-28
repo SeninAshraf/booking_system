@@ -46,6 +46,6 @@ class AuthenticationService:
                     bcrypt.gensalt()
                 ).decode("utf-8")
 
-            self.auth_dao.changing_password(theater_name,theater_username,new_password_hash)
+            self.auth_dao.changing_password(new_password_hash,theater_username,theater_name)
                             
             return True
