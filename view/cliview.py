@@ -42,7 +42,7 @@ class Viewer:
         theater_username = input("Enter theater user name:")
         theater_password = input("Enter theater password:")
 
-        result = theater_controller(theater_name,theater_username,self.theater_password)
+        result = theater_controller.theater_login(theater_name,theater_username,theater_password)
         if result:
             print("Login succesfull")
         else:
