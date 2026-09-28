@@ -21,8 +21,9 @@ class AuthDao:
                     cursor = connection.cursor()
                     cursor.execute("""select theater_user.theater_id,theater_user.username,theater_user.password_hash,theater_user.require_password_reset from theater_user join theater on theater_user.theater_id=theater.theater_id where theater_name=?""",(theater_name,))
                     result = cursor.fetchone()
-                    connection.close()
-                    
+                    result = cursor.fetchone()
+                    if result is None:
+                        return None
                     return TheaterOfficial(result[0], result[1],result[2],result[3])
 
     def changing_password(self,new_password_hash,theater_username, theater_name):

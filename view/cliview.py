@@ -51,8 +51,13 @@ class Viewer:
             print("Invalid username or theatername or password")
 
     def customer_login(self,controller):
-        print("========== CUSTOMER ==========")
-        customer_mobile_num = input("Enter mobile number:")
+        while True:
+            print("========== CUSTOMER ==========")
+            try:
+                customer_mobile_num = int(input("Enter mobile number:"))
+                break
+            except ValueError:
+                print("please enter valid number")
 
     def exit(self):
         print("Thank you for using Movie Ticket Booking System.")
