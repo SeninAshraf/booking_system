@@ -11,7 +11,12 @@ class TheaterService:
         if theater_user is None:
             return False
 
-        return bcrypt.checkpw(
+        if not bcrypt.checkpw(
             theater_password.encode("utf-8"),
-            theater_user.password_hash.encode("utf-8")
-        )
+            theater_user.passwordHash.encode("utf-8")
+        ):
+            return False
+        if theater_user.firstLogin:
+            print("Password reset is required.")
+
+        return True

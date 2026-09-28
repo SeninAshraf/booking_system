@@ -1,6 +1,6 @@
 from database.connection import get_connection
 from models.admin import Admin
-from models.theaterofficial import TheaterOfficial
+
 
 class AuthDao:
     print("senin")

@@ -1,4 +1,3 @@
-from dao.theaterofficialdao import TheaterOfficialDao
 class TheaterOfficial:
 
     def __init__(self, theater_id,theaterUserName, passwordHash, firstLogin):
