@@ -36,7 +36,7 @@ class AuthenticationService:
                 theater_username
                 )
 
-                return True
+            return True
     
     def update_password(self, theater_name, theater_username):
             new_password = input("Enter new password: ")
