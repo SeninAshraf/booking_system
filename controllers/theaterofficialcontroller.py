@@ -5,7 +5,7 @@ class TheaterController:
 
     def theater_login(self, theater_name,theater_username,theater_password):
     
-            return self.authenticationservice.login_admin(
+            return self.theater_service.login_user(
                 theater_name,
                 theater_username,
                 theater_password
