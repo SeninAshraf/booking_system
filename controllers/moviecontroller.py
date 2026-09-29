@@ -3,4 +3,10 @@ class MovieController:
             self.movieservice = movieservice
 
     def add_movie(self,title,genre,language,duration,release_date,end_date):
-          print("controller")
+          return self.movieservice.add_movie(
+                title,genre,
+                language,
+                duration,
+                release_date,
+                end_date
+          )
