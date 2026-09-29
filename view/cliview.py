@@ -35,6 +35,7 @@ class Viewer:
 
         if result:
             print("Login successful")
+            self.admin_menu()
         else:
             print("Invalid username or password")
 
@@ -62,3 +63,30 @@ class Viewer:
     def exit(self):
         print("Thank you for using Movie Ticket Booking System.")
         return
+
+    def admin_menu(self):
+        print("""
+================= ADMIN MENU =================
+        
+    1. Create Theater Official
+    2. Add Movie
+    3. Update Movie
+    4. Delete Movie
+    5. View Transactions
+    6. Logout
+        
+==============================================
+        """)
+        choice = input("SELECT YOUR ROLE: ")
+        
+        if choice == "1":
+                print("coming soon")
+        elif choice == "2":
+                self.add_movie(moviecontroller)
+        elif choice == "3":
+                print("coming soon")
+        elif choice == "4":
+                self.exit()
+        else:
+            print("coming soon")
+        
