@@ -64,7 +64,7 @@ class Viewer:
         print("Thank you for using Movie Ticket Booking System.")
         return
 
-    def admin_menu(self):
+    def admin_menu(self,moviecontroller):
         print("""
 ================= ADMIN MENU =================
         
