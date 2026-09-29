@@ -100,6 +100,6 @@ class Viewer:
 
         result = moviecontroller.add_movie(title,genre,language,duration,release_date,end_date)
         if result:
-                    print("Added Succesfull")
+                print("Added Succesfull")
         else:
-                    print("Adding Failed")
+                print("Adding Failed")
