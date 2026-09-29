@@ -131,17 +131,25 @@ class Viewer:
          self.view_movie(moviecontroller)
          movie_id = int(input("Enter movie_id "))
          self.search_movie(moviecontroller,movie_id)
-         result = moviecontroller.delete_movie(movie_id)
-         if result:
-              print("deleted")
+         print("\nDo you want to delete this movie?")
+         print("1. Yes")
+         print("2. No")
+         choice = int(input("Select an Option: "))
+         if choice == "1":
+              result = moviecontroller.delete_movie(movie_id)
+              if result:
+                   print("movie deleted succesfully")
+              else:
+                   print("deletion failed")
+         elif choice == "2":
+              print("deletion cancelled")
          else:
-              print("deletion failed")
+              print("Invalid option.")
 
     def search_movie(self,moviecontroller,movie_id):
          result = moviecontroller.search_movie(movie_id)
          if result:
               print("=====Movie Details=====")
-              for movie in result:
-                   print(result)
+              print(result)
          else:
               print("no movie found...")
