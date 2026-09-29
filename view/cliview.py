@@ -1,6 +1,6 @@
 class Viewer:
 
-    def starting_view(self, controller):
+    def starting_view(self, controller,moviecontroller):
 
         print("""
 ================= MOVIE TICKET BOOKING SYSTEM =================
@@ -16,7 +16,7 @@ class Viewer:
         choice = input("SELECT YOUR ROLE: ")
 
         if choice == "1":
-            self.login(controller)
+            self.login(controller,moviecontroller)
         elif choice == "2":
             self.theater_login(controller)
         elif choice == "3":
@@ -26,7 +26,7 @@ class Viewer:
         else:
             print("coming soon")
 
-    def login(self, controller):
+    def login(self, controller,moviecontroller):
 
         username = input("Enter Username: ")
         password = input("Enter password: ")
@@ -35,7 +35,7 @@ class Viewer:
 
         if result:
             print("Login successful")
-            self.admin_menu()
+            self.admin_menu(moviecontroller)
         else:
             print("Invalid username or password")
 
@@ -89,4 +89,11 @@ class Viewer:
                 self.exit()
         else:
             print("coming soon")
-        
+
+    def add_movie(self,moviecontroller):
+        title = input("Enter Movie Title: ")
+        genre = input("Enter Genre: ")
+        language = input("Enter Language: ")
+        duration = input("Enter Duration (minutes): ")
+        release_date = input("Enter Release Date (YYYY-MM-DD): ")
+        end_date = input("Enter End Date (YYYY-MM-DD): ")

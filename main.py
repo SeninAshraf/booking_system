@@ -25,4 +25,4 @@ auth_controller = AuthenticationController(auth_service)
 
 viewer = Viewer()
 #for displaying cli view common
-viewer.starting_view(auth_controller)
+viewer.starting_view(auth_controller,movie_controller)
