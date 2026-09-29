@@ -86,10 +86,10 @@ class Viewer:
                 self.view_movie(moviecontroller)
         elif choice == "3":
                 self.add_movie(moviecontroller)
-        elif choice == "3":
-                print("coming soon")
         elif choice == "4":
-                self.exit()
+                print("coming soon")
+        elif choice == "5":
+                self.delete_movie(moviecontroller)
         else:
             print("coming soon")
 
@@ -119,4 +119,29 @@ class Viewer:
             print("These are the available movies")
          else:
               print("No movies available")
-              
+
+    #def update_movie(self,moviecontroller):
+         #result = moviecontroller.update_movie()
+         #if result:
+              #print("updated succesfully")
+        # else:
+              #print("updation failed")
+
+    def delete_movie(self,moviecontroller):
+         self.view_movie(moviecontroller)
+         movie_id = int(input("Enter movie_id "))
+         self.search_movie(moviecontroller,movie_id)
+         result = moviecontroller.delete_movie(movie_id)
+         if result:
+              print("deleted")
+         else:
+              print("deletion failed")
+
+    def search_movie(self,moviecontroller,movie_id):
+         result = moviecontroller.search_movie(movie_id)
+         if result:
+              print("=====Movie Details=====")
+              for movie in result:
+                   print(result)
+         else:
+              print("no movie found...")

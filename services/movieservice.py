@@ -10,3 +10,9 @@ class MovieService:
 
     def view_movie(self):
         return self.movie_dao.view_movie()
+
+    def search_movie(self,movie_id):
+        return self.movie_dao.get_movie(movie_id)
+
+    def delete_movie(self,movie_id):
+        return self.movie_dao.delete_movie(movie_id)
