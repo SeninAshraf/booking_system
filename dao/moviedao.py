@@ -7,6 +7,7 @@ class MovieDao:
         cursor.execute("""INSERT INTO movie (movie_title,movie_genre,movie_language,movie_duration,release_date,end_date) VALUES (?,?,?,?,?,?)""",(title,genre,language,duration,release_date,end_date))
         connection.commit()
         connection.close()
+        return True
 
     def update_movie(self,movie):
             connection = get_connection()
