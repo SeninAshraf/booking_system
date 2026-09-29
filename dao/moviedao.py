@@ -29,4 +29,11 @@ class MovieDao:
             cursor.execute("""DELETE from movie where movie_id=?""",(movie_id,))
             connection.commit()
             connection.close()
+   
+    def view_movie(self):
+            connection = get_connection()
+            cursor=connection.cursor()
+            cursor.execute("""SELECT movie_id,movie_title from movie""")
+            result= cursor.fetchall()
+            return result
 

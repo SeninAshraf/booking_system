@@ -69,11 +69,12 @@ class Viewer:
 ================= ADMIN MENU =================
         
     1. Create Theater Official
-    2. Add Movie
-    3. Update Movie
-    4. Delete Movie
-    5. View Transactions
-    6. Logout
+    2. View Movies
+    3. Add Movie
+    4. Update Movie
+    5. Delete Movie
+    6. View Transactions
+    7. Logout
         
 ==============================================
         """)
@@ -82,6 +83,8 @@ class Viewer:
         if choice == "1":
                 print("coming soon")
         elif choice == "2":
+                self.view_movie(moviecontroller)
+        elif choice == "3":
                 self.add_movie(moviecontroller)
         elif choice == "3":
                 print("coming soon")
@@ -103,3 +106,17 @@ class Viewer:
                 print("Added Succesfull")
         else:
                 print("Adding Failed")
+
+    def view_movie(self,moviecontroller):
+         result = moviecontroller.view_movie()
+         if result:
+            print("\n========== AVAILABLE MOVIE ==========\n")
+
+            print("Movie ID\tMovie")
+
+            for movie in result:
+                print(f"{movie[0]}\t\t{movie[1]}")
+            print("These are the available movies")
+         else:
+              print("No movies available")
+              

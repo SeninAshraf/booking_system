@@ -7,3 +7,6 @@ class MovieService:
         return self.movie_dao.add_movie(
             title,genre,language,duration,release_date,end_date
         )
+
+    def view_movie(self):
+        return self.movie_dao.view_movie()

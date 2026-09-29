@@ -10,3 +10,6 @@ class MovieController:
                 release_date,
                 end_date
           )
+
+    def view_movie(self):
+          return self.movieservice.view_movie()
