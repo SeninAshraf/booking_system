@@ -97,3 +97,9 @@ class Viewer:
         duration = input("Enter Duration (minutes): ")
         release_date = input("Enter Release Date (YYYY-MM-DD): ")
         end_date = input("Enter End Date (YYYY-MM-DD): ")
+
+        result = moviecontroller.add_movie(title,genre,language,duration,release_date,end_date)
+        if result:
+                    print("Added Succesfull")
+        else:
+                    print("Adding Failed")
