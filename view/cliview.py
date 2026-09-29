@@ -135,13 +135,13 @@ class Viewer:
          print("1. Yes")
          print("2. No")
          choice = int(input("Select an Option: "))
-         if choice == "1":
+         if choice == 1:
               result = moviecontroller.delete_movie(movie_id)
               if result:
                    print("movie deleted succesfully")
               else:
                    print("deletion failed")
-         elif choice == "2":
+         elif choice == 2:
               print("deletion cancelled")
          else:
               print("Invalid option.")
