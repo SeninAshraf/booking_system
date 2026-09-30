@@ -123,20 +123,27 @@ class Viewer:
     def update_movie(self,moviecontroller):
          self.view_movie(moviecontroller)
          movie_id = int(input("Enter movie_id "))
-         self.search_movie(moviecontroller,movie_id)
-         print("Enter new values (Press Enter to keep the existing value)")
-         title = input("Enter Movie Title: ")
-         genre = input("Enter Genre: ")
-         language = input("Enter Language: ")
-         duration = input("Enter Duration (minutes): ")
-         release_date = input("Enter Release Date (YYYY-MM-DD): ")
-         end_date = input("Enter End Date (YYYY-MM-DD): ")
-         
-         result = moviecontroller.update_movie(title,genre,language,duration,release_date,end_date)
+         result= self.search_movie(moviecontroller,movie_id)
          if result:
-              print("updated succesfully")
+            print("Enter new values (Press Enter to keep the existing value)")  
+            title1 = input("Enter Movie Title: ")
+            genre1 = input("Enter Genre: ")
+            language1 = input("Enter Language: ")
+            duration1 = input("Enter Duration (minutes): ")
+            release_date1 = input("Enter Release Date (YYYY-MM-DD): ")
+            end_date1 = input("Enter End Date (YYYY-MM-DD): ")
+            title1 = title1 if title1 else result[1]
+            genre1 = genre1 if genre1 else result[2]
+            language1 = language1 if language1 else result[3]
+            duration1 = duration1 if duration1 else result[4]
+            end_date1 = end_date1 if end_date1 else result[5]
+            result1 = moviecontroller.update_movie(movie_id,title1,genre1,language1,duration1,release_date1,end_date1)
+            if result1:
+                print("updating Movie..\nMovie Updated Succesfully")
+            else:
+                print("updation failed")
          else:
-              print("updation failed")
+              print("movie not found")
 
     def delete_movie(self,moviecontroller):
          self.view_movie(moviecontroller)
@@ -169,5 +176,7 @@ class Viewer:
               print(f"Release Date : {result[5]}")
               print(f"End Date     : {result[6]}")
               print("\n===================================")
+
+              return result
          else:
               print("no movie found...")

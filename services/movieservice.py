@@ -16,3 +16,8 @@ class MovieService:
 
     def delete_movie(self,movie_id):
         return self.movie_dao.delete_movie(movie_id)
+
+    def update_movie(self,movie_id,title1,genre1,language1,duration1,release_date1,end_date1):
+        return self.movie_dao.update_movie(
+            movie_id,title1,genre1,language1,duration1,release_date1,end_date1
+        )

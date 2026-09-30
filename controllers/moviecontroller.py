@@ -19,3 +19,8 @@ class MovieController:
 
     def delete_movie(self,movie_id):
           return self.movieservice.delete_movie(movie_id)
+
+    def update_movie(self,movie_id,title1,genre1,language1,duration1,release_date1,end_date1):
+          return self.movieservice.update_movie(
+                movie_id,title1,genre1,language1,duration1,release_date1,end_date1
+          )
