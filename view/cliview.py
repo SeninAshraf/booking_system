@@ -1,8 +1,8 @@
 class Viewer:
 
     def starting_view(self, controller,moviecontroller):
-
-        print("""
+        while True:
+            print("""
 ================= MOVIE TICKET BOOKING SYSTEM =================
 
 1. Admin
@@ -11,20 +11,21 @@ class Viewer:
 4. Exit
 
 ===============================================================
-""")
+    """)
 
-        choice = input("SELECT YOUR ROLE: ")
+            choice = input("SELECT YOUR ROLE: ")
 
-        if choice == "1":
-            self.login(controller,moviecontroller)
-        elif choice == "2":
-            self.theater_login(controller)
-        elif choice == "3":
-            self.customer_login(controller)
-        elif choice == "4":
-            self.exit()
-        else:
-            print("coming soon")
+            if choice == "1":
+                self.login(controller,moviecontroller)
+            elif choice == "2":
+                self.theater_login(controller)
+            elif choice == "3":
+                self.customer_login(controller)
+            elif choice == "4":
+                self.exit()
+                break
+            else:
+                print("choose only appropriate role's option")
 
     def login(self, controller,moviecontroller):
 
@@ -65,33 +66,39 @@ class Viewer:
         return
 
     def admin_menu(self,moviecontroller):
-        print("""
+        while True:
+            print("""
 ================= ADMIN MENU =================
-        
+            
     1. Create Theater Official
     2. View Movies
     3. Add Movie
     4. Update Movie
     5. Delete Movie
     6. View Transactions
-    7. Logout
-        
+    7. Exit Admin menu
+            
 ==============================================
-        """)
-        choice = input("SELECT YOUR ROLE: ")
-        
-        if choice == "1":
+            """)
+            choice = input("SELECT YOUR ROLE: ")
+            
+            if choice == "1":
+                    print("coming soon")
+            elif choice == "2":
+                    self.view_movie(moviecontroller)
+            elif choice == "3":
+                    self.add_movie(moviecontroller)
+            elif choice == "4":
+                    self.update_movie(moviecontroller)
+            elif choice == "5":
+                    self.delete_movie(moviecontroller)
+            elif choice == "6":
+                    print("coming soon")
+            elif choice == "7":
+                print("Logging out...")
+                break
+            else:
                 print("coming soon")
-        elif choice == "2":
-                self.view_movie(moviecontroller)
-        elif choice == "3":
-                self.add_movie(moviecontroller)
-        elif choice == "4":
-                self.update_movie(moviecontroller)
-        elif choice == "5":
-                self.delete_movie(moviecontroller)
-        else:
-            print("coming soon")
 
     def add_movie(self,moviecontroller):
         title = input("Enter Movie Title: ")
@@ -140,7 +147,7 @@ class Viewer:
             end_date1 = end_date1 if end_date1 else result[6]
             result1 = moviecontroller.update_movie(movie_id,title1,genre1,language1,duration1,release_date1,end_date1)
             if result1:
-                print("updating Movie..\nMovie Updated Succesfully")
+                print("updating Movie..\nMovie Updated Succesfully\nReturning To Admin Menu....")
             else:
                 print("updation failed")
          else:
