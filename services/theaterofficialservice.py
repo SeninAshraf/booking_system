@@ -1,22 +1,38 @@
-#import bcrypt
-#class TheaterService:
+import bcrypt
+from services.theaterservice import TheaterService
+class TheaterofficialService:
+    def __init__(self, theater_official_dao):
+        self.theater_official_dao = theater_official_dao
 
-    #def __init__(self, theater_dao):
-        #self.theater_dao = theater_dao
+    def add_theater_user(self,theater_name,theater_username,password):
+        result = self.theater_official_dao.get_theater_id(theater_name)
+        if not result:
+            return False
 
-    #def login_user(self,theater_name,theater_username,theater_password):
+        theater_id = result[0]
 
-        #theater_user = self.theater_dao.find_theater_user(theater_name)
+        existing_user = self.check_user(theater_id)
 
-        #if theater_user is None:
-            #return False
+        if existing_user:
+            return False
 
-        #if not bcrypt.checkpw(
-            #theater_password.encode("utf-8"),
-            #theater_user.passwordHash.encode("utf-8")
-        #):
-            #return False
-        #if theater_user.firstLogin:
-            #print("Password reset is required.")
+        password_hash = bcrypt.hashpw(
+            password.encode("utf-8"),
+            bcrypt.gensalt()
+        ).decode("utf-8")
 
-        #return True
+        return self.theater_official_dao.add_theateruser(
+            theater_id,
+            theater_username,
+            password_hash
+        )
+
+    def check_user(self, theater_id):
+        return self.theater_official_dao.find_theater_user(theater_id)
+
+
+
+
+    def check_user(self,theater_id):
+        return self.theater_official_dao.find_theater_user(theater_id)
+

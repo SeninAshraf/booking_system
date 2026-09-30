@@ -1,6 +1,6 @@
 class Viewer:
 
-    def starting_view(self, controller,moviecontroller):
+    def starting_view(self, controller,moviecontroller,theaterofficialcontroller):
         while True:
             print("""
 ================= MOVIE TICKET BOOKING SYSTEM =================
@@ -16,7 +16,7 @@ class Viewer:
             choice = input("SELECT YOUR ROLE: ")
 
             if choice == "1":
-                self.login(controller,moviecontroller)
+                self.login(controller,moviecontroller,theaterofficialcontroller)
             elif choice == "2":
                 self.theater_login(controller)
             elif choice == "3":
@@ -27,7 +27,7 @@ class Viewer:
             else:
                 print("choose only appropriate role's option")
 
-    def login(self, controller,moviecontroller):
+    def login(self, controller,moviecontroller,theaterofficialcontroller):
 
         username = input("Enter Username: ")
         password = input("Enter password: ")
@@ -36,7 +36,7 @@ class Viewer:
 
         if result:
             print("Login successful")
-            self.admin_menu(moviecontroller)
+            self.admin_menu(moviecontroller,theaterofficialcontroller)
         else:
             print("Invalid username or password")
 
@@ -65,7 +65,7 @@ class Viewer:
         print("Thank you for using Movie Ticket Booking System.")
         return
 
-    def admin_menu(self,moviecontroller):
+    def admin_menu(self,moviecontroller,theaterofficialcontroller):
         while True:
             print("""
 ================= ADMIN MENU =================
@@ -80,10 +80,10 @@ class Viewer:
             
 ==============================================
             """)
-            choice = input("SELECT YOUR ROLE: ")
+            choice = input("SELECT AN OPTION: ")
             
             if choice == "1":
-                    print("coming soon")
+                    self.add_theater_user(theaterofficialcontroller)
             elif choice == "2":
                     self.view_movie(moviecontroller)
             elif choice == "3":
@@ -188,3 +188,15 @@ class Viewer:
               return result
          else:
               print("no movie found...")
+
+    def add_theater_user(self,theaterofficialcontroller):
+         theater_name = input("Enter theater Name:")
+         theater_username = input("Enter Username")
+         password = input("Enter Password:")
+
+         result = theaterofficialcontroller.add_theater_user(theater_name,theater_username,password)
+
+         if result:
+              print("Theater user added succesfully.")
+         else:
+              print("user addition failed.")
