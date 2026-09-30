@@ -112,7 +112,7 @@ class Viewer:
         if result:
                 print("Added Succesfull")
         else:
-                print("Adding Failed")
+                print("Adding Failed or missmatch of dates are found!!!")
 
     def view_movie(self,moviecontroller):
          result = moviecontroller.view_movie()
@@ -149,7 +149,7 @@ class Viewer:
             if result1:
                 print("updating Movie..\nMovie Updated Succesfully\nReturning To Admin Menu....")
             else:
-                print("updation failed")
+                print("updation failed or missmatch of date found!!!")
          else:
               print("movie not found")
 

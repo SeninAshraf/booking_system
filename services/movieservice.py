@@ -4,9 +4,12 @@ class MovieService:
         self.movie_dao = movie_dao
 
     def add_movie(self,title,genre,language,duration,release_date,end_date):
-        return self.movie_dao.add_movie(
-            title,genre,language,duration,release_date,end_date
-        )
+        if end_date<release_date:
+            return None
+        else:
+            return self.movie_dao.add_movie(
+                title,genre,language,duration,release_date,end_date
+            )
 
     def view_movie(self):
         return self.movie_dao.view_movie()
@@ -18,6 +21,9 @@ class MovieService:
         return self.movie_dao.delete_movie(movie_id)
 
     def update_movie(self,movie_id,title1,genre1,language1,duration1,release_date1,end_date1):
-        return self.movie_dao.update_movie(
-            movie_id,title1,genre1,language1,duration1,release_date1,end_date1
-        )
+        if end_date1<release_date1:
+            return None
+        else:
+            return self.movie_dao.update_movie(
+                movie_id,title1,genre1,language1,duration1,release_date1,end_date1
+            )
