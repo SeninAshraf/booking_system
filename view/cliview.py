@@ -136,7 +136,8 @@ class Viewer:
             genre1 = genre1 if genre1 else result[2]
             language1 = language1 if language1 else result[3]
             duration1 = duration1 if duration1 else result[4]
-            end_date1 = end_date1 if end_date1 else result[5]
+            release_date1 = release_date1 if release_date1 else result[5]
+            end_date1 = end_date1 if end_date1 else result[6]
             result1 = moviecontroller.update_movie(movie_id,title1,genre1,language1,duration1,release_date1,end_date1)
             if result1:
                 print("updating Movie..\nMovie Updated Succesfully")
