@@ -87,7 +87,7 @@ class Viewer:
         elif choice == "3":
                 self.add_movie(moviecontroller)
         elif choice == "4":
-                print("coming soon")
+                self.update_movie(moviecontroller)
         elif choice == "5":
                 self.delete_movie(moviecontroller)
         else:
@@ -120,12 +120,23 @@ class Viewer:
          else:
               print("No movies available")
 
-    #def update_movie(self,moviecontroller):
-         #result = moviecontroller.update_movie()
-         #if result:
-              #print("updated succesfully")
-        # else:
-              #print("updation failed")
+    def update_movie(self,moviecontroller):
+         self.view_movie(moviecontroller)
+         movie_id = int(input("Enter movie_id "))
+         self.search_movie(moviecontroller,movie_id)
+         print("Enter new values (Press Enter to keep the existing value)")
+         title = input("Enter Movie Title: ")
+         genre = input("Enter Genre: ")
+         language = input("Enter Language: ")
+         duration = input("Enter Duration (minutes): ")
+         release_date = input("Enter Release Date (YYYY-MM-DD): ")
+         end_date = input("Enter End Date (YYYY-MM-DD): ")
+         
+         result = moviecontroller.update_movie(title,genre,language,duration,release_date,end_date)
+         if result:
+              print("updated succesfully")
+         else:
+              print("updation failed")
 
     def delete_movie(self,moviecontroller):
          self.view_movie(moviecontroller)
@@ -148,8 +159,15 @@ class Viewer:
 
     def search_movie(self,moviecontroller,movie_id):
          result = moviecontroller.search_movie(movie_id)
+         
          if result:
-              print("=====Movie Details=====")
-              print(result)
+              print("\n========== MOVIE DETAILS ==========\n")
+              print(f"Movie Title  : {result[1]}")
+              print(f"Genre        : {result[2]}")
+              print(f"Language     : {result[3]}")
+              print(f"Duration     : {result[4]}")
+              print(f"Release Date : {result[5]}")
+              print(f"End Date     : {result[6]}")
+              print("\n===================================")
          else:
               print("no movie found...")
