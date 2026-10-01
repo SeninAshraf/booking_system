@@ -18,7 +18,7 @@ class Viewer:
             if choice == "1":
                 self.login(controller,moviecontroller,theaterofficialcontroller)
             elif choice == "2":
-                self.theater_login(controller)
+                self.theater_login(controller,theaterofficialcontroller)
             elif choice == "3":
                 self.customer_login(controller)
             elif choice == "4":
@@ -40,7 +40,7 @@ class Viewer:
         else:
             print("Invalid username or password")
 
-    def theater_login(self,controller):
+    def theater_login(self,controller,theaterofficialcontroller):
         print("==========THEATER OFFICIAL LOGIN==========")
         theater_name = input("Enter theater name:")
         theater_username = input("Enter theater user name:")
@@ -49,6 +49,7 @@ class Viewer:
         result = controller.theater_login(theater_name,theater_username,theater_password)
         if result:
             print("Login succesfull")
+            self.theaterofficial_menu(theaterofficialcontroller)
         else:
             print("Invalid username or theatername or password")
 
@@ -200,3 +201,31 @@ class Viewer:
               print("Theater user added succesfully.")
          else:
               print("user addition failed.")
+
+    def theaterofficial_menu(self,theaterofficialcontroller):
+            while True:
+                print("""
+================= THEATER OFFICIAL MENU =================
+                
+1. Configure show
+2. Update Show
+3. Delete Show
+4. View Show
+5. Logout
+                
+=========================================================
+                """)
+                choice = input("SELECT AN OPTION: ")
+                
+                if choice == "1":
+                        print("coming soon")
+                elif choice == "2":
+                        print("coming soon")
+                elif choice == "3":
+                        print("coming soon")
+                elif choice == "4":
+                        print("coming soon")
+                elif choice == "5":
+                        print("coming soon")
+                else:
+                    print("invalid option...")
