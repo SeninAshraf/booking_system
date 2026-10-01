@@ -128,6 +128,8 @@ class Viewer:
          else:
               print("No movies available")
 
+         return result
+
     def update_movie(self,moviecontroller):
          self.view_movie(moviecontroller)
          movie_id = int(input("Enter movie_id "))
@@ -247,6 +249,21 @@ class Viewer:
                     print("invalid option...")
 
     def configure_show(self,moviecontroller,showcontroller):
-         self.view_movie(moviecontroller)
-         choice = input("Enter Movie ID:")
+         movies = self.view_movie(moviecontroller)
+         try:
+            choice = int(input("Enter Movie ID:"))
+         except ValueError:
+            print("Enter in number only")
+            return
+         valid = False
+         for movie in movies:
+            if movie[0]==choice:
+                valid = True
+                break
+         if not valid:
+            print("invalid movie id")
+            return 
+         print("Valid Movie id ")
+
+
          
