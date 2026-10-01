@@ -1,27 +1,31 @@
 from database.connection import get_connection
-from models.theaterofficial import TheaterOfficial
 class TheaterOfficialDao:
 
-    def add_theateruser(self,theater_name,theater_username,password_hash):
+    def add_theateruser(self,theater_id,theater_username,password_hash):
             connection = get_connection()
             cursor = connection.cursor()
-            cursor.execute("""INSERT INTO theater_user (theater_id, username, password_hash, require_password_reset) VALUES (?, ?, ?, 0)""", (theater_name,theater_username,password_hash))            
+            cursor.execute("""INSERT INTO theater_user (theater_id, username, password_hash, require_password_reset) VALUES (?, ?, ?, 0)""", (theater_id,theater_username,password_hash))            
             connection.commit()
+            success = cursor.rowcount > 0
             connection.close()
-            
+            return success
+    
+
+    
     #def get_theater_user(self,theaterUserName):
             #connection = get_connection()
             #cursor = connection.cursor()
             #cursor.execute("""select * from theaterofficial where username=?""",(theaterUserName))
             #result= cursor.fetchone()
             #return result
-    def find_theater_user(self,theater_name):
+    def find_theater_user(self,theater_id):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""select theater_user.theater_id,theater_user.username,theater_user.password_hash,theater_user.require_password_reset from theater_user join theater on theater_user.theater_id=theater.theater_id where theater_name=?""",(theater_name,))
+        cursor.execute("""SELECT theater_id,username,password_hash,require_password_reset FROM theater_user WHERE theater_id = ?""",(theater_id,))
         result = cursor.fetchone()
         connection.commit()
         connection.close()
+        return result
                 
         return True
     def get_theater_id(self, theater_name):

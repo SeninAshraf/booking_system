@@ -1,12 +1,14 @@
 from database.connection import get_connection
 
 class TheaterDao:
-    def add_theater(self,theater):
+    def add_theater(self,theater_name):
             connection = get_connection()
             cursor = connection.cursor()
-            cursor.execute("""INSERT INTO theater (theater_id,theater_name) VALUES (?,?)""",(theater.theater_id,theater.theaterName))
+            cursor.execute("""INSERT INTO theater (theater_name) VALUES (?)""",(theater_name,))
             connection.commit()
+            theater_id = cursor.lastrowid
             connection.close()
+            return theater_id
 
     def update_theater(self,theater):
             connection = get_connection()
