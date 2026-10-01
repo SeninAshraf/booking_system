@@ -4,7 +4,7 @@ class TheaterOfficialDao:
     def add_theateruser(self,theater_id,theater_username,password_hash):
             connection = get_connection()
             cursor = connection.cursor()
-            cursor.execute("""INSERT INTO theater_user (theater_id, username, password_hash, require_password_reset) VALUES (?, ?, ?, 0)""", (theater_id,theater_username,password_hash))            
+            cursor.execute("""INSERT INTO theater_user (theater_id, username, password_hash, require_password_reset) VALUES (?, ?, ?, 1)""", (theater_id,theater_username,password_hash))            
             connection.commit()
             success = cursor.rowcount > 0
             connection.close()
