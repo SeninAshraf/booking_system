@@ -264,6 +264,24 @@ class Viewer:
             print("invalid movie id")
             return 
          print("Valid Movie id ")
+         if valid:
+              screen_number = input("Enter Screen Number: ")
+              start_time = input("Enter Start Time: ")
+              end_time = input("Enter End Time: ")
+              print("For Vip Category")
+              vip_rows = input("Enter Rows: ")
+              vip_number_of_seats_per_row = input("Enter Seats Per Row:")
+              ticket_price_vip = input("Enter VIP Ticket Price: ")
+              print("For Economy Category")
+              economy_rows= input("Enter Economy Rows: ")
+              economy_number_of_seat_per_row = input("Enter Seats Per Row:")
+              ticket_price_economy = input("Enter Economy Ticket Price:")
+
+              result = showcontroller.add_movie(screen_number,start_time,end_time,vip_rows,vip_number_of_seats_per_row,ticket_price_vip,economy_rows,economy_number_of_seat_per_row,ticket_price_economy)
+              if result:
+                print("Show added succesfully")
+              else:
+                   print("Show addition failed...")
 
 
          
