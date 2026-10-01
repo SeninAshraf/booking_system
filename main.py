@@ -8,6 +8,7 @@ from controllers.moviecontroller import MovieController
 from services.movieservice import MovieService
 from dao.moviedao import MovieDao
 
+from services.theaterservice import TheaterService
 from controllers.theaterofficialcontroller import TheaterofficialController
 from services.theaterofficialservice import TheaterofficialService
 from dao.theaterofficialdao import TheaterOfficialDao
@@ -26,8 +27,9 @@ auth_controller = AuthenticationController(auth_service)
 #theater managment
 theater_official_dao = TheaterOfficialDao()
 theater_dao = TheaterDao()
+theater_service = TheaterService(theater_dao)
 theater_official_service= TheaterofficialService(theater_dao,theater_official_dao)
-theater_official_controller = TheaterofficialController(theater_official_service)
+theater_official_controller = TheaterofficialController(theater_official_service,theater_service)
 
 viewer = Viewer()
 #for displaying cli view common

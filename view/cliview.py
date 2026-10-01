@@ -202,23 +202,38 @@ class Viewer:
          else:
               print("user addition failed.")
 
+    def view_theater(self,theaterofficialcontroller):
+             result = theaterofficialcontroller.view_theaters()
+             
+             if result:
+                print("\n========== AVAILABLE THEATERS ==========\n")
+                  
+                print("Theater ID\tTheater Name")
+                  
+                for theater in result:
+                    print(f"{theater[0]}\t\t{theater[1]}")
+                print("These are the available Theaters..")
+                return result
+             else:
+                  print("no theaters found...")
+
     def theaterofficial_menu(self,theaterofficialcontroller):
             while True:
                 print("""
 ================= THEATER OFFICIAL MENU =================
-                
+
 1. Configure show
 2. Update Show
 3. Delete Show
 4. View Show
 5. Logout
-                
+
 =========================================================
                 """)
                 choice = input("SELECT AN OPTION: ")
                 
                 if choice == "1":
-                        print("coming soon")
+                        self.view_theater(theaterofficialcontroller)
                 elif choice == "2":
                         print("coming soon")
                 elif choice == "3":
@@ -226,6 +241,7 @@ class Viewer:
                 elif choice == "4":
                         print("coming soon")
                 elif choice == "5":
-                        print("coming soon")
+                        print("exiting theater official menu...")
+                        break
                 else:
                     print("invalid option...")

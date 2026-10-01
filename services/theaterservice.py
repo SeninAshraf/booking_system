@@ -4,3 +4,6 @@ class TheaterService:
 
     #def check_theater(self,theater_name):
             #return self.theater_dao.get_theater(theater_name)
+
+    def view_theaters(self):
+          return self.theater_dao.view_theaters()

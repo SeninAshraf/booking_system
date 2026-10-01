@@ -23,3 +23,10 @@ class TheaterDao:
             cursor.execute("""SELECT * FROM theater where theater_name COLLATE NOCASE =?""",(theater_name,))
             result= cursor.fetchone()
             return result
+
+    def view_theaters(self):
+           connection = get_connection()
+           cursor = connection.cursor()
+           cursor.execute("""SELECT * FROM theater""")
+           result = cursor.fetchall()
+           return result
