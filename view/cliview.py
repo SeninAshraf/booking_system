@@ -1,6 +1,6 @@
 class Viewer:
 
-    def starting_view(self, controller,moviecontroller,theaterofficialcontroller):
+    def starting_view(self, controller,moviecontroller,theaterofficialcontroller,showcontroller):
         while True:
             print("""
 ================= MOVIE TICKET BOOKING SYSTEM =================
@@ -18,7 +18,7 @@ class Viewer:
             if choice == "1":
                 self.login(controller,moviecontroller,theaterofficialcontroller)
             elif choice == "2":
-                self.theater_login(controller,theaterofficialcontroller)
+                self.theater_login(controller,theaterofficialcontroller,showcontroller,moviecontroller)
             elif choice == "3":
                 self.customer_login(controller)
             elif choice == "4":
@@ -40,7 +40,7 @@ class Viewer:
         else:
             print("Invalid username or password")
 
-    def theater_login(self,controller,theaterofficialcontroller):
+    def theater_login(self,controller,theaterofficialcontroller,showcontroller,moviecontroller):
         print("==========THEATER OFFICIAL LOGIN==========")
         theater_name = input("Enter theater name:")
         theater_username = input("Enter theater user name:")
@@ -49,7 +49,7 @@ class Viewer:
         result = controller.theater_login(theater_name,theater_username,theater_password)
         if result:
             print("Login succesfull")
-            self.theaterofficial_menu(theaterofficialcontroller)
+            self.theaterofficial_menu(theaterofficialcontroller,showcontroller,moviecontroller)
         else:
             print("Invalid username or theatername or password")
 
@@ -217,7 +217,7 @@ class Viewer:
              else:
                   print("no theaters found...")
 
-    def theaterofficial_menu(self,theaterofficialcontroller):
+    def theaterofficial_menu(self,theaterofficialcontroller,showcontroller,moviecontroller):
             while True:
                 print("""
 ================= THEATER OFFICIAL MENU =================
@@ -233,7 +233,7 @@ class Viewer:
                 choice = input("SELECT AN OPTION: ")
                 
                 if choice == "1":
-                        self.view_theater(theaterofficialcontroller)
+                        self.configure_show(moviecontroller,showcontroller)
                 elif choice == "2":
                         print("coming soon")
                 elif choice == "3":
@@ -245,3 +245,8 @@ class Viewer:
                         break
                 else:
                     print("invalid option...")
+
+    def configure_show(self,moviecontroller,showcontroller):
+         self.view_movie(moviecontroller)
+         choice = input("Enter Movie ID:")
+         
