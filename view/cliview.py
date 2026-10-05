@@ -249,7 +249,7 @@ class Viewer:
                 else:
                     print("invalid option...")
 
-    def configure_show(self, moviecontroller, showcontroller):
+    def configure_show(self, moviecontroller, showcontroller,theater_id):
 
         movies = self.view_movie(moviecontroller)
 
@@ -281,6 +281,7 @@ class Viewer:
 
         result = showcontroller.add_show(
             choice,
+            theater_id,
             screen_number,
             show_date,
             start_time,

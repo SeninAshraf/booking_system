@@ -4,7 +4,8 @@ class ShowDao:
     def add_show(self,choice,theater_id,screen_no,start_time,end_time,show_date):
                 connection = get_connection()
                 cursor = connection.cursor()
-                cursor.execute("""INSERT INTO show (movie_id, theater_id, screen_no,start_time,end_time,show_date) VALUES (?, ?, ?, ?,?,?)""", (choice,theater_id,screen_no,start_time,end_time,show_date))            
+                cursor.execute("""INSERT INTO show (movie_id, theater_id, screen_no,start_time,end_time,show_date) VALUES (?, ?, ?, ?,?,?)""", (choice,theater_id,screen_no,start_time,end_time,show_date))
+                            
                 connection.commit()
                 connection.close()
 
