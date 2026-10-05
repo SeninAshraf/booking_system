@@ -15,6 +15,7 @@ from dao.theaterofficialdao import TheaterOfficialDao
 from dao.theaterdao import TheaterDao
 
 from services.showservice import ShowService
+from services.seatservice import SeatService
 from controllers.showcontroller import ShowController
 from dao.showdao import ShowDao
 
@@ -38,7 +39,9 @@ theater_official_controller = TheaterofficialController(theater_official_service
 #show managment
 show_dao = ShowDao()
 show_service = ShowService(show_dao)
-show_controller = ShowController(show_service)
+seat_dao = SeatService()
+seat_service = SeatService(seat_dao)
+show_controller = ShowController(show_service,seat_service)
 viewer = Viewer()
 #for displaying cli view common
 viewer.starting_view(auth_controller,movie_controller,theater_official_controller,show_controller)
