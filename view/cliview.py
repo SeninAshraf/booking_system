@@ -271,6 +271,7 @@ class Viewer:
             return
 
         screen_number = int(input("Enter Screen Number: "))
+        show_date = input("Enter Show Date (YYYY-MM-DD): ")
         start_time = input("Enter Start Time: ")
         end_time = input("Enter End Time: ")
 
@@ -281,6 +282,7 @@ class Viewer:
         result = showcontroller.add_show(
             choice,
             screen_number,
+            show_date,
             start_time,
             end_time,
             vip_rows,
@@ -294,5 +296,14 @@ class Viewer:
         if result:
             print("Show added successfully")
 
+    def get_seat_configuration(self, category):
+
+        print(f"\n=== {category} SEATS ===")
+
+        rows = int(input("Enter Number of Rows: "))
+        seats_per_row = int(input("Enter Seats Per Row: "))
+        price = float(input("Enter Ticket Price: "))
+
+        return rows, seats_per_row, price
 
             
