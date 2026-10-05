@@ -1,10 +1,10 @@
 from database.connection import get_connection
 
 class ShowDao:
-    def add_show(self,choice,screen_number,start_time,end_time,vip_rows,vip_number_of_seats_per_row,ticket_price_vip,economy_rows,economy_number_of_seat_per_row,ticket_price_economy):
+    def add_show(self,choice,theater_id,screen_no,start_time,end_time,show_date):
                 connection = get_connection()
                 cursor = connection.cursor()
-                cursor.execute("""INSERT INTO show (movie_id, theater_id, screen_no,start_time,end_time,show_date) VALUES (?, ?, ?, ?,?,?)""", (show.movieId,show.theater_id,show.screenNo,show.startTime,show.endTime,show.showDate))            
+                cursor.execute("""INSERT INTO show (movie_id, theater_id, screen_no,start_time,end_time,show_date) VALUES (?, ?, ?, ?,?,?)""", (choice,theater_id,screen_no,start_time,end_time,show_date))            
                 connection.commit()
                 connection.close()
 
