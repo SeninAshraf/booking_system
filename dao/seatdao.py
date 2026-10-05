@@ -3,10 +3,10 @@ from database.connection import get_connection
 
 class SeatDAO:
 
-    def add_seat(self, seat):
+    def add_seat(self, show_id,seat_no,category,status,ticket_price,row_letter):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""INSERT INTO seat(seat_id,show_id, seat_no, category, seat_status, seat_price, seat_row) VALUES (?,?, ?, ?, ?, ?, ?)""", (seat.seat_id,seat.show_id,seat.seat_no,seat.category.value,seat.seat_status.value,seat.seat_price,seat.seat_row))
+        cursor.execute("""INSERT INTO seat(show_id, seat_no, category, seat_status, seat_price, seat_row) VALUES (?, ?, ?, ?, ?, ?)""", (show_id,seat_no,category,status,ticket_price,row_letter))
         connection.commit()
         connection.close()
 
