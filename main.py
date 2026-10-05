@@ -37,8 +37,8 @@ theater_official_controller = TheaterofficialController(theater_official_service
 
 #show managment
 show_dao = ShowDao()
-show_service = ShowService()
-show_controller = ShowController()
+show_service = ShowService(show_dao)
+show_controller = ShowController(show_service)
 viewer = Viewer()
 #for displaying cli view common
 viewer.starting_view(auth_controller,movie_controller,theater_official_controller,show_controller)
