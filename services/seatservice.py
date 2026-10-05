@@ -25,7 +25,7 @@ class SeatService:
                         self.seat_dao.add_seat(
                             show_id,
                             seat_no,
-                            "ECONOMY",
+                            "Economy",
                             "Available",
                             ticket_price_economy,
                             row_letter

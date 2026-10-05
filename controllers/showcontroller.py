@@ -8,6 +8,6 @@ class ShowController:
                     choice,theater_id,screen_number,show_date,start_time,end_time)
 
     def add_seat(self,result,vip_rows,vip_number_of_seats_per_row,ticket_price_vip,economy_rows,economy_number_of_seat_per_row,ticket_price_economy):
-                return self.seatservice.add_show(
+                return self.seatservice.add_seats(
                         result,vip_rows,vip_number_of_seats_per_row,ticket_price_vip,economy_rows,economy_number_of_seat_per_row,ticket_price_economy
                 )
