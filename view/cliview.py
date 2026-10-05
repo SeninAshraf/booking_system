@@ -286,12 +286,17 @@ class Viewer:
             show_date,
             start_time,
             end_time,
-            vip_rows,
-            vip_seats,
-            vip_price,
-            economy_rows,
-            economy_seats,
-            economy_price
+        )
+
+        
+        result_seat = showcontroller.add_seat(
+             result,
+             vip_rows,
+             vip_seats,
+             vip_price,
+             economy_rows,
+             economy_seats,
+             economy_price
         )
 
         if result:

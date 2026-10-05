@@ -5,9 +5,10 @@ class ShowDao:
                 connection = get_connection()
                 cursor = connection.cursor()
                 cursor.execute("""INSERT INTO show (movie_id, theater_id, screen_no,start_time,end_time,show_date) VALUES (?, ?, ?, ?,?,?)""", (choice,theater_id,screen_no,start_time,end_time,show_date))
-                            
+                show_id = cursor.lastrowid
                 connection.commit()
                 connection.close()
+                return show_id
 
     def update_show(self,show):
                 connection = get_connection()
