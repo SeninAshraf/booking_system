@@ -269,8 +269,13 @@ class Viewer:
         if not valid:
             print("Invalid Movie ID")
             return
-
-        screen_number = int(input("Enter Screen Number: "))
+        while True:
+            try:
+                screen_number = int(input("Enter Screen Number: "))
+                break
+            except ValueError:
+                print("Enter valid  Number")
+                
         show_date = input("Enter Show Date (YYYY-MM-DD): ")
         start_time = input("Enter Start Time: ")
         end_time = input("Enter End Time: ")
@@ -305,10 +310,33 @@ class Viewer:
     def get_seat_configuration(self, category):
 
         print(f"\n=== {category} SEATS ===")
-
-        rows = int(input("Enter Number of Rows: "))
-        seats_per_row = int(input("Enter Seats Per Row: "))
-        price = float(input("Enter Ticket Price: "))
+        while True:
+            try:
+                rows = int(input("Enter Number of Rows: "))
+                if rows <= 0:
+                    print("Rows must be greater than 0.")
+                    continue
+                break
+            except ValueError:
+                 print("Enter a Valid Number")
+        while True:
+             try:
+                seats_per_row = int(input("Enter Seats Per Row: "))
+                if seats_per_row<=0:
+                     print("Seats must be greater than 0")
+                     continue
+                break
+             except ValueError:
+                  print("Enter valid number")
+        while True:
+             try:
+                price = float(input("Enter Ticket Price: "))
+                if price <= 0:
+                     print("Price must be greater than 0")
+                     continue
+                break
+             except ValueError:
+                  print("Enter a valid price")
 
         return rows, seats_per_row, price
 
