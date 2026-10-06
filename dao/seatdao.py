@@ -9,7 +9,7 @@ class SeatDAO:
         cursor.execute("""INSERT INTO seat(show_id, seat_no, category, seat_status, seat_price, seat_row) VALUES (?, ?, ?, ?, ?, ?)""", (show_id,seat_no,category,status,ticket_price,row_letter))
         connection.commit()
         connection.close()
-
+        return True
 
     def find_by_show(self, show):
         connection = get_connection()

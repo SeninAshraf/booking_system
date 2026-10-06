@@ -30,3 +30,5 @@ class SeatService:
                             ticket_price_economy,
                             row_letter
                         )
+
+        return True
