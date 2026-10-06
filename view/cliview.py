@@ -311,7 +311,9 @@ class Viewer:
             start_time,
             end_time,
         )
-
+        if result is None:
+            print("Show was NOT created.")
+            return
         
         result_seat = showcontroller.add_seat(
              result,
