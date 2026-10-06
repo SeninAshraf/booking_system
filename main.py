@@ -39,7 +39,7 @@ theater_official_controller = TheaterofficialController(theater_official_service
 
 #show managment
 show_dao = ShowDao()
-show_service = ShowService(show_dao)
+show_service = ShowService(show_dao,movie_dao)
 seat_dao = SeatDAO()
 seat_service = SeatService(seat_dao)
 show_controller = ShowController(show_service,seat_service)

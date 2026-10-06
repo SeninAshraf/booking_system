@@ -323,8 +323,8 @@ class Viewer:
              economy_price
         )
 
-        if result:
-            print("Show added successfully")
+        if result is not None and result_seat is not None:
+            print("Show and seats created successfully")
 
     def get_seat_configuration(self, category):
 
