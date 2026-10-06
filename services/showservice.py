@@ -22,6 +22,16 @@ class ShowService:
              print("this show date is after the release date ")
              return None
         else:
-            return self.show_dao.add_show(
-                            choice,theater_id,screen_number,show_date,start_time,end_time
-                    )
+            collision = self.show_dao.check_show_collision(theater_id,screen_number,show_date.strftime("%Y-%m-%d"),
+    start_time.strftime("%H:%M"),
+    end_time.strftime("%H:%M"))
+
+            if collision:
+                print("Show collision! This screen is already occupied.")
+                return None
+            else:
+                return self.show_dao.add_show(
+                                choice,theater_id,screen_number, start_time.strftime("%H:%M"),
+    end_time.strftime("%H:%M"),
+    show_date.strftime("%Y-%m-%d")
+                        )
