@@ -296,8 +296,32 @@ class Viewer:
 
             except ValueError:
                     print("Invalid date. Please use YYYY-MM-DD.")
-        start_time = input("Enter Start Time: ")
-        end_time = input("Enter End Time: ")
+        while True:
+            start_time = input("Enter Start Time (HH:MM): ")
+
+            try:
+                start_time = datetime.strptime(
+                    start_time,
+                    "%H:%M"
+                ).time()
+                break
+
+            except ValueError:
+                print("Invalid start time. Please use HH:MM.")
+        while True:
+            end_time = input("Enter End Time (HH:MM): ")
+
+            try:
+                end_time = datetime.strptime(end_time,"%H:%M").time()
+
+                if end_time <= start_time:
+                    print("End time must be after start time.")
+                    continue
+
+                break
+
+            except ValueError:
+             print("Invalid end time. Please use HH:MM.")
 
         vip_rows, vip_seats, vip_price = self.get_seat_configuration("VIP")
 
