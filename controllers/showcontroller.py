@@ -11,3 +11,7 @@ class ShowController:
                 return self.seatservice.add_seats(
                         result,vip_rows,vip_number_of_seats_per_row,ticket_price_vip,economy_rows,economy_number_of_seat_per_row,ticket_price_economy
                 )
+
+    def view_show(self,theater_id):
+                return self.showservice.view_show(theater_id)
+    

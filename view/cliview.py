@@ -239,11 +239,11 @@ class Viewer:
                 if choice == "1":
                         self.configure_show(moviecontroller,showcontroller,theater_id)
                 elif choice == "2":
-                        print("coming soon")
+                        self.update_show(moviecontroller,showcontroller,theater_id)
                 elif choice == "3":
                         print("coming soon")
                 elif choice == "4":
-                        print("coming soon")
+                        self.view_show(showcontroller,theater_id)
                 elif choice == "5":
                         print("exiting theater official menu...")
                         break
@@ -384,5 +384,23 @@ class Viewer:
                   print("Enter a valid price")
 
         return rows, seats_per_row, price
+
+    def update_show():
+         pass
+
+    def view_show(self,showcontroller,theater_id):
+         result = showcontroller.view_show(theater_id)
+         if result:
+                     print("\n========== AVAILABLE SHOWS ==========\n")
+         
+                     print("Show ID\t\tShow\t\tDate\t\tTime")
+         
+                     for show in result:
+                         print(f"{show[0]}\t\t{show[1]}\t\t{show[2]}\t\t{show[3]}")
+                     print("These are the available shows")
+         else:
+                       print("No movies available")
+         
+         return result
 
             

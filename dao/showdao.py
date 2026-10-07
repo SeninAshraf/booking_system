@@ -32,10 +32,10 @@ class ShowDao:
                 connection.commit()
                 connection.close()
 
-    def get_all(self):
+    def get_all(self,theater_id):
             connection = get_connection()
             cursor=connection.cursor()
-            cursor.execute("SELECT * FROM show")
+            cursor.execute("""SELECT s.show_id,m.movie_title,s.show_date,s.start_time FROM show s JOIN movie m ON s.movie_id = m.movie_id WHERE s.theater_id = ?""",(theater_id,))
             result = cursor.fetchall()
             return result
 

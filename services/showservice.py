@@ -35,3 +35,6 @@ class ShowService:
     end_time.strftime("%H:%M"),
     show_date.strftime("%Y-%m-%d")
                         )
+
+    def view_show(self,theater_id):
+            return self.show_dao.get_all(theater_id)
