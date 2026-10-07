@@ -393,7 +393,18 @@ class Viewer:
             except ValueError:
                 print("Enter invalid Id")
                 continue
-
+            result= self.search_show(showcontroller,show_id)
+            if result:
+                        print("Enter new values (Press Enter to keep the existing value)")  
+                        title1 = input("Enter Movie Title: ")
+                        genre1 = input("Enter Genre: ")
+                        language1 = input("Enter Language: ")
+                        duration1 = input("Enter Duration (minutes): ")
+                        release_date1 = input("Enter Release Date (YYYY-MM-DD): ")
+                        end_date1 = input("Enter End Date (YYYY-MM-DD): ")
+            else:
+                          print("movie not found")
+        
     def view_show(self,showcontroller,moviecontroller,theater_id):
          result = showcontroller.view_show(theater_id)
          if result:
