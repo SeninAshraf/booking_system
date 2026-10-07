@@ -14,4 +14,7 @@ class ShowController:
 
     def view_show(self,theater_id):
                 return self.showservice.view_show(theater_id)
+
+    def search_show(self,show_id):
+              return self.showservice.search_show(show_id)
     

@@ -39,4 +39,11 @@ class ShowDao:
             result = cursor.fetchall()
             return result
 
+    def search_show(self,show_id):
+                connection = get_connection()
+                cursor=connection.cursor()
+                cursor.execute("""SELECT s.show_id,m.movie_title,s.screen_no,s.start_time,s.end_time,s.show_date,seat.category,seat.seat_row,seat.seat_price FROM show s JOIN movie m ON s.movie_id = m.movie_id JOIN seat ON s.show_id = seat.show_id WHERE s.show_id = ?""", (show_id,))
+                result = cursor.fetchall()
+                return result
+
     

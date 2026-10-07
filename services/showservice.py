@@ -38,3 +38,7 @@ class ShowService:
 
     def view_show(self,theater_id):
             return self.show_dao.get_all(theater_id)
+
+    def search_show(self,show_id):
+            return self.show_dao.get_show(show_id)
+    

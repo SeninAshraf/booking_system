@@ -385,10 +385,16 @@ class Viewer:
 
         return rows, seats_per_row, price
 
-    def update_show():
-         pass
+    def update_show(self,moviecontroller,showcontroller,theater_id):
+         self.view_show(showcontroller,moviecontroller,theater_id)
+         while True:
+            try:
+                show_id =int(input("Enter id of show that needed to update:"))
+            except ValueError:
+                print("Enter invalid Id")
+                continue
 
-    def view_show(self,showcontroller,theater_id):
+    def view_show(self,showcontroller,moviecontroller,theater_id):
          result = showcontroller.view_show(theater_id)
          if result:
                      print("\n========== AVAILABLE SHOWS ==========\n")
@@ -403,4 +409,55 @@ class Viewer:
          
          return result
 
-            
+    def search_show(self, showcontroller, show_id):
+
+        result = showcontroller.search_show(show_id)
+
+        if result:
+
+            print("\n========== SHOW DETAILS ==========\n")
+            print(f"Movie Title       : {result[0][1]}")
+            print(f"Screen Number     : {result[0][2]}")
+            print(f"Start Time        : {result[0][3]}")
+            print(f"End Time          : {result[0][4]}")
+            print(f"Show Date         : {result[0][5]}")
+
+            vip_rows = []
+            vip_seat_count = 0
+            vip_price = None
+
+            for row in result:
+                if row[6] == "VIP":
+
+                    if row[7] not in vip_rows:
+                        vip_rows.append(row[7])
+
+                    vip_seat_count += 1
+                    vip_price = row[8]
+
+            print("\nFor VIP Category")
+            print(f"Rows                    : {', '.join(vip_rows)}")
+            print(f"No Of seats per row     : {vip_seat_count // len(vip_rows)}")
+            print(f"Ticket Price             : {vip_price}")
+
+            economy_rows = []
+            economy_seat_count = 0
+            economy_price = None
+
+            for row in result:
+                if row[6] == "Economy":
+
+                    if row[7] not in economy_rows:
+                        economy_rows.append(row[7])
+
+                    economy_seat_count += 1
+                    economy_price = row[8]
+
+            print("\nFor Economy Category")
+            print(f"Rows                    : {', '.join(economy_rows)}")
+            print(f"No Of seats per row     : {economy_seat_count // len(economy_rows)}")
+            print(f"Ticket Price             : {economy_price}")
+
+            print("\n===================================")
+
+            return result
