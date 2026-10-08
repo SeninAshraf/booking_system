@@ -395,13 +395,106 @@ class Viewer:
                 continue
             result= self.search_show(showcontroller,show_id)
             if result:
+                        show = result[0]
+                        old_movie = show[1]
+                        old_screen = show[2]
+                        old_start = show[3]
+                        old_end = show[4]
+                        old_date = show[5]
                         print("Enter new values (Press Enter to keep the existing value)")  
-                        title1 = input("Enter Movie Title: ")
-                        genre1 = input("Enter Genre: ")
-                        language1 = input("Enter Language: ")
-                        duration1 = input("Enter Duration (minutes): ")
-                        release_date1 = input("Enter Release Date (YYYY-MM-DD): ")
-                        end_date1 = input("Enter End Date (YYYY-MM-DD): ")
+                        movie = input(f"Movie [{old_movie}]: ")
+                        if movie == "":
+                            movie = old_movie
+                        while True:
+                            screen_numb = input(f"Enter Screen Number[{old_screen}]: ")
+                            if screen_numb == "":
+                                screen_number = old_screen
+                                break
+                            try:
+                                screen_number = int(screen_numb)
+                                break
+                            except ValueError:
+                                  print("Enter valid Number")
+                            
+                        while True:
+                            show_date_input = input(
+                                f"Enter Show Date (YYYY-MM-DD) [{old_date}]: "
+                            )
+
+                            if show_date_input == "":
+                                show_date = old_date
+                                break
+
+                            try:
+                                show_date = datetime.strptime(
+                                    show_date_input,
+                                    "%Y-%m-%d"
+                                ).date()
+
+                                if show_date < date.today():
+                                    print("Show date cannot be in the past.")
+                                    continue
+
+                                break
+
+                            except ValueError:
+                                print("Invalid date. Please use YYYY-MM-DD.")
+                            
+                        while True:
+                                    start_time_input = input(f"Enter Start Time (HH:MM)[{old_start}]: ")
+                                    if start_time_input =="":
+                                                    start_time=old_start
+                                                    break
+                        
+                                    try:
+                                        start_time = datetime.strptime(
+                                            start_time_input,
+                                            "%H:%M"
+                                        ).time()
+                                        break
+                        
+                                    except ValueError:
+                                        print("Invalid start time. Please use HH:MM.")
+                                    
+                        while True:
+                                    end_time_input = input(f"Enter End Time (HH:MM)[{old_end}]: ")
+                                    if end_time_input =="":
+                                                    end_time=old_end
+                                                    break
+                        
+                                    try:
+                                        end_time = datetime.strptime(end_time_input,"%H:%M").time()
+                        
+                                        if end_time <= start_time:
+                                            print("End time must be after start time.")
+                                            continue
+                        
+                                        break
+                        
+                                    except ValueError:
+                                     print("Invalid end time. Please use HH:MM.")
+                        
+                        (old_vip_rows,
+                                        old_vip_seats,
+                                        old_vip_price,
+                                        old_economy_rows,
+                                        old_economy_seats,
+                                        old_economy_price
+                                    ) = self.get_old_seat_configuration(result)
+                        vip_rows, vip_seats, vip_price = self.update_seat_configuration(
+                                        "VIP",
+                                        old_vip_rows,
+                                        old_vip_seats,
+                                        old_vip_price
+                                    )
+                        economy_rows, economy_seats, economy_price = self.update_seat_configuration(
+                                    "ECONOMY",
+                                    old_economy_rows,
+                                    old_economy_seats,
+                                    old_economy_price
+                                )
+
+                       
             else:
                           print("movie not found")
         
@@ -472,3 +565,119 @@ class Viewer:
             print("\n===================================")
 
             return result
+
+    def get_old_seat_configuration(self, result):
+
+        old_vip_rows = []
+        old_vip_seat_count = 0
+        old_vip_price = None
+
+        old_economy_rows = []
+        old_economy_seat_count = 0
+        old_economy_price = None
+
+        for row in result:
+
+            if row[6] == "VIP":
+                if row[7] not in old_vip_rows:
+                    old_vip_rows.append(row[7])
+
+                old_vip_seat_count += 1
+                old_vip_price = row[8]
+
+            elif row[6] == "Economy":
+                if row[7] not in old_economy_rows:
+                    old_economy_rows.append(row[7])
+
+                old_economy_seat_count += 1
+                old_economy_price = row[8]
+
+        old_vip_seats = old_vip_seat_count // len(old_vip_rows)
+        old_economy_seats = old_economy_seat_count // len(old_economy_rows)
+
+        return (
+            old_vip_rows,
+            old_vip_seats,
+            old_vip_price,
+            old_economy_rows,
+            old_economy_seats,
+            old_economy_price
+        )
+
+    def update_seat_configuration(
+        self,
+        category,
+        old_rows,
+        old_seats_per_row,
+        old_price
+    ):
+
+        print(f"\n=== UPDATE {category} SEATS ===")
+
+    
+        while True:
+            rows_input = input(
+                f"Enter Number of Rows [{old_rows}]: "
+            )
+
+            if rows_input == "":
+                rows = old_rows
+                break
+
+            try:
+                rows = int(rows_input)
+
+                if rows <= 0:
+                    print("Rows must be greater than 0.")
+                    continue
+
+                break
+
+            except ValueError:
+                print("Enter a valid number.")
+
+    
+        while True:
+            seats_input = input(
+                f"Enter Seats Per Row [{old_seats_per_row}]: "
+            )
+
+            if seats_input == "":
+                seats_per_row = old_seats_per_row
+                break
+
+            try:
+                seats_per_row = int(seats_input)
+
+                if seats_per_row <= 0:
+                    print("Seats must be greater than 0.")
+                    continue
+
+                break
+
+            except ValueError:
+                print("Enter a valid number.")
+
+        
+        while True:
+            price_input = input(
+                f"Enter Ticket Price [{old_price}]: "
+            )
+
+            if price_input == "":
+                price = old_price
+                break
+
+            try:
+                price = float(price_input)
+
+                if price <= 0:
+                    print("Price must be greater than 0.")
+                    continue
+
+                break
+
+            except ValueError:
+                print("Enter a valid price.")
+
+        return rows, seats_per_row, price
