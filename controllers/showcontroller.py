@@ -17,4 +17,20 @@ class ShowController:
 
     def search_show(self,show_id):
               return self.showservice.search_show(show_id)
+
+    def update_show(self,show_id,screen_number,show_date,start_time,end_time):
+            return self.showservice.update_show(show_id,screen_number,show_date,start_time,end_time)
+
+    def update_seats(self,show_id,vip_rows,
+                                     vip_seats,
+                                     vip_price,
+                                     economy_rows,
+                                     economy_seats,
+                                     economy_price):
+            return self.seatservice.update_seats(show_id,vip_rows,
+                                     vip_seats,
+                                     vip_price,
+                                     economy_rows,
+                                     economy_seats,
+                                     economy_price)
     

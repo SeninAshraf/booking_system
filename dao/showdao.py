@@ -18,12 +18,13 @@ class ShowDao:
             connection.close()
             return result
     
-    def update_show(self,show):
+    def update_show(self,show_id,screen_number,show_date,start_time,end_time):
                 connection = get_connection()
                 cursor = connection.cursor()
-                cursor.execute("""UPDATE show SET movie_id=?,theater_id=?,screen_no=?,start_time=?,end_time=?,show_date=? WHERE show_id=?""",(show.movieId,show.theater_id,show.screenNo,show.startTime,show.endTime,show.showDate,show.showId))
+                cursor.execute("""UPDATE show SET screen_no=?,start_time=?,end_time=?,show_date=? WHERE show_id=?""",(screen_number,show_date,start_time,end_time,show_id))
                 connection.commit()
                 connection.close()
+                return True
 
     def delete_show(self,showId):
                 connection = get_connection()
@@ -42,7 +43,7 @@ class ShowDao:
     def search_show(self,show_id):
                 connection = get_connection()
                 cursor=connection.cursor()
-                cursor.execute("""SELECT s.show_id,m.movie_title,s.screen_no,s.start_time,s.end_time,s.show_date,seat.category,seat.seat_row,seat.seat_price FROM show s JOIN movie m ON s.movie_id = m.movie_id JOIN seat ON s.show_id = seat.show_id WHERE s.show_id = ?""", (show_id,))
+                cursor.execute("""SELECT s.show_id,m.movie_title,s.screen_no,s.start_time,s.end_time,s.show_date,seat.category,seat.seat_row,seat.seat_price FROM show s JOIN movie m ON s.movie_id = m.movie_id LEFT JOIN seat ON s.show_id = seat.show_id WHERE s.show_id = ?""", (show_id,))
                 result = cursor.fetchall()
                 return result
 

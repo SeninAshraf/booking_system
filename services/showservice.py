@@ -41,4 +41,7 @@ class ShowService:
 
     def search_show(self,show_id):
             return self.show_dao.search_show(show_id)
+
+    def update_show(self,show_id,screen_number,show_date,start_time,end_time):
+         return self.show_dao.update_show(show_id,screen_number,show_date,start_time,end_time)
     

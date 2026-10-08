@@ -394,6 +394,7 @@ class Viewer:
                 print("Enter invalid Id")
                 continue
             result= self.search_show(showcontroller,show_id)
+            
             if result:
                         show = result[0]
                         old_movie = show[1]
@@ -401,10 +402,7 @@ class Viewer:
                         old_start = show[3]
                         old_end = show[4]
                         old_date = show[5]
-                        print("Enter new values (Press Enter to keep the existing value)")  
-                        movie = input(f"Movie [{old_movie}]: ")
-                        if movie == "":
-                            movie = old_movie
+                        print(f"Enter Updated Values for the show of{old_movie} ")
                         while True:
                             screen_numb = input(f"Enter Screen Number[{old_screen}]: ")
                             if screen_numb == "":
@@ -483,17 +481,27 @@ class Viewer:
                                     ) = self.get_old_seat_configuration(result)
                         vip_rows, vip_seats, vip_price = self.update_seat_configuration(
                                         "VIP",
-                                        old_vip_rows,
+                                        len(old_vip_rows),
                                         old_vip_seats,
                                         old_vip_price
                                     )
                         economy_rows, economy_seats, economy_price = self.update_seat_configuration(
                                     "ECONOMY",
-                                    old_economy_rows,
+                                    len(old_economy_rows),
                                     old_economy_seats,
                                     old_economy_price
                                 )
 
+                        update_show = showcontroller.update_show(show_id,screen_number,show_date,start_time,end_time)
+                        update_seat = showcontroller.update_seats(show_id,vip_rows,
+                                     vip_seats,
+                                     vip_price,
+                                     economy_rows,
+                                     economy_seats,
+                                     economy_price
+                                )
+                        if update_show is not None and update_seat is not None:
+                                    print("Show and seats updated successfully")
                        
             else:
                           print("movie not found")

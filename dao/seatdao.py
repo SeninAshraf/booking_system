@@ -26,3 +26,17 @@ class SeatDAO:
         cursor.execute("""UPDATE seat SET seat_status = ? WHERE seat_id = ?""", (status.value,seat.seat_id))
         connection.commit()
         connection.close()
+
+    def delete_seats(self, show_id):
+        connection = get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(
+            "DELETE FROM seat WHERE show_id = ?",
+            (show_id,)
+        )
+
+        connection.commit()
+        connection.close()
+
+        return True
