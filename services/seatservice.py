@@ -77,3 +77,6 @@ class SeatService:
                         )
 
                 return True
+
+    def delete_seat(self,show_id):
+         return self.seat_dao.delete_seats(show_id)

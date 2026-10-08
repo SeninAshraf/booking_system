@@ -32,6 +32,7 @@ class ShowDao:
                 cursor.execute("""DELETE from show where show_id=?""",(showId,))
                 connection.commit()
                 connection.close()
+                return True
 
     def get_all(self,theater_id):
             connection = get_connection()

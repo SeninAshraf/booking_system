@@ -33,4 +33,13 @@ class ShowController:
                                      economy_rows,
                                      economy_seats,
                                      economy_price)
-    
+
+    def delete_show(self, show_id):
+
+        result_show = self.showservice.delete_show(show_id)
+        result_seat = self.seatservice.delete_seat(show_id)
+
+        if result_show and result_seat:
+                return True
+
+        return False

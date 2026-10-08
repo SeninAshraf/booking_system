@@ -241,7 +241,7 @@ class Viewer:
                 elif choice == "2":
                         self.update_show(moviecontroller,showcontroller,theater_id)
                 elif choice == "3":
-                        print("coming soon")
+                        self.delete_show(moviecontroller,showcontroller,theater_id)
                 elif choice == "4":
                         self.view_show(showcontroller,theater_id)
                 elif choice == "5":
@@ -506,7 +506,7 @@ class Viewer:
             else:
                           print("movie not found")
         
-    def view_show(self,showcontroller,moviecontroller,theater_id):
+    def view_show(self,moviecontroller,showcontroller,theater_id):
          result = showcontroller.view_show(theater_id)
          if result:
                      print("\n========== AVAILABLE SHOWS ==========\n")
@@ -518,6 +518,7 @@ class Viewer:
                      print("These are the available shows")
          else:
                        print("No movies available")
+        
          
          return result
 
@@ -689,3 +690,46 @@ class Viewer:
                 print("Enter a valid price.")
 
         return rows, seats_per_row, price
+
+    def delete_show(self, moviecontroller,showcontroller,theater_id):
+
+        self.view_show(moviecontroller,showcontroller,theater_id)
+        
+        while True:
+            try:
+                show_id = int(input("Enter Show ID: "))
+                break
+            except ValueError:
+                print("Enter a valid Show ID.")
+
+        result = self.search_show(showcontroller, show_id)
+
+        if not result:
+            print("Show not found.")
+            return
+
+        print("\nDo you want to delete this show?")
+        print("1. Yes")
+        print("2. No")
+        while True:
+            try:
+                choice = int(input("Select an Option: "))
+
+                if choice in [1, 2]:
+                    break
+
+                print("Please select 1 or 2.")
+
+            except ValueError:
+                print("Enter a valid option.")
+
+        if choice == 1:
+
+            result = showcontroller.delete_show(show_id)
+            if result:
+                print("Show deleted successfully")
+            else:
+                print("Deletion failed")
+
+        elif choice == 2:
+            print("Deletion cancelled")

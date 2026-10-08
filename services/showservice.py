@@ -44,4 +44,7 @@ class ShowService:
 
     def update_show(self,show_id,screen_number,show_date,start_time,end_time):
          return self.show_dao.update_show(show_id,screen_number,show_date,start_time,end_time)
+
+    def delete_show(self,show_id):
+         return self.show_dao.delete_show(show_id)
     
