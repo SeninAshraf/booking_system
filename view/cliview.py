@@ -243,7 +243,7 @@ class Viewer:
                 elif choice == "3":
                         self.delete_show(moviecontroller,showcontroller,theater_id)
                 elif choice == "4":
-                        self.view_show(showcontroller,theater_id)
+                        self.view_show(showcontroller,moviecontroller,theater_id)
                 elif choice == "5":
                         print("exiting theater official menu...")
                         break
@@ -517,7 +517,7 @@ class Viewer:
                          print(f"{show[0]}\t\t{show[1]}\t\t{show[2]}\t\t{show[3]}")
                      print("These are the available shows")
          else:
-                       print("No movies available")
+                       print("No shows available")
         
          
          return result
@@ -693,8 +693,10 @@ class Viewer:
 
     def delete_show(self, moviecontroller,showcontroller,theater_id):
 
-        self.view_show(moviecontroller,showcontroller,theater_id)
-        
+        result=self.view_show(moviecontroller,showcontroller,theater_id)
+        if not result:
+            print("No shows available to delete.")
+            return
         while True:
             try:
                 show_id = int(input("Enter Show ID: "))
