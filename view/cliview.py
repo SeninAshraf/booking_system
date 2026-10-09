@@ -386,7 +386,9 @@ class Viewer:
         return rows, seats_per_row, price
 
     def update_show(self,moviecontroller,showcontroller,theater_id):
-         self.view_show(showcontroller,moviecontroller,theater_id)
+         result=self.view_show(showcontroller,moviecontroller,theater_id)
+         if not  result:
+              return
          while True:
             try:
                 show_id =int(input("Enter id of show that needed to update:"))
@@ -506,7 +508,7 @@ class Viewer:
             else:
                           print("movie not found")
         
-    def view_show(self,moviecontroller,showcontroller,theater_id):
+    def view_show(self,showcontroller,moviecontroller,theater_id):
          result = showcontroller.view_show(theater_id)
          if result:
                      print("\n========== AVAILABLE SHOWS ==========\n")
@@ -695,7 +697,7 @@ class Viewer:
 
         result=self.view_show(moviecontroller,showcontroller,theater_id)
         if not result:
-            print("No shows available to delete.")
+            #print("No shows available to delete.")
             return
         while True:
             try:
