@@ -1,0 +1,2 @@
+class BookingController:
+    pass

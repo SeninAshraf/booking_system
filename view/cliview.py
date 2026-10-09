@@ -1,7 +1,7 @@
 from datetime import datetime, date
 class Viewer:
 
-    def starting_view(self, controller,moviecontroller,theaterofficialcontroller,showcontroller):
+    def starting_view(self, controller,moviecontroller,theaterofficialcontroller,showcontroller,bookingcontroller):
         while True:
             print("""
 ================= MOVIE TICKET BOOKING SYSTEM =================
@@ -55,14 +55,29 @@ class Viewer:
         else:
             print("Invalid username or theatername or password")
 
-    def customer_login(self,controller):
+    
+    def customer_login(self, controller):
         while True:
             print("========== CUSTOMER ==========")
+
             try:
-                customer_mobile_num = int(input("Enter mobile number:"))
+                customer_mobile_num = int(input("Enter mobile number: "))
                 break
             except ValueError:
-                print("please enter valid number")
+                print("Please enter a valid number.")
+
+        result = controller.customer_login(customer_mobile_num)
+
+        if result:
+            customer_id = result[0]
+            print(f"Customer ID is {customer_id}")
+            return result
+        else:
+            print("Customer not found.")
+            return None
+
+            
+                
 
     def exit(self):
         print("Thank you for using Movie Ticket Booking System.")
@@ -737,3 +752,5 @@ class Viewer:
 
         elif choice == 2:
             print("Deletion cancelled")
+
+    

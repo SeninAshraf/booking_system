@@ -20,15 +20,23 @@ from dao.seatdao import SeatDAO
 from controllers.showcontroller import ShowController
 from dao.showdao import ShowDao
 
+from controllers.bookingcontroller import BookingController
+from services.bookingservice import BookingService
+from dao.bookingdao import BookingDAO
+
 #movie managment
 movie_dao = MovieDao()
 movie_service=MovieService(movie_dao)
 movie_controller=MovieController(movie_service)
+#customer managment
+booking_dao =BookingDAO()
+booking_service = BookingService(booking_dao)
+booking_controller=BookingController()
 
 #authetication admin
 auth_dao = AuthDao()
 auth_service = AuthenticationService(auth_dao)
-auth_controller = AuthenticationController(auth_service)
+auth_controller = AuthenticationController(auth_service,booking_service)
 
 #theater managment
 theater_official_dao = TheaterOfficialDao()
@@ -44,5 +52,7 @@ seat_dao = SeatDAO()
 seat_service = SeatService(seat_dao)
 show_controller = ShowController(show_service,seat_service)
 viewer = Viewer()
+
+
 #for displaying cli view common
-viewer.starting_view(auth_controller,movie_controller,theater_official_controller,show_controller)
+viewer.starting_view(auth_controller,movie_controller,theater_official_controller,show_controller,booking_controller)

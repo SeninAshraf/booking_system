@@ -1,7 +1,8 @@
 class AuthenticationController:
 
-    def __init__(self, authenticationservice):
+    def __init__(self, authenticationservice,bookingservice):
         self.authenticationservice = authenticationservice
+        self.bookingservice = bookingservice
 
     def login(self, username, password):
 
@@ -18,4 +19,6 @@ class AuthenticationController:
                     theater_password
                 )
     def customer_login(self,customer_mobile_num):
-          pass
+          return self.bookingservice.login_customer(
+                customer_mobile_num
+          )

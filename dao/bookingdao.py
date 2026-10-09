@@ -13,4 +13,10 @@ class BookingDAO:
         cursor.execute("""select * from booking""")
         result = cursor.fetchall()
         return result
-    
+
+    def find_customer(self,customer_mobile_num):
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute("""select customer_id from customer where mobile_number = ?""",(customer_mobile_num,))
+        result =cursor.fetchall()
+        return result
