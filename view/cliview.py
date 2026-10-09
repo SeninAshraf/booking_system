@@ -21,7 +21,7 @@ class Viewer:
             elif choice == "2":
                 self.theater_login(controller,theaterofficialcontroller,showcontroller,moviecontroller)
             elif choice == "3":
-                self.customer_login(controller)
+                self.customer_login(controller,moviecontroller,theaterofficialcontroller,showcontroller)
             elif choice == "4":
                 self.exit()
                 break
@@ -56,30 +56,48 @@ class Viewer:
             print("Invalid username or theatername or password")
 
     
-    def customer_login(self, controller):
+    
+    def customer_login(self, controller, moviecontroller,
+                    theaterofficialcontroller, showcontroller):
+
         while True:
             print("========== CUSTOMER ==========")
+            customer_mobile_num = input("Enter mobile number: ").strip()
 
-            try:
-                customer_mobile_num = input("Enter mobile number: ")
-                break
-            except ValueError:
-                print("Please enter a valid number.")
+            if not customer_mobile_num.isdigit():
+                print("Please enter a valid mobile number.")
+                continue
+
+            break
 
         result = controller.customer_login(customer_mobile_num)
 
         if result:
             customer_id = result[0]
             print(f"Customer ID is {customer_id}")
-            return result
+
         else:
-            print("New Customer Details added to database.....")
+            print("New customer detected. Registering...")
             new_user = controller.new_customer_login(customer_mobile_num)
+
             if new_user:
-                 print("Customer added succesfully")
+                print("Customer added successfully.")
+                result = controller.customer_login(customer_mobile_num)
+                if result:
+                    customer_id = result[0]
+                    print(f"Customer ID is {customer_id}")
+                else:
+                    print("Unable to retrieve customer details.")
+                    return
             else:
-                 print("Customer addition Failed.")
-            
+                print("Customer addition failed.")
+                return
+        self.customer_menu(
+            moviecontroller,
+            theaterofficialcontroller,
+            showcontroller
+        )
+
 
             
                 
@@ -757,5 +775,28 @@ class Viewer:
 
         elif choice == 2:
             print("Deletion cancelled")
+
+    def customer_menu(self,moviecontroller,theaterofficialcontroller,showcontroller):
+            while True:
+                         print("""
+================= CUSTOMER MENU =================
+         
+1. View Your Tickets
+2. Book Tickets
+3. Exit Customer Menu
+         
+=========================================================
+                         """)
+                         choice = input("SELECT AN OPTION: ")
+                         
+                         if choice == "1":
+                                 print("coming soon")
+                         elif choice == "2":
+                                 print("coming soon")
+                         elif choice == "3":
+                                 print("exiting customer menu...")
+                                 break
+                         else:
+                             print("invalid option...")
 
     
