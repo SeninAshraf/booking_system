@@ -18,5 +18,5 @@ class BookingDAO:
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute("""select customer_id from customer where mobile_number = ?""",(customer_mobile_num,))
-        result =cursor.fetchall()
+        result =cursor.fetchone()
         return result

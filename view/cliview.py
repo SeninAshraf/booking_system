@@ -61,7 +61,7 @@ class Viewer:
             print("========== CUSTOMER ==========")
 
             try:
-                customer_mobile_num = int(input("Enter mobile number: "))
+                customer_mobile_num = input("Enter mobile number: ")
                 break
             except ValueError:
                 print("Please enter a valid number.")
