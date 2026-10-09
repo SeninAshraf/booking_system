@@ -22,3 +22,6 @@ class AuthenticationController:
           return self.bookingservice.login_customer(
                 customer_mobile_num
           )
+
+    def new_customer_login(self,customer_mobile_num):
+          return self.bookingservice.new_customer_login(customer_mobile_num)

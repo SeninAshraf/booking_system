@@ -73,8 +73,13 @@ class Viewer:
             print(f"Customer ID is {customer_id}")
             return result
         else:
-            print("Customer not found.")
-            return None
+            print("New Customer Details added to database.....")
+            new_user = controller.new_customer_login(customer_mobile_num)
+            if new_user:
+                 print("Customer added succesfully")
+            else:
+                 print("Customer addition Failed.")
+            
 
             
                 

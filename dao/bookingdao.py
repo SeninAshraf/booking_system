@@ -1,11 +1,12 @@
 from database.connection import get_connection
 class BookingDAO:
-    def save(self, booking):
+    def save(self, customer_mobile_number):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""INSERT INTO booking(booking_id,customer_id,show_id,total_amount,booking_status,ticket_quantity)VALUES (?, ?, ?, ?, ?, ?)""", (booking.bookingId,booking.customerId,booking.showId,booking.totalAmount,booking.status.value,booking.ticketQuantity))
+        cursor.execute("""INSERT INTO customer(mobile_number)VALUES (?)""", (customer_mobile_number,))
         connection.commit()
         connection.close()
+        return True
 
     def find_all(self):
         connection = get_connection()

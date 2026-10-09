@@ -9,4 +9,7 @@ class BookingService:
            else:
                  print("New User Detected!!!")
            return result
+
+     def new_customer_login(self,customer_mobile_num):
+           return self.booking_dao.save(customer_mobile_num)
            
