@@ -792,11 +792,14 @@ class Viewer:
                          if choice == "1":
                                  print("coming soon")
                          elif choice == "2":
-                                 print("coming soon")
+                                 self.book_tickets(moviecontroller)
                          elif choice == "3":
                                  print("exiting customer menu...")
                                  break
                          else:
                              print("invalid option...")
+
+    def book_tickets(self,moviecontroller):
+         self.view_movie(moviecontroller)
 
     
