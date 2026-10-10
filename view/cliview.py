@@ -776,30 +776,58 @@ class Viewer:
         elif choice == 2:
             print("Deletion cancelled")
 
-    def customer_menu(self,moviecontroller,theaterofficialcontroller,showcontroller):
-            while True:
-                         print("""
-================= CUSTOMER MENU =================
-         
-1. View Your Tickets
-2. Book Tickets
-3. Exit Customer Menu
-         
-=========================================================
-                         """)
-                         choice = input("SELECT AN OPTION: ")
-                         
-                         if choice == "1":
-                                 print("coming soon")
-                         elif choice == "2":
-                                 self.book_tickets(moviecontroller)
-                         elif choice == "3":
-                                 print("exiting customer menu...")
-                                 break
-                         else:
-                             print("invalid option...")
-
-    def book_tickets(self,moviecontroller):
-         self.view_movie(moviecontroller)
-
     
+    def customer_menu(self, moviecontroller, theaterofficialcontroller, showcontroller):
+        while True:
+            print("""
+================= CUSTOMER MENU =================
+
+    1. View Your Tickets
+    2. Book Tickets
+    3. Exit Customer Menu
+
+=================================================
+            """)
+
+            choice = input("SELECT AN OPTION: ")
+
+            if choice == "1":
+                print("Coming soon")
+
+            elif choice == "2":
+                self.book_tickets(moviecontroller, theaterofficialcontroller)
+
+            elif choice == "3":
+                print("Exiting customer menu...")
+                break
+
+            else:
+                print("Invalid option...")
+
+
+    def book_tickets(self, moviecontroller, theaterofficialcontroller):
+        movies = self.view_movie(moviecontroller)
+
+        if not movies:
+            print("No movies available.")
+            return
+
+        while True:
+            try:
+                choice = int(input("Enter Movie ID: "))
+            except ValueError:
+                print("Enter a valid Movie ID.")
+                continue
+
+            valid = False
+
+            for movie in movies:
+                if movie[0] == choice:
+                    valid = True
+                    break
+
+            if valid:
+                theaterofficialcontroller.view_movie_based_theater(choice)
+                break
+            else:
+                print("Invalid Movie ID. Please enter a correct Movie ID.")
