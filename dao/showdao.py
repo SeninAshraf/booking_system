@@ -48,4 +48,10 @@ class ShowDao:
                 result = cursor.fetchall()
                 return result
 
+    def view_show_based_theater(self,your_theater,choice):
+            connection = get_connection()
+            cursor = connection.cursor()
+            cursor.execute("""select show_id,start_time from show WHERE theater_id =? and movie_id =?""",(your_theater,choice))
+            result = cursor.fetchall()
+            return result
     

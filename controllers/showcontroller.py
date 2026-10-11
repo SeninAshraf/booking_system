@@ -43,3 +43,6 @@ class ShowController:
                 return True
 
         return False
+
+    def view_show_based_theater(self,your_theater,choice):
+            return self.show_service.view_show_based_theater(your_theater,choice)

@@ -47,4 +47,7 @@ class ShowService:
 
     def delete_show(self,show_id):
          return self.show_dao.delete_show(show_id)
+
+    def view_show_based_theater(self,your_theater,choice):
+         result=self.show_dao.view_show_based_theater(your_theater,choice)
     

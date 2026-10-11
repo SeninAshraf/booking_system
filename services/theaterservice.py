@@ -8,14 +8,19 @@ class TheaterService:
     def view_theaters(self):
           return self.theater_dao.view_theaters()
 
-    def view_movie_based_theater(self,choice):
-          result= self.theater_dao.view_movie_based_theater(choice)
-          if result:
-                print("====AVAILABLE THEATERS====")
+    def view_movie_based_theater(self, choice):
+        result = self.theater_dao.view_movie_based_theater(choice)
+
+        if result:
+                print("==== AVAILABLE THEATERS ====")
                 print("Theater ID\tTheater Name")
+
                 for theater in result:
                         print(f"{theater[0]}\t\t{theater[1]}")
-                        print("These are the available Theaters..")
+
+                        print("These are the available theaters.")
                         return result
-          else:
-                        print("no theaters found...")
+
+        else:
+                print("No theaters found...")
+                return result

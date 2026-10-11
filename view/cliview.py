@@ -805,7 +805,7 @@ class Viewer:
                 print("Invalid option...")
 
 
-    def book_tickets(self, moviecontroller, theaterofficialcontroller):
+    def book_tickets(self, moviecontroller, theaterofficialcontroller,showcontroller):
         movies = self.view_movie(moviecontroller)
 
         if not movies:
@@ -827,7 +827,24 @@ class Viewer:
                     break
 
             if valid:
-                theaterofficialcontroller.view_movie_based_theater(choice)
-                break
+                theaters=theaterofficialcontroller.view_movie_based_theater(choice)
+                if not theaters:
+                     print("No theaters available")
+                     return
+                while True:
+                    try:
+                        your_theater = int(input("Enter the theater you want:"))
+                    except ValueError:
+                         print("Enter valid id....")
+                         continue
+
+                    valid = False
+                    for theater in theaters:
+                         if theater[0] == your_theater:
+                              valid = True
+                              break
+                    if valid:
+                         shows = showcontroller.view_show_based_theater(your_theater,choice)
+                
             else:
                 print("Invalid Movie ID. Please enter a correct Movie ID.")
