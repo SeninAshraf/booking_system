@@ -80,3 +80,6 @@ class SeatService:
 
     def delete_seat(self,show_id):
          return self.seat_dao.delete_seats(show_id)
+
+    def view_seat_based_shows(self,your_show):
+         return self.seat_dao.view_seat_based_shows(your_show)

@@ -795,7 +795,7 @@ class Viewer:
                 print("Coming soon")
 
             elif choice == "2":
-                self.book_tickets(moviecontroller, theaterofficialcontroller)
+                self.book_tickets(moviecontroller, theaterofficialcontroller,showcontroller)
 
             elif choice == "3":
                 print("Exiting customer menu...")
@@ -859,6 +859,9 @@ class Viewer:
                                    if show[0]==your_show:
                                         valid = True
                                         break
+
+                    if valid:
+                         seats = showcontroller.view_seat_based_shows(your_show,your_theater,choice)
                 
             else:
                 print("Invalid Movie ID. Please enter a correct Movie ID.")
