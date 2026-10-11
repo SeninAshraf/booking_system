@@ -845,6 +845,20 @@ class Viewer:
                               break
                     if valid:
                          shows = showcontroller.view_show_based_theater(your_theater,choice)
+                         if not shows:
+                              print("No shows available")
+                              return
+                         while True:
+                              try:
+                                   your_show = int(input("Enter the show you want:"))
+                              except ValueError:
+                                   print("Enter valid id....")
+                                   continue
+                              valid=False
+                              for show in shows:
+                                   if show[0]==your_show:
+                                        valid = True
+                                        break
                 
             else:
                 print("Invalid Movie ID. Please enter a correct Movie ID.")

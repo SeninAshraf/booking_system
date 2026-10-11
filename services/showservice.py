@@ -50,4 +50,16 @@ class ShowService:
 
     def view_show_based_theater(self,your_theater,choice):
          result=self.show_dao.view_show_based_theater(your_theater,choice)
-    
+         if result:
+                print("==== AVAILABLE SHOWS ====")
+                print("Show ID\tShow Time")
+                
+                for show in result:
+                            print(f"{show[0]}\t\t{show[1]}")
+                
+                            print("These are the available shows.")
+                            return result
+                
+                else:
+                            print("No shows found...")
+                            return result
