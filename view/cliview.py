@@ -866,6 +866,7 @@ class Viewer:
                                             num_tickets = int(input("Enter the number of tickets:"))
                                     except ValueError:
                                             print("in number format")
+                                            continue
                                     num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)
                                            
                                     selected_seats = []
