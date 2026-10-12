@@ -864,12 +864,36 @@ class Viewer:
                                  while True:
                                     try:
                                             num_tickets = int(input("Enter the number of tickets:"))
-                                            num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)
-                                            if num_seats:
-                                                 seat_name=input("Enter the seat name in exact 'A1' format:")
                                     except ValueError:
-                                            print("Enter number in numerical....")
-                                            continue
+                                            print("in number format")
+                                    num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)
+                                           
+                                    selected_seats = []
+
+                                    for i in range(num_tickets):
+                                        while True:
+                                                    seat_name = input( f"Enter seat {i + 1} (e.g., A1): ").strip().upper()
+
+                                                    if seat_name in selected_seats:
+                                                        print("Seat already selected!")
+                                                        continue
+
+                                                    valid = False
+
+                                                    for seat in seats:
+                                                            if seat[2] == seat_name and seat[4] == "Available":
+                                                                valid = True
+                                                                break
+
+                                                    if not valid:
+                                                            print("Invalid or unavailable seat!")
+                                                            continue
+
+                                                    selected_seats.append(seat_name)
+                                                    break
+
+                                        print("Selected seats:", selected_seats)
+
                                  
                         
                               else:

@@ -45,6 +45,6 @@ class SeatDAO:
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute("""select count(seat_id) from seat where seat_status = 'Available' and show_id =?""",(your_show,))
-        result = cursor.fetchall()
+        result = cursor.fetchone()[0]
         connection.commit()
         return result

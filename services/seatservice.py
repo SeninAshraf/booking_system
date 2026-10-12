@@ -95,10 +95,11 @@ class SeatService:
                     if seat[6] == row and seat[4] == "Available":
                         print(seat[2], end=" ")
                 print()
+              return result
 
     def check_number_of_seats(self,your_show,num_tickets):
          result = self.seat_dao.check_number_of_seats(your_show)
-         if result == num_tickets:
+         if result >= num_tickets:
               return True
          else:
               print("Ticket Availabilty Exceeds....!")
