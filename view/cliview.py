@@ -898,10 +898,10 @@ class Viewer:
                                     if updating_seats:
                                          print("Seat booked succesfully..")
                                          display_details,total_amount = bookingcontroller.display_movie_details(choice,your_show,selected_seats)
-                                         print(f"Movie:{display_details[0]}")
+                                         print(f"Movie:{display_details[0][0]}")
                                          print("Seats : ", end="")
-                                         for row in updating_seats:
-                                            print(row[2], end=" ")
+                                         for seat in selected_seats:
+                                            print(seat, end=" ")
                                             print()
                                          print(f"Total Amount:{total_amount}")
                                          return
