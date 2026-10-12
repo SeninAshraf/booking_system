@@ -82,4 +82,9 @@ class SeatService:
          return self.seat_dao.delete_seats(show_id)
 
     def view_seat_based_shows(self,your_show):
-         return self.seat_dao.view_seat_based_shows(your_show)
+         result= self.seat_dao.view_seat_based_shows(your_show)
+         if result:
+              print("====AVAILABLE SEATS====")
+              for seat in result:
+                    if seat[4] == "Available":
+                        print(seat[2], end=" ")

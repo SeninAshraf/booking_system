@@ -11,10 +11,10 @@ class SeatDAO:
         connection.close()
         return True
 
-    def find_by_show(self, show):
+    def view_seat_based_shows(self,your_show ):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""SELECT * FROM seat WHERE show_id = ?""", (show.show_id,))
+        cursor.execute("""SELECT * FROM seat WHERE show_id = ?""", (your_show,))
         result = cursor.fetchall()
         connection.close()
         return result
