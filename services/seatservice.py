@@ -85,6 +85,13 @@ class SeatService:
          result= self.seat_dao.view_seat_based_shows(your_show)
          if result:
               print("====AVAILABLE SEATS====")
+              rows = []
               for seat in result:
-                    if seat[4] == "Available":
+                if seat[6] not in rows:
+                    rows.append(seat[6])
+              rows.sort()
+              for row in rows:
+                for seat in result:
+                    if seat[6] == row and seat[4] == "Available":
                         print(seat[2], end=" ")
+                print()

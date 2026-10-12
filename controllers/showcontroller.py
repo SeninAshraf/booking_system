@@ -47,7 +47,7 @@ class ShowController:
     def view_show_based_theater(self,your_theater,choice):
             return self.showservice.view_show_based_theater(your_theater,choice)
 
-    def view_seat_based_shows(self,your_show,your_theater,choice):
-            return self.seatservice.view_seat_based_shows(your_show,your_theater,choice)
+    def view_seat_based_shows(self,your_show):
+            return self.seatservice.view_seat_based_shows(your_show)
 
     
