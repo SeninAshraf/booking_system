@@ -28,15 +28,8 @@ from dao.bookingdao import BookingDAO
 movie_dao = MovieDao()
 movie_service=MovieService(movie_dao)
 movie_controller=MovieController(movie_service)
-#customer managment
-booking_dao =BookingDAO()
-booking_service = BookingService(booking_dao)
-booking_controller=BookingController()
 
-#authetication admin
-auth_dao = AuthDao()
-auth_service = AuthenticationService(auth_dao)
-auth_controller = AuthenticationController(auth_service,booking_service)
+
 
 #theater managment
 theater_official_dao = TheaterOfficialDao()
@@ -51,6 +44,18 @@ show_service = ShowService(show_dao,movie_dao)
 seat_dao = SeatDAO()
 seat_service = SeatService(seat_dao)
 show_controller = ShowController(show_service,seat_service)
+
+#customer managment
+booking_dao =BookingDAO()
+booking_service = BookingService(booking_dao)
+booking_controller=BookingController(show_service,seat_service,booking_service)
+
+#authetication admin
+auth_dao = AuthDao()
+auth_service = AuthenticationService(auth_dao)
+auth_controller = AuthenticationController(auth_service,booking_service)
+
+
 viewer = Viewer()
 
 

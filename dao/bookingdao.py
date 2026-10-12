@@ -21,3 +21,12 @@ class BookingDAO:
         cursor.execute("""select customer_id from customer where mobile_number = ?""",(customer_mobile_num,))
         result =cursor.fetchone()
         return result
+
+    def display_movie_details(self,choice,your_show,selected_seats):
+        connection = get_connection()
+        cursor = connection.cursor()
+        result = []
+        for seat_name in selected_seats:
+            cursor.execute("""SELECT m.movie_title, s.show_id,seat.seat_no, seat.seat_price FROM movie m JOIN show s ON m.movie_id = s.movie_id JOIN seat ON s.show_id = seat.show_id WHERE m.movie_id = ? AND s.show_id = ? AND seat.seat_no = ?""", (choice,your_show, seat_name))
+            result.extend(cursor.fetchall())
+        return result

@@ -21,7 +21,7 @@ class Viewer:
             elif choice == "2":
                 self.theater_login(controller,theaterofficialcontroller,showcontroller,moviecontroller)
             elif choice == "3":
-                self.customer_login(controller,moviecontroller,theaterofficialcontroller,showcontroller)
+                self.customer_login(controller,moviecontroller,theaterofficialcontroller,showcontroller,bookingcontroller)
             elif choice == "4":
                 self.exit()
                 break
@@ -58,7 +58,7 @@ class Viewer:
     
     
     def customer_login(self, controller, moviecontroller,
-                    theaterofficialcontroller, showcontroller):
+                    theaterofficialcontroller, showcontroller,bookingcontroller):
 
         while True:
             print("========== CUSTOMER ==========")
@@ -95,7 +95,7 @@ class Viewer:
         self.customer_menu(
             moviecontroller,
             theaterofficialcontroller,
-            showcontroller
+            showcontroller,bookingcontroller
         )
 
 
@@ -777,7 +777,7 @@ class Viewer:
             print("Deletion cancelled")
 
     
-    def customer_menu(self, moviecontroller, theaterofficialcontroller, showcontroller):
+    def customer_menu(self, moviecontroller, theaterofficialcontroller, showcontroller,bookingcontroller):
         while True:
             print("""
 ================= CUSTOMER MENU =================
@@ -795,7 +795,7 @@ class Viewer:
                 print("Coming soon")
 
             elif choice == "2":
-                self.book_tickets(moviecontroller, theaterofficialcontroller,showcontroller)
+                self.book_tickets(moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller)
 
             elif choice == "3":
                 print("Exiting customer menu...")
@@ -805,7 +805,7 @@ class Viewer:
                 print("Invalid option...")
 
 
-    def book_tickets(self, moviecontroller, theaterofficialcontroller,showcontroller):
+    def book_tickets(self, moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller):
         movies = self.view_movie(moviecontroller)
 
         if not movies:
@@ -896,6 +896,13 @@ class Viewer:
                                     updating_seats = showcontroller.update_booked_seats(your_show,selected_seats)
                                     if updating_seats:
                                          print("Seat booked succesfully..")
+                                         display_details,total_amount = bookingcontroller.display_movie_details(choice,your_show,selected_seats)
+                                         print(f"Movie:{display_details[0]}")
+                                         print("Seats : ", end="")
+                                         for row in updating_seats:
+                                            print(row[2], end=" ")
+                                            print()
+                                         print(f"Total Amount:{total_amount}")
                                          return
                                     else:
                                          print("booking failed..")
