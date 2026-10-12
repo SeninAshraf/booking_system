@@ -50,4 +50,7 @@ class ShowController:
     def view_seat_based_shows(self,your_show):
             return self.seatservice.view_seat_based_shows(your_show)
 
+    def check_number_of_seats(self,your_show,num_tickets):
+            return self.seatservice.check_number_of_seats(your_show,num_tickets)
+
     

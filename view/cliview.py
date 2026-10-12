@@ -864,7 +864,9 @@ class Viewer:
                                  while True:
                                     try:
                                             num_tickets = int(input("Enter the number of tickets:"))
-                                            break
+                                            num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)
+                                            if num_seats:
+                                                 seat_name=input("Enter the seat name in exact 'A1' format:")
                                     except ValueError:
                                             print("Enter number in numerical....")
                                             continue

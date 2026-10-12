@@ -40,3 +40,11 @@ class SeatDAO:
         connection.close()
 
         return True
+
+    def check_number_of_seats(self,your_show):
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute("""select count(seat_id) from seat where seat_status = 'Available' and show_id =?""",(your_show,))
+        result = cursor.fetchall()
+        connection.commit()
+        return result
