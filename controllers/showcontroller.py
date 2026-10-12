@@ -53,4 +53,6 @@ class ShowController:
     def check_number_of_seats(self,your_show,num_tickets):
             return self.seatservice.check_number_of_seats(your_show,num_tickets)
 
+    def update_booked_seats(self,your_show,selected_seats):
+            return self.seatservice.update_booked_seats(your_show,selected_seats)
     

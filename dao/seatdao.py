@@ -20,12 +20,24 @@ class SeatDAO:
         return result
 
 
-    def update_status(self, seat, status):
+    def update_booked_seats(self, your_show, selected_seats):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""UPDATE seat SET seat_status = ? WHERE seat_id = ?""", (status.value,seat.seat_id))
-        connection.commit()
-        connection.close()
+
+        try:
+            for seat_name in selected_seats:
+                cursor.execute("""update seat set seat_status = 'Booked' where show_id = ? and seat_no = ? and seat_status = 'Available' """, (your_show, seat_name))
+                if cursor.rowcount == 0:
+                    connection.rollback()
+                    return False
+            connection.commit()
+            return True
+        except Exception as e:
+            connection.rollback()
+            print("Error booking seats:", e)
+            return False
+        finally:
+            connection.close()
 
     def delete_seats(self, show_id):
         connection = get_connection()

@@ -893,7 +893,12 @@ class Viewer:
                                                     break
 
                                         print("Selected seats:", selected_seats)
-
+                                    updating_seats = showcontroller.update_booked_seats(your_show,selected_seats)
+                                    if updating_seats:
+                                         print("Seat booked succesfully..")
+                                         return
+                                    else:
+                                         print("booking failed..")
                                  
                         
                               else:
