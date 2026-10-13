@@ -909,8 +909,9 @@ class Viewer:
                                             print(seat, end=" ")
                                             print()
                                          print(f"Total Amount:{total_amount}")
-                                         add_booking = bookingcontroller.add_booking_details(customer_id,your_show,total_amount,num_tickets)
-                                         if add_booking:
+                                         booking_id = bookingcontroller.add_booking_details(customer_id,your_show,total_amount,num_tickets)
+                                         booking_seat_id = bookingcontroller.add_booking_seat_details(booking_id,selected_seat_id)
+                                         if booking_id and booking_seat_id:
                                               print("Booking details added succesfully.!")
                                          else:
                                               print("Booking details addition failed..!")

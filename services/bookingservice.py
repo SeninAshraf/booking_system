@@ -22,5 +22,8 @@ class BookingService:
                  return result,total_amount
      def add_booking_details(self,customer_id,your_show,total_amount,num_tickets):
            return self.booking_dao.add_booking_details(customer_id,your_show,total_amount,num_tickets)
+
+     def add_booking_seat_details(self,booking_id,selected_seat_id):
+           return self.booking_dao.add_booking_seat_details(booking_id,selected_seat_id)
                        
            

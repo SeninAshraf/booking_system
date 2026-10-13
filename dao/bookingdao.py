@@ -36,5 +36,15 @@ class BookingDAO:
         cursor = connection.cursor()
         cursor.execute("""INSERT INTO booking(customer_id,show_id,total_amount,ticket_quantity,booking_status) VALUES (?,?,?,?,"Confirmed")""",(customer_id,your_show,total_amount,num_tickets,))
         connection.commit()
+        booking_id = cursor.lastrowid
+        connection.close()
+        return booking_id
+
+    def add_booking_seat_details(self,booking_id,selected_seat_id):
+        connection = get_connection()
+        cursor = connection.cursor()
+        for id in selected_seat_id:
+            cursor.execute("""insert into booking_seat(booking_id,seat_id) values(?,?)""",(booking_id,id))
+        connection.commit()
         connection.close()
         return True
