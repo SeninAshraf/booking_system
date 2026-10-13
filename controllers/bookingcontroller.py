@@ -6,3 +6,6 @@ class BookingController:
 
      def display_movie_details(self,choice,your_show,selected_seats):
              return self.bookingservice.display_movie_details(choice,your_show,selected_seats)
+
+     def add_booking_details(self,customer_id,your_show,total_amount,num_tickets):
+             return self.bookingservice.add_booking_details(customer_id,your_show,total_amount,num_tickets)

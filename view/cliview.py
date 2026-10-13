@@ -806,8 +806,8 @@ class Viewer:
                 print("Invalid option...")
 
 
-    def book_tickets(self, custoemr_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller):
-        print(f"customer ID:{custoemr_id}")
+    def book_tickets(self, customer_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller):
+        print(f"customer ID:{customer_id}")
         movies = self.view_movie(moviecontroller)
 
         if not movies:
@@ -898,7 +898,6 @@ class Viewer:
                                         print("Selected seats:", selected_seats)
                                     updating_seats = showcontroller.update_booked_seats(your_show,selected_seats)
                                     if updating_seats:
-                                         add_booking = bookingcontroller.add_booking_details()
                                          print("Seat booked succesfully..")
                                          display_details,total_amount = bookingcontroller.display_movie_details(choice,your_show,selected_seats)
                                          print(f"Movie:{display_details[0][0]}")
@@ -907,6 +906,11 @@ class Viewer:
                                             print(seat, end=" ")
                                             print()
                                          print(f"Total Amount:{total_amount}")
+                                         add_booking = bookingcontroller.add_booking_details(customer_id,your_show,total_amount,num_tickets)
+                                         if add_booking:
+                                              print("Booking details added succesfully.!")
+                                         else:
+                                              print("Booking details addition failed..!")
                                          return
                                     else:
                                          print("booking failed..")

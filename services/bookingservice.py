@@ -20,5 +20,7 @@ class BookingService:
                  for row in result:
                        total_amount += row[3]
                  return result,total_amount
+     def add_booking_details(self,customer_id,your_show,total_amount,num_tickets):
+           return self.booking_dao.add_booking_details(customer_id,your_show,total_amount,num_tickets)
                        
            
