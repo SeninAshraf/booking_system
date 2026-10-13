@@ -28,15 +28,27 @@ class BookingService:
 
      def view_your_tickets(self,customer_mobile_num):
            result = self.booking_dao.view_your_tickets(customer_mobile_num)
-           if result:
-                print("User found")
-                print(f"Movie : {result[0][0]}")
+            
+    
+           if not result:
+                print("No tickets found.")
+                return
 
-                print("Seats : ", end="")
-                for row in result:
-                    print(row[1], end=" ")
+           print("User found")
 
-                print()
-                print(f"Total Amount : ₹{result[0][2]:.0f}")
-           else:
-                print("User not found")
+           previous_booking = None
+
+           for row in result:
+                booking_id = row[0]
+
+                if booking_id != previous_booking:
+                    print(f"\nMovie : {row[1]}")
+                    print("Seats : ", end="")
+                    print(row[2], end=" ")
+                    print(f"\nTotal Amount : ₹{row[3]}")
+
+                    previous_booking = booking_id
+                else:
+                    print(row[2], end=" ")#if booking_id= previous booking and want to append other seat also so this use
+
+           print()
