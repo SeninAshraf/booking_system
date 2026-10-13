@@ -872,6 +872,7 @@ class Viewer:
                                     num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)
                                            
                                     selected_seats = []
+                                    selected_seat_id = []
 
                                     for i in range(num_tickets):
                                         while True:
@@ -886,6 +887,7 @@ class Viewer:
                                                     for seat in seats:
                                                             if seat[2] == seat_name and seat[4] == "Available":
                                                                 valid = True
+                                                                selected_seat_id.append(seat[0])
                                                                 break
 
                                                     if not valid:
@@ -896,6 +898,7 @@ class Viewer:
                                                     break
 
                                         print("Selected seats:", selected_seats)
+                                        print("Selected seat ID:",selected_seat_id)
                                     updating_seats = showcontroller.update_booked_seats(your_show,selected_seats)
                                     if updating_seats:
                                          print("Seat booked succesfully..")
