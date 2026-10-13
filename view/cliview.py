@@ -793,7 +793,7 @@ class Viewer:
             choice = input("SELECT AN OPTION: ")
 
             if choice == "1":
-                self.view_your_tickets()
+                self.view_your_tickets(bookingcontroller)
 
             elif choice == "2":
                 self.book_tickets(customer_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller)
@@ -923,5 +923,14 @@ class Viewer:
                               else:
                                 print("Invalid Movie ID. Please enter a correct Movie ID.")
 
-    def view_your_tickets():
-         pass
+    def view_your_tickets(self,bookingcontroller):
+          while True:
+                     print("========== CUSTOMER ==========")
+                     customer_mobile_num = input("Enter mobile number: ").strip()
+         
+                     if not customer_mobile_num.isdigit():
+                         print("Please enter a valid mobile number.")
+                         continue
+                     
+                     break
+          result = self.bookingcontroller.view_your_tickets(customer_mobile_num)

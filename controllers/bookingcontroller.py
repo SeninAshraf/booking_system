@@ -12,3 +12,6 @@ class BookingController:
 
      def add_booking_seat_details(self,booking_id,selected_seat_id):
              return self.bookingservice.add_booking_seat_details(booking_id,selected_seat_id)
+
+     def view_your_tickets(self,customer_mobile_num):
+             return self.bookingservice.view_your_tickets(customer_mobile_num)
