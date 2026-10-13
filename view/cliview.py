@@ -793,7 +793,7 @@ class Viewer:
             choice = input("SELECT AN OPTION: ")
 
             if choice == "1":
-                print("Coming soon")
+                self.view_your_tickets()
 
             elif choice == "2":
                 self.book_tickets(customer_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller)
@@ -922,3 +922,6 @@ class Viewer:
                         
                               else:
                                 print("Invalid Movie ID. Please enter a correct Movie ID.")
+
+    def view_your_tickets():
+         pass
