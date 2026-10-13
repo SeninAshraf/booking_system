@@ -933,4 +933,8 @@ class Viewer:
                          continue
                      
                      break
-          result = self.bookingcontroller.view_your_tickets(customer_mobile_num)
+          result = bookingcontroller.view_your_tickets(customer_mobile_num)
+          if result:
+               print("These are the history of this customer...")
+          else:
+               print("No customer found!!")

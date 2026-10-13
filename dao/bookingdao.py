@@ -52,7 +52,7 @@ class BookingDAO:
     def view_your_tickets(self,customer_mobile_num):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""select m.movie_title,seat.seat_name,b.total_amount FROM movie m JOIN show s ON m.movie_id=s.movie_id JOIN seat on s.show_id=seat.show_id JOIN booking_seat  on seat.seat_id =booking_seat.seat_id JOIN booking b on booking_seat.booking_id=b.booking_id JOIN customer on b.customer_id=customer.customer_id where mobile_number=?""",(customer_mobile_num,))
+        cursor.execute("""select m.movie_title,seat.seat_no,b.total_amount FROM movie m JOIN show s ON m.movie_id=s.movie_id JOIN seat on s.show_id=seat.show_id JOIN booking_seat  on seat.seat_id =booking_seat.seat_id JOIN booking b on booking_seat.booking_id=b.booking_id JOIN customer on b.customer_id=customer.customer_id where mobile_number=?""",(customer_mobile_num,))
         result = cursor.fetchall()
         connection.commit()
         connection.close()

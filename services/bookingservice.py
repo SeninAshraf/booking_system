@@ -27,16 +27,16 @@ class BookingService:
            return self.booking_dao.add_booking_seat_details(booking_id,selected_seat_id)
 
      def view_your_tickets(self,customer_mobile_num):
-           result = self.boooking_dao.view_your_tickets(customer_mobile_num)
+           result = self.booking_dao.view_your_tickets(customer_mobile_num)
            if result:
                 print("User found")
-                print(f"Movie : {result[0][1]}")
+                print(f"Movie : {result[0][0]}")
 
                 print("Seats : ", end="")
                 for row in result:
-                    print(row[2], end=" ")
+                    print(row[1], end=" ")
 
                 print()
-                print(f"Total Amount : ₹{result[0][3]:.0f}")
+                print(f"Total Amount : ₹{result[0][2]:.0f}")
            else:
                 print("User not found")
