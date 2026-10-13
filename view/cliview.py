@@ -93,6 +93,7 @@ class Viewer:
                 print("Customer addition failed.")
                 return
         self.customer_menu(
+            customer_id,
             moviecontroller,
             theaterofficialcontroller,
             showcontroller,bookingcontroller
@@ -777,7 +778,7 @@ class Viewer:
             print("Deletion cancelled")
 
     
-    def customer_menu(self, moviecontroller, theaterofficialcontroller, showcontroller,bookingcontroller):
+    def customer_menu(self, customer_id,moviecontroller, theaterofficialcontroller, showcontroller,bookingcontroller):
         while True:
             print("""
 ================= CUSTOMER MENU =================
@@ -795,7 +796,7 @@ class Viewer:
                 print("Coming soon")
 
             elif choice == "2":
-                self.book_tickets(moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller)
+                self.book_tickets(customer_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller)
 
             elif choice == "3":
                 print("Exiting customer menu...")
@@ -805,7 +806,8 @@ class Viewer:
                 print("Invalid option...")
 
 
-    def book_tickets(self, moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller):
+    def book_tickets(self, custoemr_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller):
+        print(f"customer ID:{custoemr_id}")
         movies = self.view_movie(moviecontroller)
 
         if not movies:
@@ -896,6 +898,7 @@ class Viewer:
                                         print("Selected seats:", selected_seats)
                                     updating_seats = showcontroller.update_booked_seats(your_show,selected_seats)
                                     if updating_seats:
+                                         add_booking = bookingcontroller.add_booking_details()
                                          print("Seat booked succesfully..")
                                          display_details,total_amount = bookingcontroller.display_movie_details(choice,your_show,selected_seats)
                                          print(f"Movie:{display_details[0][0]}")
