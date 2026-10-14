@@ -60,3 +60,4 @@ class BookingService:
             print(f"\nTotal Amount : ₹{previous_total}")
         #FOR SPACE
            print()
+           return True
