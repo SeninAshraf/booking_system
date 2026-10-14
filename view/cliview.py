@@ -17,7 +17,7 @@ class Viewer:
             choice = input("SELECT YOUR ROLE: ")
 
             if choice == "1":
-                self.login(controller,moviecontroller,theaterofficialcontroller)
+                self.login(controller,moviecontroller,theaterofficialcontroller,bookingcontroller)
             elif choice == "2":
                 self.theater_login(controller,theaterofficialcontroller,showcontroller,moviecontroller)
             elif choice == "3":
@@ -28,7 +28,7 @@ class Viewer:
             else:
                 print("choose only appropriate role's option")
 
-    def login(self, controller,moviecontroller,theaterofficialcontroller):
+    def login(self, controller,moviecontroller,theaterofficialcontroller,bookingcontroller):
 
         username = input("Enter Username: ")
         password = input("Enter password: ")
@@ -37,7 +37,7 @@ class Viewer:
 
         if result:
             print("Login successful")
-            self.admin_menu(moviecontroller,theaterofficialcontroller)
+            self.admin_menu(moviecontroller,theaterofficialcontroller,bookingcontroller)
         else:
             print("Invalid username or password")
 
