@@ -64,3 +64,5 @@ class BookingService:
 
      def view_all_transaction(self):
           result = self.booking_dao.view_all_transaction()
+          if result:
+               print(result)
