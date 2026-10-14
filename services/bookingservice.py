@@ -25,7 +25,7 @@ class BookingService:
 
      def add_booking_seat_details(self,booking_id,selected_seat_id):
            return self.booking_dao.add_booking_seat_details(booking_id,selected_seat_id)
-
+#most confusing and struggled part
      def view_your_tickets(self,customer_mobile_num):
            result = self.booking_dao.view_your_tickets(customer_mobile_num)
             
@@ -35,20 +35,28 @@ class BookingService:
                 return
 
            print("User found")
-
+            #initialise variables
            previous_booking = None
-
+           previous_total = None
+          #(1, "Leo", "A5", 400) so row[0] = booking_id
            for row in result:
                 booking_id = row[0]
-
+                    #1!=None=tRUE
                 if booking_id != previous_booking:
+                        #FALSE SKIP
+                    if previous_booking is not None:
+                        print(f"\nTotal Amount : ₹{previous_total}")
+                    #PRINT(MOVIE,SEAT: ONLY NO DATA,PRE=BOOK_ID,PREV_TOTAL=ROW[3])
                     print(f"\nMovie : {row[1]}")
                     print("Seats : ", end="")
-                    print(row[2], end=" ")
-                    print(f"\nTotal Amount : ₹{row[3]}")
 
                     previous_booking = booking_id
-                else:
-                    print(row[2], end=" ")#if booking_id= previous booking and want to append other seat also so this use
-
+                    previous_total = row[3]
+                #THEN IT CHANGE SEAT:A5
+                print(row[2], end=" ")
+                #THEN RETRUN TO FOR LOOP AGAIN BUT NO OTHER DATA SO 
+            #TRUE THEN PRINT PREV BOOKING TOTAL AMOUNT
+           if previous_booking is not None:
+            print(f"\nTotal Amount : ₹{previous_total}")
+        #FOR SPACE
            print()
