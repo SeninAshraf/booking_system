@@ -15,3 +15,6 @@ class BookingController:
 
      def view_your_tickets(self,customer_mobile_num):
              return self.bookingservice.view_your_tickets(customer_mobile_num)
+
+     def view_all_transaction(self):
+             return self.bookingservice.view_all_transaction()

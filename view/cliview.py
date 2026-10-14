@@ -107,7 +107,7 @@ class Viewer:
         print("Thank you for using Movie Ticket Booking System.")
         return
 
-    def admin_menu(self,moviecontroller,theaterofficialcontroller):
+    def admin_menu(self,moviecontroller,theaterofficialcontroller,bookingcontroller):
         while True:
             print("""
 ================= ADMIN MENU =================
@@ -135,7 +135,7 @@ class Viewer:
             elif choice == "5":
                     self.delete_movie(moviecontroller)
             elif choice == "6":
-                    print("coming soon")
+                    self.view_transaction(bookingcontroller)
             elif choice == "7":
                 print("Logging out...")
                 break
@@ -938,3 +938,6 @@ class Viewer:
                print("These are the history of this customer...")
           else:
                print("No customer found!!")
+
+    def view_transaction(self,bookingcontroller):
+         result = bookingcontroller.view_all_transaction()

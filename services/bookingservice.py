@@ -55,9 +55,12 @@ class BookingService:
                 #THEN IT CHANGE SEAT:A5
                 print(row[2], end=" ")
                 #THEN RETRUN TO FOR LOOP AGAIN BUT NO OTHER DATA SO 
-            #TRUE THEN PRINT PREV BOOKING TOTAL AMOUNT
+            #TRUE THEN PRINT PREV BOOKING TOTAL AMOUNT,the final if prints the total for the last booking.
            if previous_booking is not None:
             print(f"\nTotal Amount : ₹{previous_total}")
         #FOR SPACE
            print()
            return True
+
+     def view_all_transaction(self):
+          result = self.booking_dao.view_all_transaction()

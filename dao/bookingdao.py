@@ -57,3 +57,12 @@ class BookingDAO:
         connection.commit()
         connection.close()
         return result
+
+    def view_all_transaction(self):
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute("""SELECT b.booking_id,c.mobile_number,m.movie_title,s.show_id,seat.seat_no,b.total_amount,b.booking_status FROM customer c JOIN booking b ON c.customer_id = b.customer_id JOIN show s ON b.show_id = s.show_id JOIN movie m ON s.movie_id = m.movie_id JOIN booking_seat bs ON b.booking_id = bs.booking_id JOIN seat ON bs.seat_id = seat.seat_id""")
+        result=cursor.fetchall()
+        connection.commit()
+        connection.close()
+        return result
