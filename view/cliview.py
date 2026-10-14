@@ -237,7 +237,9 @@ class Viewer:
          theater_name = input("Enter theater Name:")
          theater_username = input("Enter Username")
          password = input("Enter Password:")
-
+         if not theater_name or not theater_username or not password:
+            print("All fields are required.")
+            return
          result = theaterofficialcontroller.add_theater_user(theater_name,theater_username,password)
 
          if result:

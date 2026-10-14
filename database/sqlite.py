@@ -107,9 +107,11 @@ connection = sqlite3.connect("movie_booking.db")
 #print("created  succesfully")
 
 cursor = connection.cursor()
-cursor.execute("""SELECT * FROM seat WHERE show_id = 1""")
-result = cursor.fetchall()
-connection.close()
-print(result)
+cursor.execute("DELETE FROM theater_user WHERE theater_id = 5")
 
+connection.commit()
+
+print("Rows deleted:", cursor.rowcount)
+
+connection.close()
 
