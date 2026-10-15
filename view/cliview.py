@@ -99,10 +99,6 @@ class Viewer:
             showcontroller,bookingcontroller
         )
 
-
-            
-                
-
     def exit(self):
         print("Thank you for using Movie Ticket Booking System.")
         return
@@ -149,6 +145,9 @@ class Viewer:
         duration = input("Enter Duration (minutes): ")
         release_date = input("Enter Release Date (YYYY-MM-DD): ")
         end_date = input("Enter End Date (YYYY-MM-DD): ")
+        if not title or not genre or not language or not duration or not release_date or not end_date:
+                    print("All fields are required.")
+                    return
 
         result = moviecontroller.add_movie(title,genre,language,duration,release_date,end_date)
         if result:

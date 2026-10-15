@@ -107,7 +107,7 @@ connection = sqlite3.connect("movie_booking.db")
 #print("created  succesfully")
 
 cursor = connection.cursor()
-cursor.execute("DELETE FROM theater_user WHERE theater_id = 5")
+cursor.execute("DELETE FROM movie WHERE movie_id = 4")
 
 connection.commit()
 
