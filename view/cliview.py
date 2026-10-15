@@ -37,7 +37,7 @@ class Viewer:
 
         if result:
             print("Login successful")
-            self.admin_menu(moviecontroller,theaterofficialcontroller,bookingcontroller,reportingcontroller)
+            self.admin_menu(moviecontroller,theaterofficialcontroller,reportingcontroller)
         else:
             print("Invalid username or password")
 
