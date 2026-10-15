@@ -103,7 +103,7 @@ class SeatService:
               return True
          else:
               print("Ticket Availabilty Exceeds....!")
-              return
+              return False
 
     def update_booked_seats(self,your_show,selected_seats):
          result = self.seat_dao.update_booked_seats(your_show,selected_seats)

@@ -874,6 +874,8 @@ class Viewer:
                                             print("in number format")
                                             continue
                                     num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)
+                                    if not num_seats:
+                                            return
                                            
                                     selected_seats = []
                                     selected_seat_id = []
