@@ -179,7 +179,20 @@ class Viewer:
             title1 = input("Enter Movie Title: ")
             genre1 = input("Enter Genre: ")
             language1 = input("Enter Language: ")
-            duration1 = input("Enter Duration (minutes): ")
+            while True:
+                duration1 = input("Enter Duration (minutes): ")
+
+                if duration1 == "":
+                    break
+
+                try:
+                    duration1 = int(duration1)
+                    if duration1 <= 0:
+                        print("Duration must be greater than zero.")
+                        continue
+                    break
+                except ValueError:
+                    print("Enter duration in numbers only.")
             release_date1 = input("Enter Release Date (YYYY-MM-DD): ")
             end_date1 = input("Enter End Date (YYYY-MM-DD): ")
             title1 = title1 if title1 else result[1]
