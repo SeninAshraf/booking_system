@@ -14,7 +14,7 @@ class SeatDAO:
     def view_seat_based_shows(self,your_show ):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""SELECT * FROM seat WHERE show_id = ?""", (your_show,))
+        cursor.execute("""SELECT * FROM seat WHERE show_id = ? ORDER BY seat_row,CAST(SUBSTR(seat_no, 2) AS INTEGER);""", (your_show,))
         result = cursor.fetchall()
         connection.close()
         return result
