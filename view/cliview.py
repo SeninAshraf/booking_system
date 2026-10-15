@@ -877,7 +877,9 @@ class Viewer:
                               for show in shows:
                                    if show[0]==your_show:
                                         valid = True
-                                        break
+                                   else:
+                                        print("No show found")
+                                        return
                               if valid:
                                  seats = showcontroller.view_seat_based_shows(your_show)
                                  while True:
