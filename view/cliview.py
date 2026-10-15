@@ -1,7 +1,7 @@
 from datetime import datetime, date
 class Viewer:
 
-    def starting_view(self, controller,moviecontroller,theaterofficialcontroller,showcontroller,bookingcontroller):
+    def starting_view(self, controller,moviecontroller,theaterofficialcontroller,showcontroller,bookingcontroller,reportingcontroller):
         while True:
             print("""
 ================= MOVIE TICKET BOOKING SYSTEM =================
@@ -17,7 +17,7 @@ class Viewer:
             choice = input("SELECT YOUR ROLE: ")
 
             if choice == "1":
-                self.login(controller,moviecontroller,theaterofficialcontroller,bookingcontroller)
+                self.login(controller,moviecontroller,theaterofficialcontroller,bookingcontroller,reportingcontroller)
             elif choice == "2":
                 self.theater_login(controller,theaterofficialcontroller,showcontroller,moviecontroller)
             elif choice == "3":
@@ -28,7 +28,7 @@ class Viewer:
             else:
                 print("choose only appropriate role's option")
 
-    def login(self, controller,moviecontroller,theaterofficialcontroller,bookingcontroller):
+    def login(self, controller,moviecontroller,theaterofficialcontroller,bookingcontroller,reportingcontroller):
 
         username = input("Enter Username: ")
         password = input("Enter password: ")
@@ -37,7 +37,7 @@ class Viewer:
 
         if result:
             print("Login successful")
-            self.admin_menu(moviecontroller,theaterofficialcontroller,bookingcontroller)
+            self.admin_menu(moviecontroller,theaterofficialcontroller,bookingcontroller,reportingcontroller)
         else:
             print("Invalid username or password")
 
@@ -941,5 +941,5 @@ class Viewer:
           else:
                print("No customer found!!")
 
-    def view_transaction(self,bookingcontroller):
-         result = bookingcontroller.view_all_transaction()
+    def view_transaction(self,reportingcontroller):
+         result = reportingcontroller.view_all_transaction()
