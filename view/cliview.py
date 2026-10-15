@@ -199,7 +199,10 @@ class Viewer:
     def delete_movie(self,moviecontroller):
          self.view_movie(moviecontroller)
          movie_id = int(input("Enter movie_id "))
-         self.search_movie(moviecontroller,movie_id)
+         result=self.search_movie(moviecontroller,movie_id)
+         if not result:
+              print("No movie found")
+              return
          print("\nDo you want to delete this movie?")
          print("1. Yes")
          print("2. No")
@@ -548,7 +551,7 @@ class Viewer:
             else:
                           print("movie not found")
         
-    def view_show(self,showcontroller,moviecontroller,theater_id):
+    def view_show(self,moviecontroller,showcontroller,theater_id):
          result = showcontroller.view_show(theater_id)
          if result:
                      print("\n========== AVAILABLE SHOWS ==========\n")
