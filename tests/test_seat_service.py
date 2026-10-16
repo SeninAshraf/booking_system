@@ -23,7 +23,7 @@ class TestSeatService(unittest.TestCase):
         self.assertTrue(result)
 
         # is 8 seat generated
-        self.assertEqual(mock_dao.add_seat.call_count, 5)
+        self.assertEqual(mock_dao.add_seat.call_count, 8)
 
         # is 1st is vip
         mock_dao.add_seat.assert_any_call(
