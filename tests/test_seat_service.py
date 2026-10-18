@@ -1,4 +1,4 @@
-
+#checking wheater the correct number of seat is added to sql
 import unittest
 from unittest.mock import Mock, call
 from services.seatservice import SeatService

@@ -1,3 +1,4 @@
+#if user enter 3seats but only 2 sql seat is available then it must be return false
 import unittest
 from unittest.mock import Mock, call
 from services.seatservice import SeatService
