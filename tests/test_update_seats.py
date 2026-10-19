@@ -1,3 +1,4 @@
+# Test whether existing seats are deleted and the new seat layout is generated correctly.
 import unittest
 from unittest.mock import Mock, call
 from services.seatservice import SeatService
