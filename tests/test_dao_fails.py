@@ -1,3 +1,4 @@
+#When the DAO returns False, the if condition is not satisfied. Your method reaches the end without a return statement, so Python automatically returns None.
 import unittest
 from unittest.mock import Mock, call
 from services.seatservice import SeatService
