@@ -1,3 +1,4 @@
+#check when updating seat status is that correct seat is call and received in dao and is it call by once
 import unittest
 from unittest.mock import Mock, call
 from services.seatservice import SeatService
