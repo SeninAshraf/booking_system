@@ -1,7 +1,7 @@
 # Test whether delete_show passes the show ID to the DAO and returns its result.
 import unittest
 from unittest.mock import Mock, call
-from services.seatservice import ShowService
+from services.showservice import ShowService
 class ShowDelete(unittest.TestCase):
     def test_delete_show(self):
         mock_show_dao = Mock()
