@@ -57,9 +57,9 @@ class ShowService:
                 for show in result:
                             print(f"{show[0]}\t\t{show[1]}")
                 
-                            print("These are the available shows.")
-                            return result
+                print("These are the available shows.")
+                return result
                 
-                else:
-                            print("No shows found...")
-                            return result
+         else:
+                print("No shows found...")
+                return result
