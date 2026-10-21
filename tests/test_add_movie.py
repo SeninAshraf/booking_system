@@ -7,9 +7,7 @@ class TestMovieAdd(unittest.TestCase):
     def test_add_movie_success(self):
         mock_movie_dao = Mock()
         mock_movie_dao.add_movie.return_value = True
-
         service = MovieService(mock_movie_dao)
-
         result = service.add_movie(
             "Movie A",
             "Action",
@@ -18,9 +16,7 @@ class TestMovieAdd(unittest.TestCase):
             "2026-10-01",
             "2026-11-30"
         )
-
         self.assertTrue(result)
-
         mock_movie_dao.add_movie.assert_called_once_with(
             "Movie A",
             "Action",
