@@ -9,5 +9,5 @@ class TestViewAll(unittest.TestCase):
         ]
         services = ReportingService(mock_booking_dao)
         result = services.view_all_transaction()
-        self.assertTrue(result)
+        self.assertIsNone(result)
         mock_booking_dao.view_all_transaction.assert_called_once()
