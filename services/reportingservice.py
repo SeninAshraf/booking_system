@@ -26,3 +26,4 @@ class ReportingService:
                          print(f"\nTotal Amount: {row[5]}")
                          print(f"Booking Status: {row[6]}")
                          print()
+                         
