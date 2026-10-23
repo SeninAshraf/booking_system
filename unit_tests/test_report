@@ -1,0 +1,134 @@
+test_add_booking_details (test_add_booking_details.TestAddBookingDetails) ... ok
+test_add_booking_details_failure (test_add_booking_details_failure.TestAddBookingDetailsFailure) ... ok
+test_add_movie_success (test_add_movie.TestMovieAdd) ... ok
+test_add_movie_invalid_date (test_add_movie_invalid_date.TestMovieAddInvalidDate) ... ok
+test_add_theater_user_theater_creation_fails (test_add_theater_creation_failure.TestTheaterCreationFailure) ... ok
+test_add_theater_user_already_exists (test_add_theater_existing_fail.TestTheaterUserExists) ... ok
+test_add_theater_user_success (test_add_theater_user.TestTheaterUserAdd) ... ok
+test_admin_login_success (test_admin_login.TestAdminLogin) ... ok
+test_admin_login_wrong_password (test_admin_login_failure.TestAdminLoginFailure) ... ok
+test_admin_not_found (test_admin_not_found.TestAdminNotFound) ... ok
+test_add (test_calculator.TestCalculator) ... ok
+test_check_user_not_found (test_check_user_not_found.TestTheaterCheckUserNotFound) ... ok
+test_customer_not_found (test_customer_fail_not_exist.TestCustomerLoginNotFound) ... New User Detected!!!
+ok
+test_update_booked_seats_failure (test_dao_fails.TestSeatDaoFail) ... ok
+test_delete_seat (test_delete_correct.SeatDeleteCrct) ... ok
+test_delete_movie_success (test_delete_movie.TestMovieDelete) ... ok
+test_delete_movie_failure (test_delete_movie_fail.TestMovieDeleteFailure) ... ok
+test_seat_delete (test_delete_seat.SeatDelete) ... ok
+test_delete_show (test_delete_show.ShowDelete) ... ok
+test_delete_show_failure (test_delete_show_fail.ShowDelete) ... ok
+test_multiple_bookings (test_diff_id_multiple_booking.TestMultipleBookings) ... ========== BOOKING TRANSACTIONS ==========
+
+Booking ID: 1
+Customer Number: 9876543210
+Movie Name: Leo
+Show ID: 101
+Seats: A1 
+Total Amount: 500
+Booking Status: Booked
+
+
+Booking ID: 2
+Customer Number: 9123456780
+Movie Name: Interstellar
+Show ID: 102
+Seats: B1 
+Total Amount: 300
+Booking Status: Booked
+
+ok
+test_view_seat_based_shows_no_seats (test_empty_seat.TestEmptySeat) ... ok
+test_existing_customer (test_existing_customer_login.TestExistingCustomer) ... Existing user Found!!
+ok
+test_delete_seat_failure (test_false_update.SeatDeleteFalse) ... ok
+test_update_movie_success (test_movie_update_movie.TestMovieUpdate) ... ok
+test_new_customer_login_failure (test_new_customer_failure.TestNewCustomerLoginFailure) ... ok
+test_new_customer_login (test_new_customer_login.TestNewCustomerLogin) ... ok
+test_exact_number_of_seats_available (test_number_of_seats.SeatReq) ... ok
+test_not_enough_seats (test_request_seat.SeatReq) ... Ticket Availabilty Exceeds....!
+ok
+test_search_movie_not_found (test_search_movie_fail.TestMovieSearchNotFound) ... ok
+test_search_movie (test_search_movies.TestMovieSearch) ... ok
+test_search_show (test_search_show.TestSearchService) ... (1, 2, '2026-10-20', '10:00', '12:00')
+ok
+test_search_show_not_found (test_search_show_failure.TestSearchService) ... ok
+test_view_seat_based_shows (test_seat_based_show.TestSeatbasedShows) ... ====AVAILABLE SEATS====
+A1 
+ok
+test_add_seats (test_seat_service.TestSeatService) ... ok
+test_add_show_collision (test_show_collision.TestShowsCollision) ... Show collision! This screen is already occupied.
+ok
+test_add_show_before_release_date (test_show_date_before_release.TestShowsCollision) ... this show date is before the release date 
+ok
+test_add_show_after_end_date (test_sow_date_after_release.TestShowsCollision) ... this show date is after the release date 
+ok
+test_add_user_to_existing_theater (test_theater_exists_but_user_not.TestExistingTheater) ... ok
+test_update_password (test_theater_new_login.TestUpdatePassword) ... Enter new password: 123
+ok
+test_check_user_exists (test_theater_official_exist.TestTheaterCheckUser) ... ok
+test_wrong_password (test_theater_user_failure_login.TestTheaterUserLoginFailure) ... ok
+test_theater_user_login_success (test_theater_user_login.TestTheaterUserLogin) ... ok
+test_theater_user_not_found (test_theater_user_not_found.TestTheaterUserNotFound) ... ok
+test_update_movie_invalid_date (test_update_movie_invalid_date.TestMovieUpdateInvalidDate) ... ok
+test_update_booked_seats (test_update_seat.SeatUpdate) ... ok
+test_update_seats (test_update_seats.SeatUpdateNew) ... ok
+test_update_show (test_update_show.TestUpdateShow) ... ok
+test_update_show_failure (test_update_show_fail.TestUpdateShow) ... ok
+test_view_all_transaction (test_view_all_transaction.TestViewAll) ... ========== BOOKING TRANSACTIONS ==========
+
+Booking ID: 1
+Customer Number: 9876543210
+Movie Name: Leo
+Show ID: 101
+Seats: A1 
+Total Amount: 500
+Booking Status: Booked
+
+ok
+test_view_all_teransaction_empty (test_view_all_transaction_empty.TestViewAllEmpty) ... No booking transactions found.
+ok
+test_view_movie_based_theater (test_view_movie_based_theaters.TestViewMovieBasedTheater) ... ==== AVAILABLE THEATERS ====
+Theater ID      Theater Name
+1               Grand Cinema
+These are the available theaters.
+ok
+test_view_movie (test_view_movies.TestMovieView) ... ok
+test_multiple_seats (test_view_multiple_booking.TestMultipleBookingSeats) ... ========== BOOKING TRANSACTIONS ==========
+
+Booking ID: 1
+Customer Number: 9876543210
+Movie Name: Leo
+Show ID: 101
+Seats: A1 A2 
+Total Amount: 500
+Booking Status: Booked
+
+ok
+test_view_show_based_theater_no_shows (test_view_no_shows_based_theater.TestShowsCollision) ... No shows found...
+ok
+test_view_show (test_view_show.TestShowService) ... [(1, '10:00', '2026-10-20'), (2, '14:00', '2026-10-20')]
+ok
+test_view_show_based_theater (test_view_show_based_theater.TestShowsCollision) ... ==== AVAILABLE SHOWS ====
+Show ID Show Time
+1               10:00
+2               14:00
+These are the available shows.
+ok
+test_view_theaters (test_view_theater.TestTheaterService) ... ok
+test_view_your_tickets (test_view_your_ticket.TestViewYourTickets) ... User found
+
+Movie : Leo
+Seats : A5 
+Total Amount : ₹400
+
+ok
+test_no_tickets (test_view_your_ticket_empty.TestViewYourTicketsEmpty) ... No tickets found.
+ok
+test_add_zero_seats (test_zero_seat_given.SeatZeroConfigure) ... ok
+
+----------------------------------------------------------------------
+Ran 61 tests in 6.958s
+
+OK
