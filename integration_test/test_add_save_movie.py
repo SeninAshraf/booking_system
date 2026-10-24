@@ -23,3 +23,5 @@ class TestMovieIntegration(unittest.TestCase):#test class
         end_date TEXT
     )
 """)#create a movie table
+       connection.close()
+       #next most imp part patcher divert direction of dao > sqlite to dao> temp databse
