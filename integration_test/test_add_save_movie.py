@@ -8,4 +8,6 @@ from dao.moviedao import MovieDao   #for testing wheather they work together thi
 from services.movieservice import MovieService
 
 class TestMovieIntegration(unittest.TestCase):#test class
-    pass
+    def setUp(self):#setup test database
+       fd, self.db_path = tempfile.mkstemp() #create a temp file fd+file descriptor,self.db_path=way to file
+       os.close(fd)
