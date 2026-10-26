@@ -25,3 +25,12 @@ class TestMovieIntegration(unittest.TestCase):#test class
 """)#create a movie table
        connection.close()
        #next most imp part patcher divert direction of dao > sqlite to dao> temp databse
+       def create_connection():#creates a function.
+            return sqlite3.connect(self.db_path)#return the " your temporary database.
+
+       self.patcher = patch(
+            "dao.moviedao.get_connection",#Find the get_connection function used inside dao/moviedao.py.,Temporarily replace its behavior.
+            side_effect=create_connection#side_effect=create_connection means whenever the DAO calls get_connection(), Python runs create_connection() instead.
+        )
+
+       self.patcher.start()#Before this line, the replacement is prepared but not active. After this line, the DAO uses our create_connection() function.
