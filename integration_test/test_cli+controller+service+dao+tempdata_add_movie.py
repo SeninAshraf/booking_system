@@ -203,6 +203,37 @@ class TestMovieFullIntegration(unittest.TestCase):
 
         # Check whether the CLI displays a message
         mock_print.assert_any_call("No movies found")
+
+    #test whether all movie details are saved correctly
+    def test_add_movie_details(self):
+        user_inputs = [
+            "Inception",
+            "Sci-Fi",
+            "English",
+            "148",
+            "2026-01-01",
+            "2026-12-31"
+        ]
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print"):
+                self.view.add_movie(self.controller)
+        # Retrieve all movie details from the database
+        connection = sqlite3.connect(self.db_path)
+        movie = connection.execute("""
+            SELECT movie_title, movie_genre, movie_language,
+                movie_duration, release_date, end_date
+            FROM movie
+        """).fetchone()
+        connection.close()
+        # Check all saved details
+        self.assertEqual(movie, (
+            "Inception",
+            "Sci-Fi",
+            "English",
+            148,
+            "2026-01-01",
+            "2026-12-31"
+        ))
     def tearDown(self):
         self.patcher.stop()
         os.remove(self.db_path)
