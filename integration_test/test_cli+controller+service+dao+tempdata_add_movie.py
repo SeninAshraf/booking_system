@@ -143,6 +143,66 @@ class TestMovieFullIntegration(unittest.TestCase):
                 self.view.search_movie(self.controller)
         # Check whether the movie title was displayed
         mock_print.assert_any_call("Inception")
+    #search not found
+    def test_search_movie_not_found(self):
+        user_inputs = ["999"]
+
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.search_movie(self.controller)
+
+        # Check that the CLI displays a not-found message
+        mock_print.assert_any_call("Movie not found")
+    #update invalid dates
+    def test_update_movie_invalid_dates(self):
+        # Add an existing movie
+        self.dao.add_movie(
+            "Inception", "Sci-Fi", "English",
+            148, "2026-01-01", "2026-12-31"
+        )
+
+        # Enter updated details with invalid dates
+        user_inputs = [
+            "1",
+            "Interstellar",
+            "Sci-Fi",
+            "English",
+            "169",
+            "2026-12-31",  # Release date
+            "2026-01-01"   # End date
+        ]
+
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.update_movie(self.controller)
+
+        # Check that the original title remains unchanged
+        movie = self.controller.search_movie(1)
+        self.assertEqual(movie[1], "Inception")
+
+        # Check the failure message
+        mock_print.assert_any_call(
+            "Adding Failed or missmatch of dates are found!!!"
+        )
+
+    #movie not found
+    def test_delete_movie_not_found(self):
+        # Enter a movie ID that does not exist
+        user_inputs = ["999"]
+
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.delete_movie(self.controller)
+
+        # Check the message shown by the CLI
+        mock_print.assert_any_call("Movie not found")
+    #movie search but no movies in database
+    def test_view_movie_empty(self):
+        with patch("builtins.print") as mock_print:
+            self.view.view_movie(self.controller)
+
+        # Check whether the CLI displays a message
+        mock_print.assert_any_call("No movies found")
     def tearDown(self):
         self.patcher.stop()
         os.remove(self.db_path)
