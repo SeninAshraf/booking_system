@@ -65,7 +65,84 @@ class TestMovieFullIntegration(unittest.TestCase):
 
         self.assertEqual(movie[0], "Inception")
         mock_print.assert_any_call("Added Succesfull")
+#test invalid date
+    def test_add_movie_invalid_dates(self):
+        user_inputs = [
+            "Inception", "Sci-Fi", "English",
+            "148", "2026-12-31", "2026-01-01"
+        ]
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.add_movie(self.controller)
+        mock_print.assert_any_call(
+            "Adding Failed or missmatch of dates are found!!!"
+        )
+#view_movie
+    
+    
+    def test_update_movie(self):
+    # First, add a movie to the database
+        self.dao.add_movie(
+            "Inception", "Sci-Fi", "English",
+            148, "2026-01-01", "2026-12-31"
+        )
 
+        # Simulate the user's input for updating the movie
+        user_inputs = [
+            "1",             # Movie ID
+            "Interstellar",  # New title
+            "Sci-Fi",        # New genre
+            "English",       # New language
+            "169",           # New duration
+            "2026-01-01",    # Release date
+            "2026-12-31"     # End date
+        ]
+
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.update_movie(self.controller)
+
+        # Check whether the movie was updated
+        movie = self.controller.search_movie(1)
+        self.assertEqual(movie[1], "Interstellar")
+
+        # Check the success message
+        mock_print.assert_any_call("Updated Successfully")
+
+    def test_delete_movie(self):
+        # Add a movie first
+        self.dao.add_movie(
+            "Inception", "Sci-Fi", "English",
+            148, "2026-01-01", "2026-12-31"
+        )
+
+        # Simulate the user's input
+        user_inputs = ["1"]  # Movie ID to delete
+
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.delete_movie(self.controller)
+
+        # Check whether the movie was deleted
+        result = self.controller.search_movie(1)
+        self.assertIsNone(result)
+
+        # Check the success message
+        mock_print.assert_any_call("Deleted Successfully")
+
+    def test_search_movie(self):
+        # Add a movie to the database
+        self.dao.add_movie(
+            "Inception", "Sci-Fi", "English",
+            148, "2026-01-01", "2026-12-31"
+        )
+        # Enter the movie ID when the CLI asks
+        user_inputs = ["1"]
+        with patch("builtins.input", side_effect=user_inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.search_movie(self.controller)
+        # Check whether the movie title was displayed
+        mock_print.assert_any_call("Inception")
     def tearDown(self):
         self.patcher.stop()
         os.remove(self.db_path)
