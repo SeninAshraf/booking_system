@@ -1,4 +1,5 @@
 from database.connection import get_connection
+from datetime import date
 
 class ShowDao:
     def add_show(self,choice,theater_id,screen_no,start_time,end_time,show_date):
@@ -48,10 +49,24 @@ class ShowDao:
                 result = cursor.fetchall()
                 return result
 
-    def view_show_based_theater(self,your_theater,choice):
-            connection = get_connection()
-            cursor = connection.cursor()
-            cursor.execute("""select show_id,start_time from show WHERE theater_id =? and movie_id =?""",(your_theater,choice))
-            result = cursor.fetchall()
-            return result
     
+
+    def view_show_based_theater(self, your_theater, choice):
+        connection = get_connection()
+        cursor = connection.cursor()
+
+        today = date.today().isoformat()
+
+        cursor.execute("""
+                SELECT show_id, start_time
+                FROM show
+                WHERE theater_id = ?
+                AND movie_id = ?
+                AND show_date >= ?
+                ORDER BY show_date, start_time
+        """, (your_theater, choice, today))
+
+        result = cursor.fetchall()
+        connection.close()
+
+        return result
