@@ -39,7 +39,7 @@ class TestMovieIntegration(unittest.TestCase):#test class
        self.dao = MovieDao()
        self.service = MovieService(self.dao)
 
-       def test_add_movie(self):
+    def test_add_movie(self):
            result = self.service.add_movie(
             "Inception", "Sci-Fi", "English",
             148, "2026-01-01", "2026-12-31")#call your actual service method with movie details.
@@ -50,6 +50,6 @@ class TestMovieIntegration(unittest.TestCase):#test class
            movie = connection.execute("SELECT movie_title FROM movie").fetchone()#SELECT movie_title FROM movie asks SQLite to retrieve movie titles from the table.
            connection.close()
            self.assertEqual(movie[0], "Inception")
-           def tearDown(self):#tearDown() runs after each test method, even if that test fails.It helps us clean up the resources used by the test.
+    def tearDown(self):#tearDown() runs after each test method, even if that test fails.It helps us clean up the resources used by the test.
                self.patcher.stop()#Stops the patch and restores the DAO's original get_connection() function.
                os.remove(self.db_path)
