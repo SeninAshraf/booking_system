@@ -187,5 +187,19 @@ class TestBookingIntegration(unittest.TestCase):
 
         self.assertEqual(result, (1,))
 
+    def test_save_customer(self):
+        result = self.dao.save("9123456780")
+
+        self.assertTrue(result)
+
+        connection = self.connect_test_db()
+        customer = connection.execute(
+            "SELECT mobile_number FROM customer WHERE mobile_number = ?",
+            ("9123456780",)
+        ).fetchone()
+        connection.close()
+
+        self.assertEqual(customer, ("9123456780",))
+
 
 
