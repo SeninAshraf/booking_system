@@ -317,7 +317,23 @@ class TestTheaterIntegration(unittest.TestCase):
         self.assertEqual(theater_count, 1)
         self.assertEqual(user_count, 1)
 
-        
+    def test_view_theaters(self):
+        # Add theaters to the temporary database
+        self.theater_dao.add_theater("Grand Cinema")
+        self.theater_dao.add_theater("City Cinema")
+
+        # Call the controller to retrieve theaters
+        result = self.controller.view_theaters()
+
+        # Check the retrieved theaters
+        self.assertEqual(len(result), 2)
+        self.assertEqual(result[0][1], "Grand Cinema")
+        self.assertEqual(result[1][1], "City Cinema")
+    def test_view_theaters_empty(self):
+        # Retrieve theaters from the empty database
+        result = self.controller.view_theaters()
+        # Check that no theaters are returned
+        self.assertEqual(result, [])
     def tearDown(self):
         self.patcher1.stop()
         self.patcher2.stop()
