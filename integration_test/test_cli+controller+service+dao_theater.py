@@ -11,7 +11,7 @@ from dao.theaterofficialdao import TheaterOfficialDao
 from services.theaterservice import TheaterService
 from services.theaterofficialservice import TheaterofficialService
 from controllers.theaterofficialcontroller import TheaterofficialController
-from view.cliview import MovieView
+from view.cliview import Viewer
 
 
 class TestTheaterIntegration(unittest.TestCase):
@@ -71,7 +71,7 @@ class TestTheaterIntegration(unittest.TestCase):
             self.theater_service
         )
 
-        self.view = MovieView()
+        self.view = Viewer()
 
     def test_add_theater_user(self):
         user_inputs = [

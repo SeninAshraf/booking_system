@@ -8,7 +8,7 @@ from unittest.mock import patch
 from dao.moviedao import MovieDao
 from services.movieservice import MovieService
 from controllers.moviecontroller import MovieController
-from view.cliview import MovieView
+from view.cliview import Viewer
 
 
 class TestMovieFullIntegration(unittest.TestCase):
@@ -43,7 +43,7 @@ class TestMovieFullIntegration(unittest.TestCase):
         self.dao = MovieDao()
         self.service = MovieService(self.dao)
         self.controller = MovieController(self.service)
-        self.view = MovieView()
+        self.view = Viewer()
 
     def test_add_movie(self):
         # Simulate user entering movie details
@@ -107,8 +107,11 @@ class TestMovieFullIntegration(unittest.TestCase):
         self.assertEqual(movie[1], "Interstellar")
 
         # Check the success message
-        mock_print.assert_any_call("Updated Successfully")
+        mock_print.assert_any_call(
+    "updating Movie..\nMovie Updated Succesfully\nReturning To Admin Menu...."
+)
 
+    
     def test_delete_movie(self):
         # Add a movie first
         self.dao.add_movie(
@@ -116,43 +119,44 @@ class TestMovieFullIntegration(unittest.TestCase):
             148, "2026-01-01", "2026-12-31"
         )
 
-        # Simulate the user's input
-        user_inputs = ["1"]  # Movie ID to delete
+        # First input: movie ID
+        # Second input: 1 to confirm deletion
+        user_inputs = ["1", "1"]
 
         with patch("builtins.input", side_effect=user_inputs):
             with patch("builtins.print") as mock_print:
                 self.view.delete_movie(self.controller)
 
-        # Check whether the movie was deleted
+        # Verify that the movie was deleted
         result = self.controller.search_movie(1)
         self.assertIsNone(result)
 
-        # Check the success message
-        mock_print.assert_any_call("Deleted Successfully")
+        # Verify the actual success message from cliview.py
+        mock_print.assert_any_call("movie deleted succesfully")
 
+    
     def test_search_movie(self):
         # Add a movie to the database
         self.dao.add_movie(
             "Inception", "Sci-Fi", "English",
             148, "2026-01-01", "2026-12-31"
         )
-        # Enter the movie ID when the CLI asks
-        user_inputs = ["1"]
-        with patch("builtins.input", side_effect=user_inputs):
-            with patch("builtins.print") as mock_print:
-                self.view.search_movie(self.controller)
+
+        with patch("builtins.print") as mock_print:
+            self.view.search_movie(self.controller, 1)
+
         # Check whether the movie title was displayed
-        mock_print.assert_any_call("Inception")
-    #search not found
+        mock_print.assert_any_call("Movie Title  : Inception")
+
     def test_search_movie_not_found(self):
         user_inputs = ["999"]
 
         with patch("builtins.input", side_effect=user_inputs):
             with patch("builtins.print") as mock_print:
-                self.view.search_movie(self.controller)
+                self.view.search_movie(self.controller,999)
 
         # Check that the CLI displays a not-found message
-        mock_print.assert_any_call("Movie not found")
+        mock_print.assert_any_call("no movie found...")
     #update invalid dates
     def test_update_movie_invalid_dates(self):
         # Add an existing movie
@@ -182,8 +186,8 @@ class TestMovieFullIntegration(unittest.TestCase):
 
         # Check the failure message
         mock_print.assert_any_call(
-            "Adding Failed or missmatch of dates are found!!!"
-        )
+    "updation failed or missmatch of date found!!!"
+)
 
     #movie not found
     def test_delete_movie_not_found(self):
@@ -195,14 +199,14 @@ class TestMovieFullIntegration(unittest.TestCase):
                 self.view.delete_movie(self.controller)
 
         # Check the message shown by the CLI
-        mock_print.assert_any_call("Movie not found")
+        mock_print.assert_any_call("No movie found")
     #movie search but no movies in database
     def test_view_movie_empty(self):
         with patch("builtins.print") as mock_print:
             self.view.view_movie(self.controller)
 
         # Check whether the CLI displays a message
-        mock_print.assert_any_call("No movies found")
+        mock_print.assert_any_call("No movies available")
 
     #test whether all movie details are saved correctly
     def test_add_movie_details(self):

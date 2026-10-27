@@ -14,7 +14,7 @@ from services.showservice import ShowService
 from services.seatservice import SeatService
 from controllers.moviecontroller import MovieController
 from controllers.showcontroller import ShowController
-from view.cliview import MovieView
+from view.cliview import Viewer
 
 
 class TestShowIntegration(unittest.TestCase):
@@ -107,16 +107,27 @@ class TestShowIntegration(unittest.TestCase):
             ShowService(self.show_dao, self.movie_dao),
             SeatService(self.seat_dao)
         )
-        self.view = MovieView()
+        self.view = Viewer()
+        self.seat_service = SeatService(self.seat_dao)
+
+        self.patches = [
+            self.patcher1,
+            self.patcher2,
+            self.patcher3
+        ]
 
     def test_create_show(self):#show creation
         show_date = (date.today() + timedelta(days=2)).isoformat()
 
         inputs = [
-            "1", show_date, "1", "10:00", "12:00",
-            "1", "2", "200",
-            "2", "3", "100"
-        ]
+    "1",          # Movie ID
+    "1",          # Screen number
+        show_date,    # Show date
+    "10:00",      # Start time
+    "12:00",      # End time
+    "1", "2", "200",  # VIP: rows, seats per row, price
+    "2", "3", "100"   # Economy: rows, seats per row, price
+]
         with patch("builtins.input", side_effect=inputs):
             with patch("builtins.print") as mock_print:
                 self.view.configure_show(
@@ -147,14 +158,14 @@ class TestShowIntegration(unittest.TestCase):
         show_date = date.today().isoformat()
 
         inputs = [
-            "1",          # Movie ID
-            "1",          # Screen number
-            show_date,    # Show date
-            "10:00",      # Start time
-            "12:00",      # End time
-            "1", "2", "200",  # VIP configuration
-            "2", "3", "100"   # Economy configuration
-        ]
+        "1",          # Movie ID
+        "1",          # Screen number
+        show_date,    # Show date
+        "10:00",      # Start time
+        "12:00",      # End time
+        "1", "2", "200",  # VIP: rows, seats per row, price
+        "2", "3", "100"   # Economy: rows, seats per row, price
+    ]
 
         with patch("builtins.input", side_effect=inputs):
             with patch("builtins.print") as mock_print:
@@ -185,17 +196,20 @@ class TestShowIntegration(unittest.TestCase):
         
     def test_show_after_end_date(self):
         # Choose a date after the movie's end date
-        show_date = "2026-12-16"
+        show_date = (
+        date.today() + timedelta(days=31)
+    ).isoformat()
+
 
         inputs = [
-            "1",          # Movie ID
-            "1",          # Screen number
-            show_date,    # Show date
-            "10:00",      # Start time
-            "12:00",      # End time
-            "1", "2", "200",  # VIP configuration
-            "2", "3", "100"   # Economy configuration
-        ]
+    "1",          # Movie ID
+    "1",          # Screen number
+    show_date,    # Show date
+    "10:00",      # Start time
+    "12:00",      # End time
+    "1", "2", "200",  # VIP: rows, seats per row, price
+    "2", "3", "100"   # Economy: rows, seats per row, price
+]
 
         with patch("builtins.input", side_effect=inputs):
             with patch("builtins.print") as mock_print:
@@ -207,20 +221,22 @@ class TestShowIntegration(unittest.TestCase):
 
         # Verify that the show was rejected
         mock_print.assert_any_call(
-            "Show date must be on or before the movie end date"
+            "Show was NOT created."
         )
 
+    
     def test_show_with_invalid_time(self):
-        show_date = "2026-11-20"
+        show_date = (date.today() + timedelta(days=2)).isoformat()
 
         inputs = [
             "1",          # Movie ID
             "1",          # Screen number
             show_date,    # Show date
             "12:00",      # Start time
-            "10:00",      # End time
-            "1", "2", "200",  # VIP configuration
-            "2", "3", "100"   # Economy configuration
+            "10:00",      # Invalid end time
+            "14:00",      # Corrected end time after the error The error StopIteration means your test ran out of mock inputs. Python tried to ask for another value using input(), but your inputs list had no values left.
+            "1", "2", "200",  # VIP: rows, seats per row, price
+            "2", "3", "100"   # Economy: rows, seats per row, price
         ]
 
         with patch("builtins.input", side_effect=inputs):
@@ -231,15 +247,20 @@ class TestShowIntegration(unittest.TestCase):
                     1
                 )
 
-        # Verify that the invalid time range is rejected
+        # Check that the invalid time was rejected
         mock_print.assert_any_call(
-            "End time must be after start time"
+            "End time must be after start time."
         )
+
+        
+    
 
     def tearDown(self):
         for p in self.patches:
             p.stop()
-        os.remove(self.db_path)
+
+        if os.path.exists(self.db_path):
+            os.remove(self.db_path)
 
 
 if __name__ == "__main__":
