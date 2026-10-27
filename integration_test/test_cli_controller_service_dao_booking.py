@@ -168,5 +168,19 @@ class TestBookingIntegration(unittest.TestCase):
 
         self.assertEqual(rows, [(1,), (2,)])
 
+    def test_display_movie_details(self):
+        result = self.dao.display_movie_details(
+            choice=1,
+            your_show=1,
+            selected_seats=["A1", "A2"]
+        )
+
+        expected = [
+            ("Inception", 1, "A1", 200.0),
+            ("Inception", 1, "A2", 200.0)
+        ]
+
+        self.assertEqual(result, expected)
+
 
 
