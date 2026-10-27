@@ -142,47 +142,99 @@ class TestShowIntegration(unittest.TestCase):
 
     #test show before release date
 
-def test_show_before_release_date(self):
-    # Choose a date before the movie's release date
-    show_date = date.today().isoformat()
+    def test_show_before_release_date(self):
+        # Choose a date before the movie's release date
+        show_date = date.today().isoformat()
 
-    inputs = [
-        "1",          # Movie ID
-        "1",          # Screen number
-        show_date,    # Show date
-        "10:00",      # Start time
-        "12:00",      # End time
-        "1", "2", "200",  # VIP configuration
-        "2", "3", "100"   # Economy configuration
-    ]
+        inputs = [
+            "1",          # Movie ID
+            "1",          # Screen number
+            show_date,    # Show date
+            "10:00",      # Start time
+            "12:00",      # End time
+            "1", "2", "200",  # VIP configuration
+            "2", "3", "100"   # Economy configuration
+        ]
 
-    with patch("builtins.input", side_effect=inputs):
-        with patch("builtins.print") as mock_print:
-            self.view.configure_show(
-                self.movie_controller,
-                self.show_controller,
-                1
-            )
+        with patch("builtins.input", side_effect=inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.configure_show(
+                    self.movie_controller,
+                    self.show_controller,
+                    1
+                )
 
-    # The CLI should report that the show was not created
-    mock_print.assert_any_call("Show was NOT created.")
+        # The CLI should report that the show was not created
+        mock_print.assert_any_call("Show was NOT created.")
 
-    # Check that no show or seats were saved
-    connection = sqlite3.connect(self.db_path)
+        # Check that no show or seats were saved
+        connection = sqlite3.connect(self.db_path)
 
-    show_count = connection.execute(
-        "SELECT COUNT(*) FROM show"
-    ).fetchone()[0]
+        show_count = connection.execute(
+            "SELECT COUNT(*) FROM show"
+        ).fetchone()[0]
 
-    seat_count = connection.execute(
-        "SELECT COUNT(*) FROM seat"
-    ).fetchone()[0]
+        seat_count = connection.execute(
+            "SELECT COUNT(*) FROM seat"
+        ).fetchone()[0]
 
-    connection.close()
+        connection.close()
 
-    self.assertEqual(show_count, 0)
-    self.assertEqual(seat_count, 0)
+        self.assertEqual(show_count, 0)
+        self.assertEqual(seat_count, 0)
+        
+    def test_show_after_end_date(self):
+        # Choose a date after the movie's end date
+        show_date = "2026-12-16"
 
+        inputs = [
+            "1",          # Movie ID
+            "1",          # Screen number
+            show_date,    # Show date
+            "10:00",      # Start time
+            "12:00",      # End time
+            "1", "2", "200",  # VIP configuration
+            "2", "3", "100"   # Economy configuration
+        ]
+
+        with patch("builtins.input", side_effect=inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.configure_show(
+                    self.movie_controller,
+                    self.show_controller,
+                    1
+                )
+
+        # Verify that the show was rejected
+        mock_print.assert_any_call(
+            "Show date must be on or before the movie end date"
+        )
+
+    def test_show_with_invalid_time(self):
+        show_date = "2026-11-20"
+
+        inputs = [
+            "1",          # Movie ID
+            "1",          # Screen number
+            show_date,    # Show date
+            "12:00",      # Start time
+            "10:00",      # End time
+            "1", "2", "200",  # VIP configuration
+            "2", "3", "100"   # Economy configuration
+        ]
+
+        with patch("builtins.input", side_effect=inputs):
+            with patch("builtins.print") as mock_print:
+                self.view.configure_show(
+                    self.movie_controller,
+                    self.show_controller,
+                    1
+                )
+
+        # Verify that the invalid time range is rejected
+        mock_print.assert_any_call(
+            "End time must be after start time"
+        )
 
     def tearDown(self):
         for p in self.patches:
