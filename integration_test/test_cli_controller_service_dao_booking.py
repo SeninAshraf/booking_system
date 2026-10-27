@@ -182,5 +182,10 @@ class TestBookingIntegration(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
+    def test_find_customer(self):
+        result = self.dao.find_customer("9876543210")
+
+        self.assertEqual(result, (1,))
+
 
 
