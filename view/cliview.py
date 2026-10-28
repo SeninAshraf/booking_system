@@ -123,7 +123,7 @@ class Viewer:
             if choice == "1":
                     self.add_theater_user(theaterofficialcontroller)
             elif choice == "2":
-                    self.view_movie(moviecontroller)
+                    self.view_movie(moviecontroller)#use ith thru moviecontroller
             elif choice == "3":
                     self.add_movie(moviecontroller)
             elif choice == "4":
@@ -149,21 +149,21 @@ class Viewer:
                     print("All fields are required.")
                     return
 
-        result = moviecontroller.add_movie(title,genre,language,duration,release_date,end_date)
+        result = moviecontroller.add_movie(title,genre,language,duration,release_date,end_date)#pass to moviecontroller
         if result:
                 print("Added Succesfull")
         else:
                 print("Adding Failed or missmatch of dates are found!!!")
 
     def view_movie(self,moviecontroller):
-         result = moviecontroller.view_movie()
+         result = moviecontroller.view_movie()#caall view_movie method in moviecontroller
          if result:
             print("\n========== AVAILABLE MOVIE ==========\n")
 
             print("Movie ID\tMovie")
 
             for movie in result:
-                print(f"{movie[0]}\t\t{movie[1]}")
+                print(f"{movie[0]}\t\t{movie[1]}")#print id name 
             print("These are the available movies")
          else:
               print("No movies available")
@@ -251,11 +251,11 @@ class Viewer:
     def add_theater_user(self,theaterofficialcontroller):
          theater_name = input("Enter theater Name:")
          theater_username = input("Enter Username")
-         password = input("Enter Password:")
+         password = input("Enter Password:")#receive inputs from uswr
          if not theater_name or not theater_username or not password:
             print("All fields are required.")
             return
-         result = theaterofficialcontroller.add_theater_user(theater_name,theater_username,password)
+         result = theaterofficialcontroller.add_theater_user(theater_name,theater_username,password)#pass to theater official controll
 
          if result:
               print("Theater user added succesfully.")

@@ -3,7 +3,7 @@ class TheaterofficialController:
         self.theater_official_service = theater_official_service
         self.theater_service = theater_service
 
-    def add_theater_user(self,theater_name,theater_username,password):
+    def add_theater_user(self,theater_name,theater_username,password):#pass to official service with 3 inputs
         return self.theater_official_service.add_theater_user(theater_name,theater_username,password)
 
     def view_theaters(self):

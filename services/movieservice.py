@@ -12,7 +12,7 @@ class MovieService:
             )
 
     def view_movie(self):
-        return self.movie_dao.view_movie()
+        return self.movie_dao.view_movie()#pass to movie_dao and return to contr
 
     def search_movie(self,movie_id):
         return self.movie_dao.get_movie(movie_id)

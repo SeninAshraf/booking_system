@@ -11,8 +11,8 @@ class MovieController:
                 end_date
           )
 
-    def view_movie(self):
-          return self.movieservice.view_movie()
+    def view_movie(self):#pass to movieservice method= view movie 
+          return self.movieservice.view_movie()#return the result to view class
 
     def search_movie(self,movie_id):
           return self.movieservice.search_movie(movie_id)

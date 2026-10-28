@@ -41,5 +41,5 @@ class MovieDao:
             cursor=connection.cursor()
             cursor.execute("""SELECT movie_id,movie_title from movie""")
             result= cursor.fetchall()
-            return result
+            return result#return to movieservice 
 
