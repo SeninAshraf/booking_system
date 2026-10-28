@@ -6,6 +6,7 @@ import os
 from unittest.mock import patch
 
 from dao.bookingdao import BookingDAO
+from dao.seatdao import SeatDAO
 
 
 class TestBookingIntegration(unittest.TestCase):
@@ -118,6 +119,13 @@ class TestBookingIntegration(unittest.TestCase):
         self.patcher.start()
 
         self.dao = BookingDAO()
+        self.seat_patcher = patch(
+            "dao.seatdao.get_connection",
+            side_effect=self.connect_test_db
+        )
+        self.seat_patcher.start()
+
+        self.seat_dao = SeatDAO()
 
     def connect_test_db(self):
         connection = sqlite3.connect(self.db_path)
@@ -126,6 +134,7 @@ class TestBookingIntegration(unittest.TestCase):
 
     def tearDown(self):
         self.patcher.stop()
+        self.seat_patcher.stop()
         if os.path.exists(self.db_path):
             os.remove(self.db_path)
 
@@ -200,6 +209,125 @@ class TestBookingIntegration(unittest.TestCase):
         connection.close()
 
         self.assertEqual(customer, ("9123456780",))
+
+    
+    def test_customer_book_tickets(self):
+        # Step 1: Find the customer
+        customer = self.dao.find_customer("9876543210")
+        self.assertIsNotNone(customer)#find already added customer
+
+        customer_id = customer[0]#retrieve customer id
+
+        # Step 2: Retrieve details for the selected seats
+        selected_seats = ["A1", "A2"]#select seats
+
+        movie_details = self.dao.display_movie_details(
+            choice=1,
+            your_show=1,
+            selected_seats=selected_seats
+        )#display details of selected seats
+
+        self.assertEqual(len(movie_details), 2)#check is that 2 seats were returned
+
+        # Step 3: Calculate the total ticket price
+        total_amount = sum(row[3] for row in movie_details)
+        self.assertEqual(total_amount, 400)#calculate sum and check is that equal to 400
+
+        # Step 4: Get the database IDs of the selected seats
+        connection = self.connect_test_db()
+
+        selected_seat_ids = [
+            row[0] for row in connection.execute(
+                """
+                SELECT seat_id
+                FROM seat
+                WHERE show_id = ?
+                AND seat_no IN (?, ?)
+                ORDER BY seat_no
+                """,
+                (1, "A1", "A2")
+            ).fetchall()
+        ]#select seat_id
+
+        connection.close()
+
+        self.assertEqual(len(selected_seat_ids), 2)#heck no seats is 2
+
+        # Step 5: Mark the selected seats as booked
+        result = self.seat_dao.update_booked_seats(
+            your_show=1,
+            selected_seats=selected_seats
+        )
+#update selected seats status
+        self.assertTrue(result)
+
+        # Step 6: Save the booking
+        booking_id = self.dao.add_booking_details(
+            customer_id=customer_id,
+            your_show=1,
+            total_amount=total_amount,
+            num_tickets=len(selected_seats)
+        )#add booking details and retrive bookin_id
+
+        self.assertIsNotNone(booking_id)#ensure booking_id is returned
+
+        # Step 7: Link the seats to the booking
+        result = self.dao.add_booking_seat_details(#add booking seat_details to get booking_seat_id
+            booking_id,
+            selected_seat_ids
+        )
+
+        self.assertTrue(result)
+
+        # Step 8: Verify the saved booking
+        connection = self.connect_test_db()
+
+        booking = connection.execute(
+            """
+            SELECT customer_id, show_id, total_amount,
+                ticket_quantity, booking_status
+            FROM booking
+            WHERE booking_id = ?
+            """,
+            (booking_id,)
+        ).fetchone()
+
+        booked_seats = connection.execute(
+            """
+            SELECT seat_id
+            FROM booking_seat
+            WHERE booking_id = ?
+            ORDER BY seat_id
+            """,
+            (booking_id,)
+        ).fetchall()
+
+        seat_statuses = connection.execute(
+            """
+            SELECT seat_no, seat_status
+            FROM seat
+            WHERE show_id = 1
+            ORDER BY seat_no
+            """
+        ).fetchall()
+
+        connection.close()
+
+        self.assertEqual(
+            booking,
+            (customer_id, 1, 400, 2, "Confirmed")
+        )
+
+        self.assertEqual(
+            booked_seats,
+            [(1,), (2,)]
+        )
+
+        self.assertEqual(
+            seat_statuses,
+            [("A1", "Booked"), ("A2", "Booked")]
+        )
+
 
 
 
