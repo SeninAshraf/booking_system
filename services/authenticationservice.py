@@ -6,12 +6,12 @@ class AuthenticationService:
 
     def login_admin(self, username, password):
 
-        admin = self.auth_dao.find_admin(username)
+        admin = self.auth_dao.find_admin(username)#CHECK ADMIN USERNAME
 
         if admin is None:
-            return False
+            return False#IF ADMIN NT PRESENT THEN RETURN FALSE
 
-        return bcrypt.checkpw(
+        return bcrypt.checkpw(#ELSE COMPARE NEW PASS AND STORED PASS AND RETURN
             password.encode("utf-8"),
             admin.passwordHash.encode("utf-8")
         )

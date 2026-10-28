@@ -1,6 +1,6 @@
-from datetime import datetime, date
+from datetime import datetime, date#for today date
 class Viewer:
-
+#FIRST CALL THIS FUNCTION THEN PRINT MENU
     def starting_view(self, controller,moviecontroller,theaterofficialcontroller,showcontroller,bookingcontroller,reportingcontroller):
         while True:
             print("""
@@ -33,11 +33,11 @@ class Viewer:
         username = input("Enter Username: ")
         password = input("Enter password: ")
 
-        result = controller.login(username, password)
+        result = controller.login(username, password)#MOVE TO CONTROLLER LOGIN METHOD
 
-        if result:
+        if result:#IF RESULT THEN PRINT AND MOVE TO ADMIN MENU
             print("Login successful")
-            self.admin_menu(moviecontroller,theaterofficialcontroller,reportingcontroller)
+            self.admin_menu(moviecontroller,theaterofficialcontroller,reportingcontroller)#CURRENT OBJECT METHOD
         else:
             print("Invalid username or password")
 

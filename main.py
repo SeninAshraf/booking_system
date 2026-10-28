@@ -28,7 +28,7 @@ from controllers.reportingcontroller import ReportingController
 from services.reportingservice import ReportingService
 
 #movie managment
-movie_dao = MovieDao()
+movie_dao = MovieDao()#creating objects to use classses like movie_dao.get_movies()
 movie_service=MovieService(movie_dao)
 movie_controller=MovieController(movie_service)
 
@@ -68,4 +68,4 @@ viewer = Viewer()
 
 
 #for displaying cli view common
-viewer.starting_view(auth_controller,movie_controller,theater_official_controller,show_controller,booking_controller,reporting__controller)
+viewer.starting_view(auth_controller,movie_controller,theater_official_controller,show_controller,booking_controller,reporting__controller)#passing controller methods so viewer object can use it

@@ -1,15 +1,15 @@
 class AuthenticationController:
-
-    def __init__(self, authenticationservice,bookingservice):
-        self.authenticationservice = authenticationservice
+#CONSTRUCTOR=method that initializes an object when you create it
+    def __init__(self, authenticationservice,bookingservice):#runs automatically when you create an object of the class. It receives the two service objects you pass in.
+        self.authenticationservice = authenticationservice#1. The controller now has a reference to that same service object, allowing it to call its methods.
         self.bookingservice = bookingservice
 
-    def login(self, username, password):
+    def login(self, username, password):#MOVE TO SERVICE LOGIN METHOD
 
         return self.authenticationservice.login_admin(
             username,
             password
-        )
+        )#RETRUN GIVEN RESULT
 
     def theater_login(self, theater_name,theater_username,theater_password):
         
