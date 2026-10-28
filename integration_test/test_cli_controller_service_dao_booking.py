@@ -328,6 +328,15 @@ class TestBookingIntegration(unittest.TestCase):
             [("A1", "Booked"), ("A2", "Booked")]
         )
 
+    def test_customer_login_existing_user(self):
+        # Customer already exists in the temporary database
+        result = self.dao.find_customer("9876543210")
+
+        self.assertIsNotNone(result)
+        self.assertEqual(result, (1,))
 
 
+    def test_customer_login_new_user(self):
+        result = self.dao.find_customer("0000000000")
 
+        self.assertIsNone(result)
