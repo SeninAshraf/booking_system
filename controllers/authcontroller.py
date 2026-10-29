@@ -11,7 +11,7 @@ class AuthenticationController:
             password
         )#RETRUN GIVEN RESULT
 
-    def theater_login(self, theater_name,theater_username,theater_password):
+    def theater_login(self, theater_name,theater_username,theater_password):#pass to service with 3 service
         
                 return self.authenticationservice.login_user(
                     theater_name,

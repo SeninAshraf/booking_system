@@ -19,7 +19,7 @@ class Viewer:
             if choice == "1":
                 self.login(controller,moviecontroller,theaterofficialcontroller,bookingcontroller,reportingcontroller)
             elif choice == "2":
-                self.theater_login(controller,theaterofficialcontroller,showcontroller,moviecontroller)
+                self.theater_login(controller,theaterofficialcontroller,showcontroller,moviecontroller)#call theater login method in this class or object(self)
             elif choice == "3":
                 self.customer_login(controller,moviecontroller,theaterofficialcontroller,showcontroller,bookingcontroller)
             elif choice == "4":
@@ -47,11 +47,11 @@ class Viewer:
         theater_username = input("Enter theater user name:")
         theater_password = input("Enter theater password:")
 
-        result = controller.theater_login(theater_name,theater_username,theater_password)
+        result = controller.theater_login(theater_name,theater_username,theater_password)#pass to controller
         if result:
             print("Login succesfull")
-            theater_id = result.theater_id
-            self.theaterofficial_menu(theaterofficialcontroller,showcontroller,moviecontroller,theater_id)
+            theater_id = result.theater_id#here it get the theater id 
+            self.theaterofficial_menu(theaterofficialcontroller,showcontroller,moviecontroller,theater_id)#pass to theater official menu with this parameters
         else:
             print("Invalid username or theatername or password")
 
@@ -171,9 +171,9 @@ class Viewer:
          return result
 
     def update_movie(self,moviecontroller):
-         self.view_movie(moviecontroller)
-         movie_id = int(input("Enter movie_id "))
-         result= self.search_movie(moviecontroller,movie_id)
+         self.view_movie(moviecontroller)#view all movies
+         movie_id = int(input("Enter movie_id "))#enter the movie id
+         result= self.search_movie(moviecontroller,movie_id)#call the searchmovie function
          if result:
             print("Enter new values (Press Enter to keep the existing value)")  
             title1 = input("Enter Movie Title: ")
@@ -195,13 +195,13 @@ class Viewer:
                     print("Enter duration in numbers only.")
             release_date1 = input("Enter Release Date (YYYY-MM-DD): ")
             end_date1 = input("Enter End Date (YYYY-MM-DD): ")
-            title1 = title1 if title1 else result[1]
+            title1 = title1 if title1 else result[1]#add input as new value if user eneter anyinput other wise old value its called terinary operator
             genre1 = genre1 if genre1 else result[2]
             language1 = language1 if language1 else result[3]
             duration1 = duration1 if duration1 else result[4]
             release_date1 = release_date1 if release_date1 else result[5]
             end_date1 = end_date1 if end_date1 else result[6]
-            result1 = moviecontroller.update_movie(movie_id,title1,genre1,language1,duration1,release_date1,end_date1)
+            result1 = moviecontroller.update_movie(movie_id,title1,genre1,language1,duration1,release_date1,end_date1)#pass the value to movie controller
             if result1:
                 print("updating Movie..\nMovie Updated Succesfully\nReturning To Admin Menu....")
             else:
@@ -210,9 +210,9 @@ class Viewer:
               print("movie not found")
 
     def delete_movie(self,moviecontroller):
-         self.view_movie(moviecontroller)
-         movie_id = int(input("Enter movie_id "))
-         result=self.search_movie(moviecontroller,movie_id)
+         self.view_movie(moviecontroller)#view movie
+         movie_id = int(input("Enter movie_id "))#id
+         result=self.search_movie(moviecontroller,movie_id)#serach movie with id
          if not result:
               print("No movie found")
               return
@@ -221,7 +221,7 @@ class Viewer:
          print("2. No")
          choice = int(input("Select an Option: "))
          if choice == 1:
-              result = moviecontroller.delete_movie(movie_id)
+              result = moviecontroller.delete_movie(movie_id)#pass to movie controller and  call delete movie method
               if result:
                    print("movie deleted succesfully")
               else:
@@ -293,7 +293,7 @@ class Viewer:
                 choice = input("SELECT AN OPTION: ")
                 
                 if choice == "1":
-                        self.configure_show(moviecontroller,showcontroller,theater_id)
+                        self.configure_show(moviecontroller,showcontroller,theater_id)#pass to this class object method
                 elif choice == "2":
                         self.update_show(moviecontroller,showcontroller,theater_id)
                 elif choice == "3":
@@ -308,10 +308,10 @@ class Viewer:
 
     def configure_show(self, moviecontroller, showcontroller,theater_id):
 
-        movies = self.view_movie(moviecontroller)
+        movies = self.view_movie(moviecontroller)#call view_movie method
 
         try:
-            choice = int(input("Enter Movie ID: "))
+            choice = int(input("Enter Movie ID: "))#id
         except ValueError:
             print("Enter a valid Movie ID")
             return
@@ -319,7 +319,7 @@ class Viewer:
         valid = False
 
         for movie in movies:
-            if movie[0] == choice:
+            if movie[0] == choice:#the user input only receive when the corresponding number must be in list of view movies
                 valid = True
                 break
 
@@ -328,7 +328,7 @@ class Viewer:
             return
         while True:
             try:
-                screen_number = int(input("Enter Screen Number: "))
+                screen_number = int(input("Enter Screen Number: "))#screeen num
                 break
             except ValueError:
                 print("Enter valid  Number")
@@ -336,41 +336,41 @@ class Viewer:
        
 
         while True:
-            show_date = input("Enter Show Date (YYYY-MM-DD): ")
+            show_date = input("Enter Show Date (YYYY-MM-DD): ")#show date in format
 
             try:
-                    show_date = datetime.strptime(
+                    show_date = datetime.strptime(#convert into satndard format of date
                         show_date,
                         "%Y-%m-%d"
                     ).date()
 
-                    if show_date < date.today():
+                    if show_date < date.today():#if user tries to enter yesterday's or past date
                         print("Show date cannot be in the past.")
                         continue
 
                     break
 
-            except ValueError:
+            except ValueError:#if not in format raise error
                     print("Invalid date. Please use YYYY-MM-DD.")
         while True:
-            start_time = input("Enter Start Time (HH:MM): ")
+            start_time = input("Enter Start Time (HH:MM): ")#enter time in format
 
             try:
-                start_time = datetime.strptime(
+                start_time = datetime.strptime(#convert time in standard format
                     start_time,
                     "%H:%M"
                 ).time()
                 break
 
             except ValueError:
-                print("Invalid start time. Please use HH:MM.")
+                print("Invalid start time. Please use HH:MM.")#raise error if it didnt follow format
         while True:
-            end_time = input("Enter End Time (HH:MM): ")
+            end_time = input("Enter End Time (HH:MM): ")#same as of start_time
 
             try:
                 end_time = datetime.strptime(end_time,"%H:%M").time()
 
-                if end_time <= start_time:
+                if end_time <= start_time:#validate time in start time > end time 
                     print("End time must be after start time.")
                     continue
 
@@ -379,11 +379,11 @@ class Viewer:
             except ValueError:
              print("Invalid end time. Please use HH:MM.")
 
-        vip_rows, vip_seats, vip_price = self.get_seat_configuration("VIP")
+        vip_rows, vip_seats, vip_price = self.get_seat_configuration("VIP")#call get_seat_configuration to enetr vip, seats or eceonomy
 
         economy_rows, economy_seats, economy_price = self.get_seat_configuration("ECONOMY")
 
-        result = showcontroller.add_show(
+        result = showcontroller.add_show(#pass this to  show controller with this parametrs
             choice,
             theater_id,
             screen_number,
@@ -410,11 +410,11 @@ class Viewer:
 
     def get_seat_configuration(self, category):
 
-        print(f"\n=== {category} SEATS ===")
+        print(f"\n=== {category} SEATS ===")#vip seats
         while True:
             try:
                 rows = int(input("Enter Number of Rows: "))
-                if rows <= 0:
+                if rows <= 0:#row is -0 then fail
                     print("Rows must be greater than 0.")
                     continue
                 break
@@ -422,8 +422,8 @@ class Viewer:
                  print("Enter a Valid Number")
         while True:
              try:
-                seats_per_row = int(input("Enter Seats Per Row: "))
-                if seats_per_row<=0:
+                seats_per_row = int(input("Enter Seats Per Row: "))#seat per row 
+                if seats_per_row<=0:#if row is -9
                      print("Seats must be greater than 0")
                      continue
                 break
@@ -432,14 +432,14 @@ class Viewer:
         while True:
              try:
                 price = float(input("Enter Ticket Price: "))
-                if price <= 0:
+                if price <= 0:#if price is -900
                      print("Price must be greater than 0")
                      continue
                 break
              except ValueError:
                   print("Enter a valid price")
 
-        return rows, seats_per_row, price
+        return rows, seats_per_row, price#retrun that with 3 parameters
 
     def update_show(self,moviecontroller,showcontroller,theater_id):
          result=self.view_show(showcontroller,moviecontroller,theater_id)
