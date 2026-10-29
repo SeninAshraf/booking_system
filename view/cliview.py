@@ -391,11 +391,11 @@ class Viewer:
             start_time,
             end_time,
         )
-        if result is None:
+        if result is None:#if result failed then it raise message no creation
             print("Show was NOT created.")
             return
         
-        result_seat = showcontroller.add_seat(
+        result_seat = showcontroller.add_seat(#if it gives show id then it. call add seat in show controller
              result,
              vip_rows,
              vip_seats,
@@ -405,7 +405,7 @@ class Viewer:
              economy_price
         )
 
-        if result is not None and result_seat is not None:
+        if result is not None and result_seat is not None:#if any of fail didnt work other wise print succesfull msg
             print("Show and seats created successfully")
 
     def get_seat_configuration(self, category):
@@ -442,16 +442,16 @@ class Viewer:
         return rows, seats_per_row, price#retrun that with 3 parameters
 
     def update_show(self,moviecontroller,showcontroller,theater_id):
-         result=self.view_show(showcontroller,moviecontroller,theater_id)
+         result=self.view_show(showcontroller,moviecontroller,theater_id)#view all shows based on theater id
          if not  result:
-              return
+              return#confusing
          while True:
             try:
-                show_id =int(input("Enter id of show that needed to update:"))
+                show_id =int(input("Enter id of show that needed to update:"))#id for update show
             except ValueError:
                 print("Enter invalid Id")
                 continue
-            result= self.search_show(showcontroller,show_id)
+            result= self.search_show(showcontroller,show_id)#show searching
             
             if result:
                         show = result[0]
@@ -488,7 +488,7 @@ class Viewer:
                                 ).date()
 
                                 if show_date < date.today():
-                                    print("Show date cannot be in the past.")
+                                    print("Show date cannot be in the past.")#validation
                                     continue
 
                                 break
