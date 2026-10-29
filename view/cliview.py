@@ -494,7 +494,7 @@ class Viewer:
                                 break
 
                             except ValueError:
-                                print("Invalid date. Please use YYYY-MM-DD.")
+                                print("Invalid date. Please use YYYY-MM-DD.")#raise error
                             
                         while True:
                                     start_time_input = input(f"Enter Start Time (HH:MM)[{old_start}]: ")
@@ -503,7 +503,7 @@ class Viewer:
                                                     break
                         
                                     try:
-                                        start_time = datetime.strptime(
+                                        start_time = datetime.strptime(#convertion into time format
                                             start_time_input,
                                             "%H:%M"
                                         ).time()
@@ -521,7 +521,7 @@ class Viewer:
                                     try:
                                         end_time = datetime.strptime(end_time_input,"%H:%M").time()
                         
-                                        if end_time <= start_time:
+                                        if end_time <= start_time:#validation if end_time<start_time
                                             print("End time must be after start time.")
                                             continue
                         
@@ -536,8 +536,8 @@ class Viewer:
                                         old_economy_rows,
                                         old_economy_seats,
                                         old_economy_price
-                                    ) = self.get_old_seat_configuration(result)
-                        vip_rows, vip_seats, vip_price = self.update_seat_configuration(
+                                    ) = self.get_old_seat_configuration(result)#for getting exact amount of like number of rows =3 number of seat per row = 10
+                        vip_rows, vip_seats, vip_price = self.update_seat_configuration(#pass to method=update seat configuration edit will be happen inside that method
                                         "VIP",
                                         len(old_vip_rows),
                                         old_vip_seats,
@@ -551,7 +551,7 @@ class Viewer:
                                 )
 
                         update_show = showcontroller.update_show(show_id,screen_number,show_date,start_time,end_time)
-                        update_seat = showcontroller.update_seats(show_id,vip_rows,
+                        update_seat = showcontroller.update_seats(show_id,vip_rows,#pass to controller - update seat method with given parameters
                                      vip_seats,
                                      vip_price,
                                      economy_rows,
@@ -559,7 +559,7 @@ class Viewer:
                                      economy_price
                                 )
                         if update_show is not None and update_seat is not None:
-                                    print("Show and seats updated successfully")
+                                    print("Show and seats updated successfully")#if both true succes mesage print
                        
             else:
                           print("movie not found")
@@ -634,34 +634,35 @@ class Viewer:
             return result
 
     def get_old_seat_configuration(self, result):
+#first create an empty list
+        old_vip_rows = []#to store a or b like..
+        old_vip_seat_count = 0#initialize total num of vip seat =0
+        old_vip_price = None#initialize price as none
 
-        old_vip_rows = []
-        old_vip_seat_count = 0
-        old_vip_price = None
-
-        old_economy_rows = []
-        old_economy_seat_count = 0
-        old_economy_price = None
-
+        old_economy_rows = []#create empty list for economy row
+        old_economy_seat_count = 0#total economy seat count =0
+        old_economy_price = None#initialize prize =none
+#loop through each seat record in result list
         for row in result:
-
+#check wheather cureent is at vip
             if row[6] == "VIP":
-                if row[7] not in old_vip_rows:
-                    old_vip_rows.append(row[7])
-
-                old_vip_seat_count += 1
-                old_vip_price = row[8]
-
+                if row[7] not in old_vip_rows:## Add the row letter only if it has not already been added
+                    old_vip_rows.append(row[7])# Example: Add "A" to ["A"]
+# Increase the total VIP seat count by one
+                old_vip_seat_count += 1# Example: 1 becomes 2
+                old_vip_price = row[8]# Store the price of the current VIP seat Example: 500
+# Otherwise, check whether the seat belongs to Economy
             elif row[6] == "Economy":
+                # Add the row letter only if it is not already in the list
                 if row[7] not in old_economy_rows:
-                    old_economy_rows.append(row[7])
+                    old_economy_rows.append(row[7])# Example: Add "C"
 
                 old_economy_seat_count += 1
                 old_economy_price = row[8]
-
-        old_vip_seats = old_vip_seat_count // len(old_vip_rows)
+ # Calculate VIP seats per row using integer division
+        old_vip_seats = old_vip_seat_count // len(old_vip_rows)#Example: 6 // 2 = 3
         old_economy_seats = old_economy_seat_count // len(old_economy_rows)
-
+#Return the old seat configuration as a tuple
         return (
             old_vip_rows,
             old_vip_seats,
