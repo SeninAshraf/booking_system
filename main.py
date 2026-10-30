@@ -59,7 +59,7 @@ reporting__controller=ReportingController(reporting_service)
 #authetication admin
 auth_dao = AuthDao()
 auth_service = AuthenticationService(auth_dao)
-auth_controller = AuthenticationController(auth_service,booking_service)
+auth_controller = AuthenticationController(auth_service)
 
 
 

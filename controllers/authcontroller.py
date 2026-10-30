@@ -1,8 +1,8 @@
 class AuthenticationController:
 #CONSTRUCTOR=method that initializes an object when you create it
-    def __init__(self, authenticationservice,bookingservice):#runs automatically when you create an object of the class. It receives the two service objects you pass in.
+    def __init__(self, authenticationservice):#runs automatically when you create an object of the class. It receives the two service objects you pass in.
         self.authenticationservice = authenticationservice#1. The controller now has a reference to that same service object, allowing it to call its methods.
-        self.bookingservice = bookingservice
+
 
     def login(self, username, password):#MOVE TO SERVICE LOGIN METHOD
 

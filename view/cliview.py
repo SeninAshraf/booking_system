@@ -864,7 +864,7 @@ class Viewer:
                               valid = True
                               break
                     if valid:
-                         shows = showcontroller.view_show_based_theater(your_theater,choice)#show based theater with todays date
+                         shows = bookingcontroller.view_show_based_theater(your_theater,choice)#show based theater with todays date
                          if not shows:
                               print("No shows available")
                               return
@@ -880,14 +880,14 @@ class Viewer:
                                         valid = True
                                         break
                               if valid:
-                                 seats = showcontroller.view_seat_based_shows(your_show)#pass to seat
+                                 seats = bookingcontroller.view_seat_based_shows(your_show)#pass to seat
                                  while True:
                                     try:
                                             num_tickets = int(input("Enter the number of tickets:"))
                                     except ValueError:
                                             print("in number format")
                                             continue
-                                    num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)#pass to show controller-seatservice
+                                    num_seats = bookingcontroller.check_number_of_seats(your_show,num_tickets)#pass to show controller-seatservice
                                     if not num_seats:
                                             return
                                       # Create an empty list to store the seat names selected by the customer     
@@ -928,7 +928,7 @@ class Viewer:
 
                                         print("Selected seats:", selected_seats)
                                         print("Selected seat ID:",selected_seat_id)
-                                    updating_seats = showcontroller.update_booked_seats(your_show,selected_seats)
+                                    updating_seats = bookingcontroller.update_booked_seats(your_show,selected_seats)
                                     if updating_seats:
                                          print("Seat booked succesfully..")
                                          display_details,total_amount = bookingcontroller.display_movie_details(choice,your_show,selected_seats)
