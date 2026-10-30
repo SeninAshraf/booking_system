@@ -82,24 +82,43 @@ class SeatService:
          return self.seat_dao.delete_seats(show_id)
 
     def view_seat_based_shows(self,your_show):
+          # Call the DAO method to retrieve all seats belonging to the selected show
          result= self.seat_dao.view_seat_based_shows(your_show)
+         # Example: result contains all seats for show ID 10
          if result:
+              # Display the heading for available seats
               print("====AVAILABLE SEATS====")
+              # Create an empty list to store unique row letters
               rows = []
+               # Example: []
+                # Loop through every seat record returned from the database
               for seat in result:
+                 # Check whether this seat's row letter is already in the rows list
                 if seat[6] not in rows:
+                     # Add the row letter if it is not already present
                     rows.append(seat[6])
+                     # Example: ["A", "B", "C"]
+             # Sort the row letters alphabetically
               rows.sort()
+              # Example: ["C", "A", "B"] becomes ["A", "B", "C"]
+               # Loop through each unique row letter
               for row in rows:
+                 # Loop through all seat records again
                 for seat in result:
+                     # Check whether the seat belongs to the current row
+                # AND whether its status is Available
                     if seat[6] == row and seat[4] == "Available":
+                        # Print the seat number on the same line , end="" is for printing same line
                         print(seat[2], end=" ")
+                         # Example: A1 A2 A3
+ # Move to the next line after displaying the current row
                 print()
+                # Return all seat records to the method that called this method
               return result
 
     def check_number_of_seats(self,your_show,num_tickets):
          result = self.seat_dao.check_number_of_seats(your_show)
-         if result >= num_tickets:
+         if result >= num_tickets:#if there only 6 tickets and user enter 67 then it fail
               return True
          else:
               print("Ticket Availabilty Exceeds....!")

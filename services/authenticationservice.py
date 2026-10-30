@@ -18,7 +18,7 @@ class AuthenticationService:
 
     def login_user(self,theater_name,theater_username,theater_password):
     
-            theater_user = self.auth_dao.find_theater_user(theater_name)#check is any theater is existed
+            theater_user = self.auth_dao.find_theater_user(theater_name,theater_username)#check is any theater is existed
     
             if theater_user is None:#if theater didnt exist then nothing false only
                 return False

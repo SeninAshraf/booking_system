@@ -15,10 +15,10 @@ class AuthDao:
         else:
             return Admin(result[0], result[1])
 
-    def find_theater_user(self,theater_name):
+    def find_theater_user(self,theater_name,theater_username):
                     connection = get_connection()
                     cursor = connection.cursor()
-                    cursor.execute("""select theater_user.theater_id,theater_user.username,theater_user.password_hash,theater_user.require_password_reset from theater_user join theater on theater_user.theater_id=theater.theater_id where theater_name=?""",(theater_name,))
+                    cursor.execute("""select theater_user.theater_id,theater_user.username,theater_user.password_hash,theater_user.require_password_reset from theater_user join theater on theater_user.theater_id=theater.theater_id where theater_name=? and theater_user.username = ?""",(theater_name,theater_username,))
                     result = cursor.fetchone()
                     connection.close()
                     if result is None:

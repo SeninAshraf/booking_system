@@ -62,23 +62,23 @@ class Viewer:
 
         while True:
             print("========== CUSTOMER ==========")
-            customer_mobile_num = input("Enter mobile number: ").strip()
+            customer_mobile_num = input("Enter mobile number: ").strip()#removes whitespace from the beginning and end of a string.
 
-            if not customer_mobile_num.isdigit():
+            if not customer_mobile_num.isdigit():#checks whether a string contains only digits 
                 print("Please enter a valid mobile number.")
                 continue
 
             break
 
-        result = controller.customer_login(customer_mobile_num)
+        result = controller.customer_login(customer_mobile_num)#pas sto customer login in controller(auth)
 
         if result:
-            customer_id = result[0]
+            customer_id = result[0]#if existing user retrive id
             print(f"Customer ID is {customer_id}")
 
         else:
             print("New customer detected. Registering...")
-            new_user = controller.new_customer_login(customer_mobile_num)
+            new_user = controller.new_customer_login(customer_mobile_num)#if new . then pass to controller auth
 
             if new_user:
                 print("Customer added successfully.")
@@ -92,7 +92,7 @@ class Viewer:
             else:
                 print("Customer addition failed.")
                 return
-        self.customer_menu(
+        self.customer_menu(#then call customer_menu with  4 parameters values
             customer_id,
             moviecontroller,
             theaterofficialcontroller,
@@ -752,7 +752,7 @@ class Viewer:
 
     def delete_show(self, moviecontroller,showcontroller,theater_id):
 
-        result=self.view_show(moviecontroller,showcontroller,theater_id)
+        result=self.view_show(moviecontroller,showcontroller,theater_id)#view show
         if not result:
             #print("No shows available to delete.")
             return
@@ -763,7 +763,7 @@ class Viewer:
             except ValueError:
                 print("Enter a valid Show ID.")
 
-        result = self.search_show(showcontroller, show_id)
+        result = self.search_show(showcontroller, show_id)#pass to controller to search
 
         if not result:
             print("Show not found.")
@@ -779,21 +779,21 @@ class Viewer:
                 if choice in [1, 2]:
                     break
 
-                print("Please select 1 or 2.")
+                print("Please select 1 or 2.")#if person choosse other than 1 2
 
             except ValueError:
                 print("Enter a valid option.")
 
         if choice == 1:
 
-            result = showcontroller.delete_show(show_id)
+            result = showcontroller.delete_show(show_id)#pass to delete show in controller
             if result:
                 print("Show deleted successfully")
             else:
                 print("Deletion failed")
 
         elif choice == 2:
-            print("Deletion cancelled")
+            print("Deletion cancelled")#nothing happned
 
     
     def customer_menu(self, customer_id,moviecontroller, theaterofficialcontroller, showcontroller,bookingcontroller):
@@ -826,7 +826,7 @@ class Viewer:
 
     def book_tickets(self, customer_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller):
         print(f"customer ID:{customer_id}")
-        movies = self.view_movie(moviecontroller)
+        movies = self.view_movie(moviecontroller)#view movie
 
         if not movies:
             print("No movies available.")
@@ -834,7 +834,7 @@ class Viewer:
 
         while True:
             try:
-                choice = int(input("Enter Movie ID: "))
+                choice = int(input("Enter Movie ID: "))#id
             except ValueError:
                 print("Enter a valid Movie ID.")
                 continue
@@ -842,18 +842,18 @@ class Viewer:
             valid = False
 
             for movie in movies:
-                if movie[0] == choice:
+                if movie[0] == choice:#this is for if there are movies with 1 and 2 but user enter 4 then return fail msg
                     valid = True
                     break
 
             if valid:
-                theaters=theaterofficialcontroller.view_movie_based_theater(choice)
+                theaters=theaterofficialcontroller.view_movie_based_theater(choice)#view theaters which have these movie
                 if not theaters:
                      print("No theaters available")
                      return
                 while True:
                     try:
-                        your_theater = int(input("Enter the theater you want:"))
+                        your_theater = int(input("Enter the theater you want:"))#theater id
                     except ValueError:
                          print("Enter valid id....")
                          continue
@@ -864,13 +864,13 @@ class Viewer:
                               valid = True
                               break
                     if valid:
-                         shows = showcontroller.view_show_based_theater(your_theater,choice)
+                         shows = showcontroller.view_show_based_theater(your_theater,choice)#show based theater with todays date
                          if not shows:
                               print("No shows available")
                               return
                          while True:
                               try:
-                                   your_show = int(input("Enter the show you want:"))
+                                   your_show = int(input("Enter the show you want:"))#show id
                               except ValueError:
                                    print("Enter valid id....")
                                    continue
@@ -878,44 +878,51 @@ class Viewer:
                               for show in shows:
                                    if show[0]==your_show:
                                         valid = True
-                                   else:
-                                        print("No show found")
-                                        return
+                                        break
                               if valid:
-                                 seats = showcontroller.view_seat_based_shows(your_show)
+                                 seats = showcontroller.view_seat_based_shows(your_show)#pass to seat
                                  while True:
                                     try:
                                             num_tickets = int(input("Enter the number of tickets:"))
                                     except ValueError:
                                             print("in number format")
                                             continue
-                                    num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)
+                                    num_seats = showcontroller.check_number_of_seats(your_show,num_tickets)#pass to show controller-seatservice
                                     if not num_seats:
                                             return
-                                           
-                                    selected_seats = []
-                                    selected_seat_id = []
-
+                                      # Create an empty list to store the seat names selected by the customer     
+                                    selected_seats = []# Example: ["A1", "A2"]
+                                    # Create an empty list to store the database IDs of selected seats
+                                    selected_seat_id = [] # Example: [101, 102]
+# Repeat the seat selection process according to the number of tickets
                                     for i in range(num_tickets):
-                                        while True:
-                                                    seat_name = input( f"Enter seat {i + 1} (e.g., A1): ").strip().upper()
-
+                                        # Keep asking until the customer enters a valid and available seat
+                                        while True:# Ask the customer to enter a seat name
+        # strip() removes extra spaces and upper() converts letters to uppercase
+                                                    seat_name = input( f"Enter seat {i + 1} (e.g., A1): ").strip().upper()#upper or lower
+# Check whether the customer has already selected this seat
+  # Display an error message if the seat was selected previously
                                                     if seat_name in selected_seats:
                                                         print("Seat already selected!")
+                                                        # Skip the remaining code and ask for another seat
                                                         continue
-
+ # Initially assume that the entered seat is invalid
                                                     valid = False
-
+ # Loop through all seats retrieved from the database
                                                     for seat in seats:
+                                                            # Check whether the seat number matches AND its status is Available
                                                             if seat[2] == seat_name and seat[4] == "Available":
+                                                                 # Mark the entered seat as valid
                                                                 valid = True
+                                                                # Store the database seat ID for booking_seat insertion
                                                                 selected_seat_id.append(seat[0])
+                                                                 # Stop searching because the matching seat was found
                                                                 break
 
                                                     if not valid:
                                                             print("Invalid or unavailable seat!")
                                                             continue
-
+# Store the valid seat name in the selected seats list
                                                     selected_seats.append(seat_name)
                                                     break
 

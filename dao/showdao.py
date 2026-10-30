@@ -22,7 +22,7 @@ class ShowDao:
     def update_show(self,show_id,screen_number,show_date,start_time,end_time):
                 connection = get_connection()
                 cursor = connection.cursor()
-                cursor.execute("""UPDATE show SET screen_no=?,start_time=?,end_time=?,show_date=? WHERE show_id=?""",(screen_number,show_date,start_time,end_time,show_id))
+                cursor.execute("""UPDATE show SET screen_no=?,start_time=?,end_time=?,show_date=? WHERE show_id=?""",(screen_number,start_time,end_time,show_date,show_id))
                 connection.commit()
                 connection.close()
                 return True
@@ -51,7 +51,7 @@ class ShowDao:
 
     
 
-    def view_show_based_theater(self, your_theater, choice):
+    def view_show_based_theater(self, your_theater, choice):#show retrival on today's date
         connection = get_connection()
         cursor = connection.cursor()
 

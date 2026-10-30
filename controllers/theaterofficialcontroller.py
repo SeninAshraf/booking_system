@@ -9,5 +9,5 @@ class TheaterofficialController:
     def view_theaters(self):
         return self.theater_service.view_theaters()
 
-    def view_movie_based_theater(self,choice):
+    def view_movie_based_theater(self,choice):#pass to service
         return self.theater_service.view_movie_based_theater(choice)
