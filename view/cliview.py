@@ -176,33 +176,33 @@ class Viewer:
          result= self.search_movie(moviecontroller,movie_id)#call the searchmovie function
          if result:
             print("Enter new values (Press Enter to keep the existing value)")  
-            title1 = input("Enter Movie Title: ")
-            genre1 = input("Enter Genre: ")
-            language1 = input("Enter Language: ")
+            title_new = input("Enter Movie Title: ")
+            genre_new = input("Enter Genre: ")
+            language_new = input("Enter Language: ")
             while True:
-                duration1 = input("Enter Duration (minutes): ")
+                duration_new = input("Enter Duration (minutes): ")
 
-                if duration1 == "":
+                if duration_new == "":
                     break
 
                 try:
-                    duration1 = int(duration1)
-                    if duration1 <= 0:
+                    duration_new = int(duration_new)
+                    if duration_new <= 0:
                         print("Duration must be greater than zero.")
                         continue
                     break
                 except ValueError:
                     print("Enter duration in numbers only.")
-            release_date1 = input("Enter Release Date (YYYY-MM-DD): ")
-            end_date1 = input("Enter End Date (YYYY-MM-DD): ")
-            title1 = title1 if title1 else result[1]#add input as new value if user eneter anyinput other wise old value its called terinary operator
-            genre1 = genre1 if genre1 else result[2]
-            language1 = language1 if language1 else result[3]
-            duration1 = duration1 if duration1 else result[4]
-            release_date1 = release_date1 if release_date1 else result[5]
-            end_date1 = end_date1 if end_date1 else result[6]
-            result1 = moviecontroller.update_movie(movie_id,title1,genre1,language1,duration1,release_date1,end_date1)#pass the value to movie controller
-            if result1:
+            release_date_new = input("Enter Release Date (YYYY-MM-DD): ")
+            end_date_new = input("Enter End Date (YYYY-MM-DD): ")
+            title_new = title_new if title_new else result[1]#add input as new value if user eneter anyinput other wise old value its called terinary operator
+            genre_new = genre_new if genre_new else result[2]
+            language_new = language_new if language_new else result[3]
+            duration_new = duration_new if duration_new else result[4]
+            release_date_new = release_date_new if release_date_new else result[5]
+            end_date_new = end_date_new if end_date_new else result[6]
+            result_new = moviecontroller.update_movie(movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new)#pass the value to movie controller
+            if result_new:
                 print("updating Movie..\nMovie Updated Succesfully\nReturning To Admin Menu....")
             else:
                 print("updation failed or missmatch of date found!!!")
