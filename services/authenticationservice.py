@@ -49,3 +49,14 @@ class AuthenticationService:
             self.auth_dao.changing_password(new_password_hash,theater_username,theater_name)#pass to dao to update pass
                             
             return True
+
+    def login_customer(self,customer_mobile_num):
+               result = self.auth_dao.find_customer(customer_mobile_num)#find if any user exist
+               if result:
+                     print("Existing user Found!!")
+               else:
+                     print("New User Detected!!!")
+               return result
+
+    def new_customer_login(self,customer_mobile_num):#add num to dao
+               return self.auth_dao.save(customer_mobile_num)

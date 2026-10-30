@@ -31,3 +31,18 @@ class AuthDao:
             cursor.execute("""UPDATE theater_user SET password_hash = ?,require_password_reset = 0 WHERE username = ? AND theater_id = (SELECT theater_id FROM theater WHERE theater_name = ?)""",(new_password_hash,theater_username,theater_name))
             connection.commit()
             connection.close()
+
+    def find_customer(self,customer_mobile_num):
+            connection = get_connection()
+            cursor = connection.cursor()
+            cursor.execute("""select customer_id from customer where mobile_number = ?""",(customer_mobile_num,))
+            result =cursor.fetchone()
+            return result
+
+    def save(self, customer_mobile_number):
+            connection = get_connection()
+            cursor = connection.cursor()
+            cursor.execute("""INSERT INTO customer(mobile_number)VALUES (?)""", (customer_mobile_number,))
+            connection.commit()
+            connection.close()
+            return True

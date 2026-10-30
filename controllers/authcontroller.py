@@ -19,9 +19,9 @@ class AuthenticationController:
                     theater_password
                 )
     def customer_login(self,customer_mobile_num):#pas to booking_service login_customer with cust mobile num parameter
-          return self.bookingservice.login_customer(
+          return self.authenticationservice.login_customer(
                 customer_mobile_num
           )
 
     def new_customer_login(self,customer_mobile_num):#pass to new_customer in booking service
-          return self.bookingservice.new_customer_login(customer_mobile_num)
+          return self.authenticationservice.new_customer_login(customer_mobile_num)
