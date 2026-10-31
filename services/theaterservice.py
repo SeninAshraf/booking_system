@@ -18,8 +18,8 @@ class TheaterService:
                 for theater in result:
                         print(f"{theater[0]}\t\t{theater[1]}")
 
-                        print("These are the available theaters.")
-                        return result
+                print("These are the available theaters.")#loop error
+                return result
 
         else:
                 print("No theaters found...")

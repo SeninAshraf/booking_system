@@ -1,8 +1,9 @@
 class BookingController:
-     def __init__(self, showservice,seatservice,bookingservice):
+     def __init__(self, showservice,seatservice,bookingservice,theaterservice):
                     self.showservice = showservice
                     self.seatservice = seatservice
                     self.bookingservice = bookingservice
+                    self.theaterservice = theaterservice   
 
      def display_movie_details(self,choice,your_show,selected_seats):
              return self.bookingservice.display_movie_details(choice,your_show,selected_seats)
@@ -30,3 +31,6 @@ class BookingController:
 
      def update_booked_seats(self, your_show, selected_seats):
         return self.seatservice.update_booked_seats(your_show, selected_seats)
+
+     def view_movie_based_theater(self, choice):
+        return self.theaterservice.view_movie_based_theater(choice)

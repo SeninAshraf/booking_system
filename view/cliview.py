@@ -814,7 +814,7 @@ class Viewer:
                 self.view_your_tickets(bookingcontroller)
 
             elif choice == "2":
-                self.book_tickets(customer_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller)
+                self.book_tickets(customer_id,moviecontroller, theaterofficialcontroller,bookingcontroller)
 
             elif choice == "3":
                 print("Exiting customer menu...")
@@ -824,7 +824,7 @@ class Viewer:
                 print("Invalid option...")
 
 
-    def book_tickets(self, customer_id,moviecontroller, theaterofficialcontroller,showcontroller,bookingcontroller):
+    def book_tickets(self, customer_id,moviecontroller,bookingcontroller):
         print(f"customer ID:{customer_id}")
         movies = self.view_movie(moviecontroller)#view movie
 
@@ -847,7 +847,7 @@ class Viewer:
                     break
 
             if valid:
-                theaters=theaterofficialcontroller.view_movie_based_theater(choice)#view theaters which have these movie
+                theaters=bookingcontroller.view_movie_based_theater(choice)#view theaters which have these movie
                 if not theaters:
                      print("No theaters available")
                      return

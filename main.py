@@ -51,7 +51,7 @@ show_controller = ShowController(show_service,seat_service)
 #customer managment
 booking_dao =BookingDAO()
 booking_service = BookingService(booking_dao)
-booking_controller=BookingController(show_service,seat_service,booking_service)
+booking_controller=BookingController(show_service,seat_service,booking_service,theater_service)
 
 #reporting managment
 reporting_service = ReportingService(booking_dao)
