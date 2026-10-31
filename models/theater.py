@@ -12,4 +12,4 @@ theater1=theater(1,"Muri")
 theater_dao = TheaterDao()
 #theater_dao.add_theater(theater1)
 #theater_dao.update_theater(theater1)
-print(theater_dao.get_theater("muri"))
+
