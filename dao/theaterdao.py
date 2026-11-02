@@ -31,9 +31,9 @@ class TheaterDao:
            result = cursor.fetchall()
            return result
 
-    def view_movie_based_theater(self,choice):
+    def view_movie_based_theater(self,movie_id):
            connection = get_connection()
            cursor = connection.cursor()
-           cursor.execute("""select t.theater_id,t.theater_name from theater t JOIN show s on t.theater_id = s.theater_id where s.movie_id=?""",(choice,))#retrive theater based on movie id
+           cursor.execute("""select t.theater_id,t.theater_name from theater t JOIN show s on t.theater_id = s.theater_id where s.movie_id=?""",(movie_id,))#retrive theater based on movie id
            result = cursor.fetchall()
            return result

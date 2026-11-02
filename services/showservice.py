@@ -4,8 +4,8 @@ class ShowService:
         self.show_dao = show_dao
         self.movie_dao = movie_dao
 
-    def add_show(self,choice,theater_id,screen_number,show_date,start_time,end_time):
-        movie = self.movie_dao.get_movie(choice)
+    def add_show(self,movie_id,theater_id,screen_number,show_date,start_time,end_time):
+        movie = self.movie_dao.get_movie(movie_id)
         release_date = movie[5]
         end_date = movie[6]
         release_date = datetime.strptime( release_date,
@@ -31,7 +31,7 @@ class ShowService:
                 return None
             else:
                 return self.show_dao.add_show(
-                                choice,theater_id,screen_number, start_time.strftime("%H:%M"),
+                                movie_id,theater_id,screen_number, start_time.strftime("%H:%M"),
     end_time.strftime("%H:%M"),
     show_date.strftime("%Y-%m-%d")
                         )
@@ -48,8 +48,8 @@ class ShowService:
     def delete_show(self,show_id):
          return self.show_dao.delete_show(show_id)
 
-    def view_show_based_theater(self,your_theater,choice):
-         result=self.show_dao.view_show_based_theater(your_theater,choice)#pass to dao
+    def view_show_based_theater(self,your_theater,movie_id):
+         result=self.show_dao.view_show_based_theater(your_theater,movie_id)#pass to dao
          if result:
                 print("==== AVAILABLE SHOWS ====")
                 print("Show ID\tShow Time")

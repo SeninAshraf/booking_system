@@ -5,8 +5,8 @@ class BookingController:
                     self.bookingservice = bookingservice
                     self.theaterservice = theaterservice   
 
-     def display_movie_details(self,choice,your_show,selected_seats):
-             return self.bookingservice.display_movie_details(choice,your_show,selected_seats)
+     def display_movie_details(self,movie_id,your_show,selected_seats):
+             return self.bookingservice.display_movie_details(movie_id,your_show,selected_seats)
 
      def add_booking_details(self,customer_id,your_show,total_amount,num_tickets):
              return self.bookingservice.add_booking_details(customer_id,your_show,total_amount,num_tickets)
@@ -20,8 +20,8 @@ class BookingController:
      #def view_all_transaction(self):
              #return self.bookingservice.view_all_transaction()
 
-     def view_show_based_theater(self, your_theater, choice):
-        return self.showservice.view_show_based_theater(your_theater, choice)
+     def view_show_based_theater(self, your_theater, movie_id):
+        return self.showservice.view_show_based_theater(your_theater, movie_id)
 
      def view_seat_based_shows(self, your_show):
         return self.seatservice.view_seat_based_shows(your_show)
@@ -32,5 +32,5 @@ class BookingController:
      def update_booked_seats(self, your_show, selected_seats):
         return self.seatservice.update_booked_seats(your_show, selected_seats)
 
-     def view_movie_based_theater(self, choice):
-        return self.theaterservice.view_movie_based_theater(choice)
+     def view_movie_based_theater(self, movie_id):
+        return self.theaterservice.view_movie_based_theater(movie_id)

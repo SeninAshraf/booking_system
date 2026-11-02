@@ -315,7 +315,7 @@ class Viewer:
         movies = self.view_movie(moviecontroller)#call view_movie method
 
         try:
-            choice = int(input("Enter Movie ID: "))#id
+            movie_id = int(input("Enter Movie ID: "))#id
         except ValueError:
             print("Enter a valid Movie ID")
             return
@@ -323,7 +323,7 @@ class Viewer:
         valid = False
 
         for movie in movies:
-            if movie[0] == choice:#the user input only receive when the corresponding number must be in list of view movies
+            if movie[0] == movie_id:#the user input only receive when the corresponding number must be in list of view movies
                 valid = True
                 break
 
@@ -388,7 +388,7 @@ class Viewer:
         economy_rows, economy_seats, economy_price = self.get_seat_configuration("ECONOMY")
 
         result = showcontroller.add_show(#pass this to  show controller with this parametrs
-            choice,
+            movie_id,
             theater_id,
             screen_number,
             show_date,
@@ -838,7 +838,7 @@ class Viewer:
 
         while True:
             try:
-                choice = int(input("Enter Movie ID: "))#id
+                movie_id = int(input("Enter Movie ID: "))#id
             except ValueError:
                 print("Enter a valid Movie ID.")
                 continue
@@ -846,12 +846,12 @@ class Viewer:
             valid = False
 
             for movie in movies:
-                if movie[0] == choice:#this is for if there are movies with 1 and 2 but user enter 4 then return fail msg
+                if movie[0] == movie_id:#this is for if there are movies with 1 and 2 but user enter 4 then return fail msg
                     valid = True
                     break
 
             if valid:
-                theaters=bookingcontroller.view_movie_based_theater(choice)#view theaters which have these movie
+                theaters=bookingcontroller.view_movie_based_theater(movie_id)#view theaters which have these movie
                 if not theaters:
                      print("No theaters available")
                      return
@@ -868,7 +868,7 @@ class Viewer:
                               valid = True
                               break
                     if valid:
-                         shows = bookingcontroller.view_show_based_theater(your_theater,choice)#show based theater with todays date
+                         shows = bookingcontroller.view_show_based_theater(your_theater,movie_id)#show based theater with todays date
                          if not shows:
                               print("No shows available")
                               return
@@ -935,7 +935,7 @@ class Viewer:
                                     updating_seats = bookingcontroller.update_booked_seats(your_show,selected_seats)
                                     if updating_seats:
                                          print("Seat booked succesfully..")
-                                         display_details,total_amount = bookingcontroller.display_movie_details(choice,your_show,selected_seats)
+                                         display_details,total_amount = bookingcontroller.display_movie_details(movie_id,your_show,selected_seats)
                                          print(f"Movie:{display_details[0][0]}")
                                          print("Seats : ", end="")
                                          for seat in selected_seats:

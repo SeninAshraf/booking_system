@@ -2,10 +2,10 @@ from database.connection import get_connection
 from datetime import date
 
 class ShowDao:
-    def add_show(self,choice,theater_id,screen_no,start_time,end_time,show_date):
+    def add_show(self,movie_id,theater_id,screen_no,start_time,end_time,show_date):
                 connection = get_connection()
                 cursor = connection.cursor()
-                cursor.execute("""INSERT INTO show (movie_id, theater_id, screen_no,start_time,end_time,show_date) VALUES (?, ?, ?, ?,?,?)""", (choice,theater_id,screen_no,start_time,end_time,show_date))
+                cursor.execute("""INSERT INTO show (movie_id, theater_id, screen_no,start_time,end_time,show_date) VALUES (?, ?, ?, ?,?,?)""", (movie_id,theater_id,screen_no,start_time,end_time,show_date))
                 show_id = cursor.lastrowid
                 connection.commit()
                 connection.close()
@@ -51,7 +51,7 @@ class ShowDao:
 
     
 
-    def view_show_based_theater(self, your_theater, choice):#show retrival on today's date
+    def view_show_based_theater(self, your_theater, movie_id):#show retrival on today's date
         connection = get_connection()
         cursor = connection.cursor()
 
@@ -64,7 +64,7 @@ class ShowDao:
                 AND movie_id = ?
                 AND show_date >= ?
                 ORDER BY show_date, start_time
-        """, (your_theater, choice, today))
+        """, (your_theater, movie_id, today))
 
         result = cursor.fetchall()
         connection.close()

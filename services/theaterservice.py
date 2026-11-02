@@ -8,8 +8,8 @@ class TheaterService:
     def view_theaters(self):
           return self.theater_dao.view_theaters()
 
-    def view_movie_based_theater(self, choice):
-        result = self.theater_dao.view_movie_based_theater(choice)#pass to dao
+    def view_movie_based_theater(self, movie_id):
+        result = self.theater_dao.view_movie_based_theater(movie_id)#pass to dao
 
         if result:
                 print("==== AVAILABLE THEATERS ====")
