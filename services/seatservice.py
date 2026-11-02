@@ -81,9 +81,9 @@ class SeatService:
     def delete_seat(self,show_id):
          return self.seat_dao.delete_seats(show_id)
 
-    def view_seat_based_shows(self,your_show):
+    def view_seat_based_shows(self,show_id):
           # Call the DAO method to retrieve all seats belonging to the selected show
-         result= self.seat_dao.view_seat_based_shows(your_show)
+         result= self.seat_dao.view_seat_based_shows(show_id)
          # Example: result contains all seats for show ID 10
          if result:
               # Display the heading for available seats
@@ -116,15 +116,15 @@ class SeatService:
                 # Return all seat records to the method that called this method
               return result
 
-    def check_number_of_seats(self,your_show,num_tickets):
-         result = self.seat_dao.check_number_of_seats(your_show)
+    def check_number_of_seats(self,show_id,num_tickets):
+         result = self.seat_dao.check_number_of_seats(show_id)
          if result >= num_tickets:#if there only 6 tickets and user enter 67 then it fail
               return True
          else:
               print("Ticket Availabilty Exceeds....!")
               return False
 
-    def update_booked_seats(self,your_show,selected_seats):
-         result = self.seat_dao.update_booked_seats(your_show,selected_seats)
+    def update_booked_seats(self,show_id,selected_seats):
+         result = self.seat_dao.update_booked_seats(show_id,selected_seats)
          if result:
               return True

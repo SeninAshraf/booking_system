@@ -11,22 +11,22 @@ class SeatDAO:
         connection.close()
         return True
 
-    def view_seat_based_shows(self,your_show ):
+    def view_seat_based_shows(self,show_id ):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""SELECT * FROM seat WHERE show_id = ? ORDER BY seat_row,CAST(SUBSTR(seat_no, 2) AS INTEGER);""", (your_show,))
+        cursor.execute("""SELECT * FROM seat WHERE show_id = ? ORDER BY seat_row,CAST(SUBSTR(seat_no, 2) AS INTEGER);""", (show_id,))
         result = cursor.fetchall()
         connection.close()
         return result
 
 
-    def update_booked_seats(self, your_show, selected_seats):
+    def update_booked_seats(self, show_id, selected_seats):
         connection = get_connection()
         cursor = connection.cursor()
 
         try:
             for seat_name in selected_seats:
-                cursor.execute("""update seat set seat_status = 'Booked' where show_id = ? and seat_no = ? and seat_status = 'Available' """, (your_show, seat_name))
+                cursor.execute("""update seat set seat_status = 'Booked' where show_id = ? and seat_no = ? and seat_status = 'Available' """, (show_id, seat_name))
                 if cursor.rowcount == 0:
                     connection.rollback()
                     return False
@@ -53,10 +53,10 @@ class SeatDAO:
 
         return True
 
-    def check_number_of_seats(self,your_show):
+    def check_number_of_seats(self,show_id):
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute("""select count(seat_id) from seat where seat_status = 'Available' and show_id =?""",(your_show,))
+        cursor.execute("""select count(seat_id) from seat where seat_status = 'Available' and show_id =?""",(show_id,))
         result = cursor.fetchone()[0]
         connection.commit()
         return result

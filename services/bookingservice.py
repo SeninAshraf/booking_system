@@ -13,15 +13,15 @@ class BookingService:
      #def new_customer_login(self,customer_mobile_num):#add num to dao
            #return self.booking_dao.save(customer_mobile_num)
 
-     def display_movie_details(self,movie_id,your_show,selected_seats):
-           result = self.booking_dao.display_movie_details(movie_id,your_show,selected_seats)
+     def display_movie_details(self,movie_id,show_id,selected_seats):
+           result = self.booking_dao.display_movie_details(movie_id,show_id,selected_seats)
            if result:
                  total_amount = 0
                  for row in result:
                        total_amount += row[3]
                  return result,total_amount
-     def add_booking_details(self,customer_id,your_show,total_amount,num_tickets):
-           return self.booking_dao.add_booking_details(customer_id,your_show,total_amount,num_tickets)
+     def add_booking_details(self,customer_id,show_id,total_amount,num_tickets):
+           return self.booking_dao.add_booking_details(customer_id,show_id,total_amount,num_tickets)
 
      def add_booking_seat_details(self,booking_id,selected_seat_id):
            return self.booking_dao.add_booking_seat_details(booking_id,selected_seat_id)

@@ -48,8 +48,8 @@ class ShowService:
     def delete_show(self,show_id):
          return self.show_dao.delete_show(show_id)
 
-    def view_show_based_theater(self,your_theater,movie_id):
-         result=self.show_dao.view_show_based_theater(your_theater,movie_id)#pass to dao
+    def view_show_based_theater(self,theater_id,movie_id):
+         result=self.show_dao.view_show_based_theater(theater_id,movie_id)#pass to dao
          if result:
                 print("==== AVAILABLE SHOWS ====")
                 print("Show ID\tShow Time")

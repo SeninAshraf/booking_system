@@ -51,7 +51,7 @@ class ShowDao:
 
     
 
-    def view_show_based_theater(self, your_theater, movie_id):#show retrival on today's date
+    def view_show_based_theater(self, theater_id, movie_id):#show retrival on today's date
         connection = get_connection()
         cursor = connection.cursor()
 
@@ -64,7 +64,7 @@ class ShowDao:
                 AND movie_id = ?
                 AND show_date >= ?
                 ORDER BY show_date, start_time
-        """, (your_theater, movie_id, today))
+        """, (theater_id, movie_id, today))
 
         result = cursor.fetchall()
         connection.close()
