@@ -205,8 +205,8 @@ class Viewer:
             duration_new = duration_new if duration_new else result[4]
             release_date_new = release_date_new if release_date_new else result[5]
             end_date_new = end_date_new if end_date_new else result[6]
-            result_new = moviecontroller.update_movie(movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new)#pass the value to movie controller
-            if result_new:
+            movie_updated = moviecontroller.update_movie(movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new)#pass the value to movie controller
+            if movie_updated:
                 print("updating Movie..\nMovie Updated Succesfully\nReturning To Admin Menu....")
             else:
                 print("updation failed or missmatch of date found!!!")
@@ -387,7 +387,7 @@ class Viewer:
 
         economy_rows, economy_seats, economy_price = self.get_seat_configuration("ECONOMY")
 
-        result = showcontroller.add_show(#pass this to  show controller with this parametrs
+        show_id = showcontroller.add_show(#pass this to  show controller with this parametrs
             movie_id,
             theater_id,
             screen_number,
@@ -395,12 +395,12 @@ class Viewer:
             start_time,
             end_time,
         )
-        if result is None:#if result failed then it raise message no creation
+        if show_id is None:#if result failed then it raise message no creation
             print("Show was NOT created.")
             return
         
-        result_seat = showcontroller.add_seat(#if it gives show id then it. call add seat in show controller
-             result,
+        seats_added = showcontroller.add_seat(#if it gives show id then it. call add seat in show controller
+             show_id,
              vip_rows,
              vip_seats,
              vip_price,
@@ -409,7 +409,7 @@ class Viewer:
              economy_price
         )
 
-        if result is not None and result_seat is not None:#if any of fail didnt work other wise print succesfull msg
+        if result is not None and seats_added is not None:#if any of fail didnt work other wise print succesfull msg
             print("Show and seats created successfully")
 
     def get_seat_configuration(self, category):
@@ -891,8 +891,8 @@ class Viewer:
                                     except ValueError:
                                             print("in number format")
                                             continue
-                                    num_seats = bookingcontroller.check_number_of_seats(show_id,num_tickets)#pass to show controller-seatservice
-                                    if not num_seats:
+                                    enough_seats = bookingcontroller.check_number_of_seats(show_id,num_tickets)#pass to show controller-seatservice
+                                    if not enough_seats:
                                             return
                                       # Create an empty list to store the seat names selected by the customer     
                                     selected_seats = []# Example: ["A1", "A2"]
@@ -932,8 +932,8 @@ class Viewer:
 
                                         print("Selected seats:", selected_seats)
                                         print("Selected seat ID:",selected_seat_id)
-                                    updating_seats = bookingcontroller.update_booked_seats(show_id,selected_seats)
-                                    if updating_seats:
+                                    seats_booked = bookingcontroller.update_booked_seats(show_id,selected_seats)
+                                    if seats_booked:
                                          print("Seat booked succesfully..")
                                          display_details,total_amount = bookingcontroller.display_movie_details(movie_id,show_id,selected_seats)
                                          print(f"Movie:{display_details[0][0]}")
@@ -943,8 +943,8 @@ class Viewer:
                                             print()
                                          print(f"Total Amount:{total_amount}")
                                          booking_id = bookingcontroller.add_booking_details(customer_id,show_id,total_amount,num_tickets)
-                                         booking_seat_id = bookingcontroller.add_booking_seat_details(booking_id,selected_seat_id)
-                                         if booking_id and booking_seat_id:
+                                         seats_saved = bookingcontroller.add_booking_seat_details(booking_id,selected_seat_id)
+                                         if booking_id and seats_saved:
                                               print("Booking details added succesfully.!")
                                          else:
                                               print("Booking details addition failed..!")
