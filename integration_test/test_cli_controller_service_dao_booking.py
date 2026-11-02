@@ -185,7 +185,7 @@ class TestBookingIntegration(unittest.TestCase):
 
     def test_display_movie_details(self):
         result = self.dao.display_movie_details(
-            choice=1,
+            movie_id=1,
             show_id=1,
             selected_seats=["A1", "A2"]
         )
@@ -198,12 +198,12 @@ class TestBookingIntegration(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_find_customer(self):
-        result = self.dao.find_customer("9876543210")
+        result = self.auth_dao.find_customer("9876543210")
 
         self.assertEqual(result, (1,))
 
     def test_save_customer(self):
-        result = self.dao.save("9123456780")
+        result = self.auth_dao.save("9123456780")
 
         self.assertTrue(result)
 
@@ -228,7 +228,7 @@ class TestBookingIntegration(unittest.TestCase):
         selected_seats = ["A1", "A2"]#select seats
 
         movie_details = self.dao.display_movie_details(
-            choice=1,
+            movie_id=1,
             show_id=1,
             selected_seats=selected_seats
         )#display details of selected seats
@@ -336,13 +336,13 @@ class TestBookingIntegration(unittest.TestCase):
 
     def test_customer_login_existing_user(self):
         # Customer already exists in the temporary database
-        result = self.dao.find_customer("9876543210")
+        result = self.auth_dao.find_customer("9876543210")
 
         self.assertIsNotNone(result)
         self.assertEqual(result, (1,))
 
 
     def test_customer_login_new_user(self):
-        result = self.dao.find_customer("0000000000")
+        result = self.auth_dao.find_customer("0000000000")
 
         self.assertIsNone(result)
