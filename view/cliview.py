@@ -49,6 +49,10 @@ class Viewer:
 
         result = controller.theater_login(theater_name,theater_username,theater_password)#pass to controller
         if result:
+            if result.firstLogin:
+                print("Password reset is required.")
+                new_password = input("Enter new password: ")
+                controller.update_password(theater_name, theater_username, new_password)
             print("Login succesfull")
             theater_id = result.theater_id#here it get the theater id 
             self.theaterofficial_menu(theaterofficialcontroller,showcontroller,moviecontroller,theater_id)#pass to theater official menu with this parameters

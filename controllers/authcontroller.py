@@ -25,3 +25,6 @@ class AuthenticationController:
 
     def new_customer_login(self,customer_mobile_num):#pass to new_customer in booking service
           return self.authenticationservice.new_customer_login(customer_mobile_num)
+
+    def update_password(self, theater_name, theater_username, new_password):
+        return self.authenticationservice.update_password(theater_name, theater_username, new_password)
