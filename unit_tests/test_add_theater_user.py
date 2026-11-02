@@ -1,7 +1,7 @@
 import bcrypt
 import unittest
 from unittest.mock import Mock
-from services.theaterofficialservice import TheaterofficialService
+from services.theaterofficialservice import TheaterOfficialService
 
 class TestTheaterUserAdd(unittest.TestCase):
     def test_add_theater_user_success(self):
@@ -14,9 +14,9 @@ class TestTheaterUserAdd(unittest.TestCase):
 
         # No user is registered for this theater.
         mock_official_dao.find_theater_user.return_value = None #search any user exixting there and retrun none
-        mock_official_dao.add_theateruser.return_value = True # new user create it
+        mock_official_dao.add_theater_user.return_value = True # new user create it
 
-        service = TheaterofficialService(#method of service with 2 daos
+        service = TheaterOfficialService(#method of service with 2 daos
             mock_theater_dao,
             mock_official_dao
         )
@@ -36,10 +36,10 @@ class TestTheaterUserAdd(unittest.TestCase):
             "Grand Cinema"
         )
         mock_official_dao.find_theater_user.assert_called_once_with(1)#check if same id theater has username  and retrunrs none
-        mock_official_dao.add_theateruser.assert_called_once() #so add theater usr called by once 
+        mock_official_dao.add_theater_user.assert_called_once() #so add theater usr called by once 
 
         # Verify the stored password is hashed, not plaintext.
-        saved_args = mock_official_dao.add_theateruser.call_args.args #for extarcting each positional arguments value
+        saved_args = mock_official_dao.add_theater_user.call_args.args #for extarcting each positional arguments value
         self.assertEqual(saved_args[0], 1)
         self.assertEqual(saved_args[1], "grand_admin")
         self.assertNotEqual(saved_args[2], "SecurePass123")#not equal

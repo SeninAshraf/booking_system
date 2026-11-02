@@ -1,14 +1,14 @@
 # Test that check_user returns None when no official user exists.
 import unittest
 from unittest.mock import Mock
-from services.theaterofficialservice import TheaterofficialService
+from services.theaterofficialservice import TheaterOfficialService
 
 class TestTheaterCheckUserNotFound(unittest.TestCase):
     def test_check_user_not_found(self):
         mock_theater_dao = Mock()
         mock_official_dao = Mock()
         mock_official_dao.find_theater_user.return_value = None #after seraching the theater user with theater_id=999
-        service = TheaterofficialService(
+        service = TheaterOfficialService(
             mock_theater_dao,
             mock_official_dao
         )

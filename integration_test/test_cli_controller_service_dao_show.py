@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 from dao.moviedao import MovieDao
 from dao.showdao import ShowDao
-from dao.seatdao import SeatDAO
+from dao.seatdao import SeatDao
 from services.movieservice import MovieService
 from services.showservice import ShowService
 from services.seatservice import SeatService
@@ -98,7 +98,7 @@ class TestShowIntegration(unittest.TestCase):
 
         self.movie_dao = MovieDao()
         self.show_dao = ShowDao()
-        self.seat_dao = SeatDAO()
+        self.seat_dao = SeatDao()
 
         self.movie_controller = MovieController(
             MovieService(self.movie_dao)

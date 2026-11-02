@@ -1,7 +1,7 @@
 from database.connection import get_connection
 
 
-class SeatDAO:
+class SeatDao:
 
     def add_seat(self, show_id,seat_no,category,status,ticket_price,row_letter):
         connection = get_connection()

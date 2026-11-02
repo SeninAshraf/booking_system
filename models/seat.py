@@ -1,7 +1,7 @@
 from models.seat_status import SeatStatus
 from models.seat_category import SeatCategory
-from dao.seatdao import SeatDAO
-class seat:
+from dao.seatdao import SeatDao
+class Seat:
     def __init__(self,seat_id,show_id,seat_no,category,seat_status,seat_price,seat_row):
         self.seat_id=seat_id
         self.show_id=show_id
@@ -19,6 +19,3 @@ class seat:
         print("seat price:",self.seat_price)
         print("seat row:",self.seat_row)
 
-seat1=seat(1,1,"A10",SeatCategory.Economy,SeatStatus.available,250,"A")
-seat_dao=SeatDAO()
-seat_dao.update_status(seat1,SeatStatus.available)

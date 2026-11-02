@@ -1,6 +1,6 @@
 import bcrypt
 from services.theaterservice import TheaterService
-class TheaterofficialService:
+class TheaterOfficialService:
     def __init__(self, theater_dao,theater_official_dao):
         self.theater_official_dao = theater_official_dao
         self.theater_dao = theater_dao
@@ -21,7 +21,7 @@ class TheaterofficialService:
                 password.encode("utf-8"),
                 bcrypt.gensalt()#generate random salt like random numb
             ).decode("utf-8")#standard way for understand computer and represent test as bytes 
-            return self.theater_official_dao.add_theateruser(#add theater user with 3 input pass to dao
+            return self.theater_official_dao.add_theater_user(#add theater user with 3 input pass to dao
                 theater_id,
                 theater_username,
                 password_hash

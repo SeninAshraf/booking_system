@@ -9,8 +9,8 @@ from unittest.mock import patch
 from dao.theaterdao import TheaterDao
 from dao.theaterofficialdao import TheaterOfficialDao
 from services.theaterservice import TheaterService
-from services.theaterofficialservice import TheaterofficialService
-from controllers.theaterofficialcontroller import TheaterofficialController
+from services.theaterofficialservice import TheaterOfficialService
+from controllers.theaterofficialcontroller import TheaterOfficialController
 from view.cliview import Viewer
 
 
@@ -61,12 +61,12 @@ class TestTheaterIntegration(unittest.TestCase):
 
         self.theater_service = TheaterService(self.theater_dao)
 
-        self.theater_official_service = TheaterofficialService(
+        self.theater_official_service = TheaterOfficialService(
             self.theater_dao,
             self.theater_official_dao
         )
 
-        self.controller = TheaterofficialController(
+        self.controller = TheaterOfficialController(
             self.theater_official_service,
             self.theater_service
         )

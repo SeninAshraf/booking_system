@@ -1,4 +1,4 @@
-class TheaterofficialController:
+class TheaterOfficialController:
     def __init__(self, theater_official_service,theater_service):
         self.theater_official_service = theater_official_service
         self.theater_service = theater_service

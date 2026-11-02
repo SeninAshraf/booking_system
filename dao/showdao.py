@@ -27,10 +27,10 @@ class ShowDao:
                 connection.close()
                 return True
 
-    def delete_show(self,showId):
+    def delete_show(self,show_id):
                 connection = get_connection()
                 cursor=connection.cursor()
-                cursor.execute("""DELETE from show where show_id=?""",(showId,))
+                cursor.execute("""DELETE from show where show_id=?""",(show_id,))
                 connection.commit()
                 connection.close()
                 return True

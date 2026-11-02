@@ -1,6 +1,6 @@
 from dao.moviedao import MovieDao
 from datetime import date
-class movie:
+class Movie:
     def __init__(self,movieId,movieTitle,movieGenre,movieLanguage,movieDuration,releaseDate,endDate):
         self.movieId=movieId
         self.movieTitle=movieTitle
@@ -17,13 +17,6 @@ class movie:
         print("duration:",self.movieDuration)
         print("release date:",self.releaseDate)
         print("endDate",self.endDate)
-movie1=movie(2,"sun","comedy","malay","230 min",date(2026,9,4),date(2026,10,4))
-#movie1.display()
-movie_dao=MovieDao()
-#movie_dao.add_movie(movie1)
-#print(movie_dao.get_movie(1))
-#movie_dao.update_movie(movie1)
-movie_dao.delete_movie(2)
 
 
 

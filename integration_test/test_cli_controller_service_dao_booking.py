@@ -5,8 +5,8 @@ import tempfile
 import os
 from unittest.mock import patch
 
-from dao.bookingdao import BookingDAO
-from dao.seatdao import SeatDAO
+from dao.bookingdao import BookingDao
+from dao.seatdao import SeatDao
 
 
 class TestBookingIntegration(unittest.TestCase):
@@ -118,14 +118,14 @@ class TestBookingIntegration(unittest.TestCase):
         )
         self.patcher.start()
 
-        self.dao = BookingDAO()
+        self.dao = BookingDao()
         self.seat_patcher = patch(
             "dao.seatdao.get_connection",
             side_effect=self.connect_test_db
         )
         self.seat_patcher.start()
 
-        self.seat_dao = SeatDAO()
+        self.seat_dao = SeatDao()
 
     def connect_test_db(self):
         connection = sqlite3.connect(self.db_path)

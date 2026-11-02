@@ -1,7 +1,7 @@
 # Test that registration is rejected when the theater already has an official user.
 import unittest
 from unittest.mock import Mock
-from services.theaterofficialservice import TheaterofficialService
+from services.theaterofficialservice import TheaterOfficialService
 class TestTheaterUserExists(unittest.TestCase):
     def test_add_theater_user_already_exists(self):
         mock_theater_dao = Mock()
@@ -14,7 +14,7 @@ class TestTheaterUserExists(unittest.TestCase):
             1, "grand_admin"#already have user also
         )
 
-        service = TheaterofficialService(
+        service = TheaterOfficialService(
             mock_theater_dao,
             mock_official_dao
         )
@@ -32,4 +32,4 @@ class TestTheaterUserExists(unittest.TestCase):
         )
         mock_theater_dao.add_theater.assert_not_called()#chehck add_theater not called
         mock_official_dao.find_theater_user.assert_called_once_with(1)#check find_theater_username once
-        mock_official_dao.add_theateruser.assert_not_called()#no call add_theatre user
+        mock_official_dao.add_theater_user.assert_not_called()#no call add_theatre user

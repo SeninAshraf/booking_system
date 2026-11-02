@@ -1,5 +1,5 @@
 from database.connection import get_connection
-class BookingDAO:
+class BookingDao:
     #def save(self, customer_mobile_number):
         #connection = get_connection()
         #cursor = connection.cursor()
