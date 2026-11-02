@@ -20,7 +20,7 @@ class MovieController:
     def delete_movie(self,movie_id):#pass to movie service and call delete movie method
           return self.movieservice.delete_movie(movie_id)
 
-    def update_movie(self,movie_id,title1,genre1,language1,duration1,release_date1,end_date1):#pass the value to update movie in service class
+    def update_movie(self,movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new):#pass the value to update movie in service class
           return self.movieservice.update_movie(
-                movie_id,title1,genre1,language1,duration1,release_date1,end_date1
+                movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new
           )

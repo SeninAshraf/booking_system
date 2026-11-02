@@ -3,7 +3,6 @@ from models.admin import Admin
 from models.theaterofficial import TheaterOfficial
 
 class AuthDao:
-    print("senin")
     def find_admin(self, username):
         connection = get_connection()
         cursor = connection.cursor()

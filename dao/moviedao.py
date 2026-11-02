@@ -9,16 +9,16 @@ class MovieDao:
         connection.close()
         return True
 
-    def update_movie(self,movie_id,title1,genre1,language1,duration1,release_date1,end_date1):
+    def update_movie(self,movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new):
             connection = get_connection()
             cursor = connection.cursor()
-            print("Updating movie:", movie_id)
-            print(title1, genre1, language1, duration1, release_date1, end_date1)
-            cursor.execute("""UPDATE movie SET movie_title = ?,movie_genre = ?,movie_language = ?,movie_duration = ?,release_date = ?,end_date = ? WHERE movie_id = ?""",(title1,genre1,language1,duration1,release_date1,end_date1,movie_id))
-            print("Rows updated:", cursor.rowcount)
+            #print("Updating movie:", movie_id)
+            #print(title_new, genre_new, language_new, duration_new, release_date_new, end_date_new)
+            cursor.execute("""UPDATE movie SET movie_title = ?,movie_genre = ?,movie_language = ?,movie_duration = ?,release_date = ?,end_date = ? WHERE movie_id = ?""",(title_new,genre_new,language_new,duration_new,release_date_new,end_date_new,movie_id))
+            #print("Rows updated:", cursor.rowcount)
             connection.commit()
             connection.close()
-            print("Rows updated:", cursor.rowcount)
+            #print("Rows updated:", cursor.rowcount)
             return cursor.rowcount > 0
 
     def get_movie(self,movie_id):

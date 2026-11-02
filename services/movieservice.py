@@ -20,10 +20,10 @@ class MovieService:
     def delete_movie(self,movie_id):
         return self.movie_dao.delete_movie(movie_id)#call dao and perform delete movie sql query
 
-    def update_movie(self,movie_id,title1,genre1,language1,duration1,release_date1,end_date1):
-        if end_date1<release_date1:#check date validation and if yes return fail
+    def update_movie(self,movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new):
+        if end_date_new<release_date_new:#check date validation and if yes return fail
             return None
         else:
             return self.movie_dao.update_movie(#else add to sql with new value
-                movie_id,title1,genre1,language1,duration1,release_date1,end_date1
+                movie_id,title_new,genre_new,language_new,duration_new,release_date_new,end_date_new
             )
