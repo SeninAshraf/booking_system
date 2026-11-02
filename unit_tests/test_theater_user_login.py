@@ -19,7 +19,7 @@ class TestTheaterUserLogin(unittest.TestCase):
             "Grand Cinema", "grand_admin", "Theater123"
         )
         self.assertEqual(result, mock_user)
-        mock_dao.find_theater_user.assert_called_once_with("Grand Cinema")
+        mock_dao.find_theater_user.assert_called_once_with("Grand Cinema","grand_admin")
 
 
 

@@ -4,7 +4,7 @@ import sqlite3
 import tempfile
 import os
 from unittest.mock import patch
-
+from dao.authenticationdao import AuthDao
 from dao.bookingdao import BookingDao
 from dao.seatdao import SeatDao
 
@@ -117,14 +117,19 @@ class TestBookingIntegration(unittest.TestCase):
             side_effect=self.connect_test_db
         )
         self.patcher.start()
-
+        
         self.dao = BookingDao()
         self.seat_patcher = patch(
             "dao.seatdao.get_connection",
             side_effect=self.connect_test_db
         )
         self.seat_patcher.start()
-
+        self.auth_patcher = patch(
+    "dao.authenticationdao.get_connection",
+            side_effect=self.connect_test_db
+        )
+        self.auth_patcher.start()
+        self.auth_dao = AuthDao()
         self.seat_dao = SeatDao()
 
     def connect_test_db(self):
@@ -135,13 +140,14 @@ class TestBookingIntegration(unittest.TestCase):
     def tearDown(self):
         self.patcher.stop()
         self.seat_patcher.stop()
+        self.auth_patcher.stop()
         if os.path.exists(self.db_path):
             os.remove(self.db_path)
 
     def test_add_booking_details(self):
         booking_id = self.dao.add_booking_details(
             customer_id=1,
-            your_show=1,
+            show_id=1,
             total_amount=400,
             num_tickets=2
         )
@@ -180,7 +186,7 @@ class TestBookingIntegration(unittest.TestCase):
     def test_display_movie_details(self):
         result = self.dao.display_movie_details(
             choice=1,
-            your_show=1,
+            show_id=1,
             selected_seats=["A1", "A2"]
         )
 
@@ -213,7 +219,7 @@ class TestBookingIntegration(unittest.TestCase):
     
     def test_customer_book_tickets(self):
         # Step 1: Find the customer
-        customer = self.dao.find_customer("9876543210")
+        customer = self.auth_dao.find_customer("9876543210")
         self.assertIsNotNone(customer)#find already added customer
 
         customer_id = customer[0]#retrieve customer id
@@ -223,7 +229,7 @@ class TestBookingIntegration(unittest.TestCase):
 
         movie_details = self.dao.display_movie_details(
             choice=1,
-            your_show=1,
+            show_id=1,
             selected_seats=selected_seats
         )#display details of selected seats
 
@@ -255,7 +261,7 @@ class TestBookingIntegration(unittest.TestCase):
 
         # Step 5: Mark the selected seats as booked
         result = self.seat_dao.update_booked_seats(
-            your_show=1,
+            show_id=1,
             selected_seats=selected_seats
         )
 #update selected seats status
@@ -264,7 +270,7 @@ class TestBookingIntegration(unittest.TestCase):
         # Step 6: Save the booking
         booking_id = self.dao.add_booking_details(
             customer_id=customer_id,
-            your_show=1,
+            show_id=1,
             total_amount=total_amount,
             num_tickets=len(selected_seats)
         )#add booking details and retrive bookin_id

@@ -11,4 +11,4 @@ class TestTheaterUserNotFound(unittest.TestCase):
             "Grand Cinema", "grand_admin", "Theater123"
         )
         self.assertFalse(result)
-        mock_dao.find_theater_user.assert_called_once_with("Grand Cinema")
+        mock_dao.find_theater_user.assert_called_once_with("Grand Cinema","grand_admin")
